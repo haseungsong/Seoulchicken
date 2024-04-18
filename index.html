@@ -169,6 +169,18 @@
         font-size: 16px;
         cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
     }
+    .nav-container {
+    display: flex;
+    justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
+    align-items: center; /* 요소를 수직으로 가운데 정렬 */
+    padding: 0 20px; /* 좌우 여백 추가 */
+    }
+
+    .order-section {
+    display: flex;
+    align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
+    justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
+    }
 
     </style>
 
@@ -334,9 +346,11 @@
         <a href="#home">홈</a>
         <a href="#menu">메뉴</a>
         <a href="#drinks">음료</a>
-        <span id="total-amount" style="float: right; padding-right: 20px;">총금액: 0원</span>
-        <button id="order-button" style="float: right;">주문</button>
-
+            <div class="order-section">
+                <span id="total-amount">총금액: 0원</span>
+                <button id="order-button">주문</button>
+            </div>
+        </div>
     </nav>
 
     <section id="home" class="content">
