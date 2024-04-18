@@ -433,6 +433,7 @@
                     if (texts[language][key]) {
                         element.textContent = texts[language][key];
                     }
+                toggleDropdown(); // 언어 변경 후 드롭다운이 닫히도록 보장
                 });
             }
             
@@ -466,7 +467,7 @@
         <div class="nav-top">
             <div class="language-dropdown">
                 <button class="dropbtn">Language</button>
-                <div class="dropdown-content">
+                <div class="dropdown-content" id="dropdown-content">
                     <a href="#" onclick="changeLanguage('ko')">한국어</a>
                     <a href="#" onclick="changeLanguage('po')">Portugues</a>
                 </div>
