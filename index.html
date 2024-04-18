@@ -435,6 +435,52 @@ drinksSection.addEventListener('touchend', function(event) {
             </div>
         </div>
         
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const threshold = 50;
+            
+                // 각 섹션을 변수로 저장
+                const homeSection = document.getElementById('home');
+                const menuSection = document.getElementById('menu');
+                const drinksSection = document.getElementById('drinks');
+            
+                // 터치 시작 위치 저장
+                function handleTouchStart(event) {
+                    touchStartX = event.touches[0].clientX;
+                }
+            
+                // 터치 종료 위치 저장 및 섹션 이동 로직
+                function handleTouchMove(event) {
+                    touchEndX = event.changedTouches[0].clientX;
+                    let deltaX = touchEndX - touchStartX;
+            
+                    // 현재 활성화된 섹션을 감지
+                    let currentSection = event.currentTarget;
+            
+                    // 오른쪽으로 드래그 (음수값)
+                    if (deltaX < -threshold) {
+                        if (currentSection.nextElementSibling) {
+                            currentSection.nextElementSibling.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                    // 왼쪽으로 드래그 (양수값)
+                    else if (deltaX > threshold) {
+                        if (currentSection.previousElementSibling) {
+                            currentSection.previousElementSibling.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                }
+            
+                // 모든 섹션에 대해 이벤트 리스너 추가
+                [homeSection, menuSection, drinksSection].forEach(section => {
+                    section.addEventListener('touchstart', handleTouchStart);
+                    section.addEventListener('touchend', handleTouchMove);
+                });
+            });
+            </script>
+                
 
 </head>
 
