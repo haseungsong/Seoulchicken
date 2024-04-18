@@ -181,104 +181,22 @@
         align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
         justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
         }
+        .draggable-container {
+            overflow-x: auto;
+            display: flex;
+        }
 
+        .draggable {
+            display: inline-flex;
+            flex-wrap: nowrap;
+            min-width: 100%;
+            cursor: grab; /* 드래그 중인 손 모양 커서로 변경 */
+        }
+
+        .menu-item {
+            flex: 0 0 auto; /* flex-basis를 auto로 설정하여 너비가 자동 조정되게 함 */
+        }
         </style>
-
-<script>
-    // 터치 시작 지점의 x좌표를 저장하는 변수
-    let touchStartX = 0;
-
-    // 터치 이동 거리의 임계값 (터치가 너무 작은 움직임으로 간주되지 않도록)
-    const threshold = 50;
-
-    // 홈 섹션을 나타내는 변수
-    const homeSection = document.getElementById('home');
-
-    // 메뉴 섹션을 나타내는 변수
-    const menuSection = document.getElementById('menu');
-
-    // 음료 섹션을 나타내는 변수
-    const drinksSection = document.getElementById('drinks');
-
-    // 모든 메뉴 네비게이션 아이템을 가져와서 각각에 대한 클릭 이벤트 리스너를 추가
-    const menuNavItems = document.querySelectorAll('.menu-nav-item');
-    menuNavItems.forEach(function(navItem) {
-        navItem.addEventListener('click', function(event) {
-            // 클릭된 네비게이션 아이템의 데이터 섹션을 가져옴
-            const section = event.target.dataset.section;
-
-            // 해당 섹션으로 스크롤
-            document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // 터치 시작 이벤트 리스너 추가
-    homeSection.addEventListener('touchstart', function(event) {
-        touchStartX = event.touches[0].clientX;
-    });
-
-    // 터치 종료 이벤트 리스너 추가
-    homeSection.addEventListener('touchend', function(event) {
-        const touchEndX = event.changedTouches[0].clientX;
-        const deltaX = touchEndX - touchStartX;
-
-        // 오른쪽으로 드래그한 경우 (음수 값)
-        if (deltaX < -threshold) {
-            // 메뉴 섹션으로 이동
-            menuSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        // 왼쪽으로 드래그한 경우 (양수 값)
-        else if (deltaX > threshold) {
-            // 음료 섹션으로 이동
-            drinksSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    // 터치 시작 이벤트 리스너 추가
-    menuSection.addEventListener('touchstart', function(event) {
-        touchStartX = event.touches[0].clientX;
-    });
-
-    // 터치 종료 이벤트 리스너 추가
-    menuSection.addEventListener('touchend', function(event) {
-        const touchEndX = event.changedTouches[0].clientX;
-        const deltaX = touchEndX - touchStartX;
-
-        // 왼쪽으로 드래그한 경우 (양수 값)
-        if (deltaX > threshold) {
-            // 홈 섹션으로 이동
-            homeSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        // 오른쪽으로 드래그한 경우 (음수 값)
-        else if (deltaX < -threshold) {
-            // 음료 섹션으로 이동
-            drinksSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    // 터치 시작 이벤트 리스너 추가
-    drinksSection.addEventListener('touchstart', function(event) {
-        touchStartX = event.touches[0].clientX;
-    });
-
-    // 터치 종료 이벤트 리스너 추가
-    drinksSection.addEventListener('touchend', function(event) {
-        const touchEndX = event.changedTouches[0].clientX;
-        const deltaX = touchEndX - touchStartX;
-
-        // 왼쪽으로 드래그한 경우 (양수 값)
-        if (deltaX > threshold) {
-            // 메뉴 섹션으로 이동
-            menuSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        // 오른쪽으로 드래그한 경우 (음수 값)
-        else if (deltaX < -threshold) {
-            // 홈 섹션으로 이동
-            homeSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-</script>
-
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -320,51 +238,101 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const sections = document.querySelectorAll('.content');
-            const navLinks = document.querySelectorAll('nav a');
+                const navLinks = document.querySelectorAll('nav a');
             
-            function hideAllSections() {
-                sections.forEach(section => {
-                    section.style.display = 'none'; // 모든 섹션 숨김
+                function hideAllSections() {
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                }
+            
+                function showSection(id) {
+                    hideAllSections();
+                    const section = document.querySelector(id);
+                    section.style.display = 'block';
+                }
+            
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        showSection(this.getAttribute('href'));
+                    });
                 });
-            }
             
-            function showSection(id) {
-                hideAllSections();
-                const section = document.querySelector(id);
-                section.style.display = 'block'; // 선택된 섹션만 표시
-            }
+                showSection('#home'); // 초기에 홈 섹션 표시
             
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    showSection(this.getAttribute('href'));
-                });
-            });
+                document.getElementById('order-button').addEventListener('click', function() {
+                    const orderDetails = [];
+                    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                        const name = item.querySelector('p').textContent;
+                        const quantity = item.querySelector('input[type=number]').value;
+                        if (parseInt(quantity) > 0) {
+                            orderDetails.push(`${name}: ${quantity}개`);
+                        }
+                    });
             
-            showSection('#home'); // 초기에 홈 섹션 표시
-
-
-            // 이벤트 리스너를 DOMContentLoaded 안으로 이동
-            document.getElementById('order-button').addEventListener('click', function() {
-                const orderDetails = [];
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const name = item.querySelector('p').textContent;
-                    const quantity = item.querySelector('input[type=number]').value;
-                    if (parseInt(quantity) > 0) {
-                        orderDetails.push(`${name}: ${quantity}개`);
+                    if (orderDetails.length > 0) {
+                        document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
+                        document.getElementById('order-modal').style.display = 'block';
+                    } else {
+                        alert('주문할 메뉴를 선택해주세요.');
                     }
                 });
-
-                if (orderDetails.length > 0) {
-                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
-                    document.getElementById('order-modal').style.display = 'block';
-                } else {
-                    alert('주문할 메뉴를 선택해주세요.');
+            
+                // Drag and Drop Code
+                let dragSrcEl = null;
+            
+                function handleDragStart(e) {
+                    this.style.opacity = '0.4';
+                    dragSrcEl = this;
                 }
+            
+                function handleDragOver(e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                    return false;
+                }
+            
+                function handleDragEnter(e) {
+                    this.classList.add('over');
+                }
+            
+                function handleDragLeave(e) {
+                    this.classList.remove('over');
+                }
+            
+                function handleDrop(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    }
+                    if (dragSrcEl !== this) {
+                        dragSrcEl.innerHTML = this.innerHTML;
+                        this.innerHTML = e.dataTransfer.getData('text/html');
+                    }
+                    return false;
+                }
+            
+                function handleDragEnd(e) {
+                    this.style.opacity = '1';
+                    let items = document.querySelectorAll('.menu .menu-item');
+                    items.forEach(function (item) {
+                        item.classList.remove('over');
+                    });
+                }
+            
+                let items = document.querySelectorAll('.menu .menu-item');
+                items.forEach(function(item) {
+                    item.addEventListener('dragstart', handleDragStart);
+                    item.addEventListener('dragenter', handleDragEnter);
+                    item.addEventListener('dragover', handleDragOver);
+                    item.addEventListener('dragleave', handleDragLeave);
+                    item.addEventListener('drop', handleDrop);
+                    item.addEventListener('dragend', handleDragEnd);
+                });
             });
-        });
             </script>
-
+            
             <script>
             document.getElementById('order-button').addEventListener('click', function() {
                 const orderDetails = [];
@@ -394,9 +362,6 @@
             function closeModal() {
                 document.getElementById('order-modal').style.display = 'none';
             }
-            
-            
-
             </script>  
             
 
@@ -418,7 +383,6 @@
                     alert('주문할 메뉴를 선택해주세요.');
                 }
             });
-
             </script>  
 
 
@@ -451,7 +415,8 @@
         </nav>
 
         <section id="home" class="content">
-            <div class="introduction">
+            <div class="menu draggable-container">
+                <div class="menu draggable">
                 <h1>서울치킨에 오신걸 환영합니다!</h1>
                 <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
                 <p>봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.</p>
@@ -470,7 +435,8 @@
 
 
         <section id="menu" class="content">
-            <div class="menu">
+            <div class="menu draggable-container">
+                <div class="menu draggable">
                 <h2></h2>
                 <div class="menu-item" id="menu1">
                     <p>Original chicken: crispy and crunchy</p>
@@ -539,7 +505,8 @@
         </section>
 
         <section id="drinks" class="content">
-            <div class="menu">
+            <div class="menu draggable-container">
+                <div class="menu draggable">
                 <h2></h2>
                 <div class="menu-item drink-item" id="drink1">
                     <p>음료 1: 설명</p>
