@@ -1,81 +1,136 @@
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메뉴와 예약</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000; /* 배경색을 검은색으로 설정 */
-            color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+            background-color: #282828;
+            color: #f0f0f0;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .content {
+            padding-top: 60px;
         }
         .menu, .reservation-form {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        h2 {
-            color: #fff; /* 제목 텍스트 색상을 흰색으로 변경 */
+        .menu-item, .drink-item {
+            width: 100%;
+            max-width: 360px;
+            margin-bottom: 20px;
+            text-align: center;
         }
-        .menu img, .reservation-form img {
+        .menu-item img, .drink-item img {
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
-        .back-to-menu a {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
+        /* 추가된 스타일 */
+        .menu-item span.price-per-item {
+            margin-right: 10px; /* 가격과 "-" 버튼 사이의 간격을 조정 */
+            font-weight: bold; /* 가격의 글씨체를 굵게 */
+        }
+        button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type=number] {
+            width: 50px;
+            margin: 0 5px;
         }
         @media (max-width: 768px) {
             .menu, .reservation-form {
                 padding: 10px;
             }
         }
-        .menu-image {
-            width: 100%;
-            max-width: 700px;
-            height: auto;
-        }
     </style>
-    </head>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
-            button.addEventListener('click', function() {
-              const container = this.parentNode;
-              const inputField = container.querySelector('input[type=number]');
-              let currentValue = parseInt(inputField.value);
-              const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
-              
-              let newValue = currentValue + delta;
-              inputField.value = newValue;
-        
-              // 가격 계산
-              const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-              const totalPriceElement = container.querySelector('.total-price');
-              totalPriceElement.textContent = newValue * pricePerItem; // 총 가격 업데이트
-            });
-          });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 모든 버튼에 이벤트 리스너 추가
+      document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+        button.addEventListener('click', function() {
+          const container = this.parentNode;
+          const inputField = container.querySelector('input[type=number]');
+          let currentValue = parseInt(inputField.value);
+          const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
+          
+          let newValue = currentValue + delta;
+          inputField.value = newValue;
+    
+          // 가격 계산
+          const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+          const totalPriceElement = container.querySelector('.total-price');
+          totalPriceElement.textContent = newValue * pricePerItem; // 각 메뉴 아이템의 총 가격 업데이트
+    
+          // 총금액 업데이트
+          updateTotalAmount();
         });
-        </script>
+      });
+    
+      // 초기 총금액 계산
+      updateTotalAmount();
+    });
+    
+    // 총금액 업데이트 함수
+    function updateTotalAmount() {
+      let totalAmount = 0;
+      document.querySelectorAll('.total-price').forEach(priceElement => {
+        totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
+      });
+      document.getElementById('total-amount').textContent = `총금액: ${totalAmount}원`; // 총금액 표시
+    }
+    </script>
+    
 
-    <body>
+</head>
 
-    <section id="menu">
+<body>
+    <nav>
+        <a href="#menu">메뉴</a>
+        <a href="#drinks">음료</a>
+    </nav>
+
+    <section id="menu" class="content">
         <div class="menu">
-            <h2>메뉴판</h2>
+            <h2>메뉴판</h2> <span id="total-amount">총금액: 0원</span>
             <div class="menu-item" id="menu1">
-                <p>Original chicken: Crispy</p>
+                <p>Original chicken: crispy and crunchy</p>
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image">
+                <span class="price-per-item">5000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">5000</span>원
                 <span class="total-price">0</span>원
-              </div>
+            </div>
             <div class="menu-item" id="menu2">
                 <p>메뉴 2: 설명</p>
                 <img src="path_to_image3.jpg" alt="메뉴 2 사진">
@@ -130,6 +185,11 @@
                 <span class="price-per-item">8000</span>원
                 <span class="total-price">0</span>원
               </div>
+        </div>
+    </section>
+
+    <section id="drinks" class="content">
+        <div class="menu">
             <div class="menu-item">
                 <p>음료 1: 설명</p>
                 <img src="path_to_image8.jpg" alt="음료 1 사진">
@@ -174,68 +234,10 @@
                     <input type="number" id="quantity1" value="0" min="0">
                     <button type="button" onclick="increaseQuantity('quantity1')">+</button>
                 </div>
-            </div>
+            <!-- Additional drink items as needed -->
         </div>
     </section>
 
-    <section id="reservation">
-        <div class="reservation-form">
-            <h2>예약하기</h2>
-            <form action="/reservation" method="post">
-                <!-- 예약 폼 내용 -->
-            </form>
-            <div class="back-to-menu">
-                <a href="#menu">메뉴
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>레스토랑 메뉴 및 예약</title>
-                        <style>
-                            body {
-                                background-color: black;
-                                color: white;
-                                font-family: Arial, sans-serif;
-                            }
-                            .menu-item {
-                                margin-bottom: 20px;
-                            }
-                            .menu-item img {
-                                width: 100px;
-                                height: auto;
-                            }
-                            .reservation-form {
-                                margin-top: 20px;
-                            }
-                            @media (max-width: 600px) {
-                                .menu-item img {
-                                    width: 50px;
-                                }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                    
-                    <div id="menu">
-                        <h2>메뉴</h2>
-                        <div class="menu-item">
-                            <h3>메뉴 아이템 1</h3>
-                            <p>설명...</p>
-                            <img src="menu-item1.jpg" alt="메뉴 아이템 1">
-                        </div>
-                        <!-- 메뉴 아이템 추가 -->
-                    </div>
-                    
-                    <div class="reservation-form">
-                        <h2>예약</h2>
-                        <form>
-                            <!-- 예약 폼 내용 추가 -->
-                        </form>
-                    </div>
-                    
-                    <div class="back-to-menu">
-                        <a href="#menu">메뉴로 돌아가기</a>
-                    </div>
-                    
-                    </body>
-                    </html>
-                    
+
+</body>
+</html>
