@@ -54,6 +54,14 @@
             margin-right: 10px; /* 가격과 "-" 버튼 사이의 간격을 조정 */
             font-weight: bold; /* 가격의 글씨체를 굵게 */
         }
+        /* 추가된 스타일 */
+        .menu-item span.price-per-item {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .content {
+        display: none; /* 기본적으로 모든 섹션을 숨김 */
+        }
         button {
             background-color: #ff6f61;
             border: none;
@@ -72,33 +80,48 @@
                 padding: 10px;
             }
         }
+        /* 여기에 새로운 스타일 추가 */
+        .introduction {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .introduction h1 {
+            color: #ff6f61;
+        }
+        .introduction p {
+            color: #fff;
+            font-size: 16px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
     </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // 모든 버튼에 이벤트 리스너 추가
-      document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+document.addEventListener('DOMContentLoaded', function() {
+    // 메뉴 아이템과 음료 아이템 모두에 이벤트 리스너 추가
+    document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
         button.addEventListener('click', function() {
-          const container = this.parentNode;
-          const inputField = container.querySelector('input[type=number]');
-          let currentValue = parseInt(inputField.value);
-          const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
-          
-          let newValue = currentValue + delta;
-          inputField.value = newValue;
-    
-          // 가격 계산
-          const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-          const totalPriceElement = container.querySelector('.total-price');
-          totalPriceElement.textContent = newValue * pricePerItem; // 각 메뉴 아이템의 총 가격 업데이트
-    
-          // 총금액 업데이트
-          updateTotalAmount();
+            const container = this.closest('.menu-item, .drink-item');
+            const inputField = container.querySelector('input[type=number]');
+            let currentValue = parseInt(inputField.value);
+            const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
+
+            let newValue = currentValue + delta;
+            inputField.value = newValue;
+
+            // 가격 계산
+            const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+            const totalPriceElement = container.querySelector('.total-price');
+            totalPriceElement.textContent = newValue * pricePerItem; // 각 아이템의 총 가격 업데이트
+
+            // 총금액 업데이트
+            updateTotalAmount();
         });
-      });
-    
-      // 초기 총금액 계산
-      updateTotalAmount();
+    });
+
+    // 초기 총금액 계산
+    updateTotalAmount();
     });
     
     // 총금액 업데이트 함수
@@ -111,19 +134,61 @@
     }
     </script>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content');
+            const navLinks = document.querySelectorAll('nav a');
+        
+            function hideAllSections() {
+                sections.forEach(section => {
+                    section.style.display = 'none'; // 모든 섹션 숨김
+                });
+            }
+        
+            function showSection(id) {
+                hideAllSections();
+                const section = document.querySelector(id);
+                section.style.display = 'block'; // 선택된 섹션만 표시
+            }
+        
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showSection(this.getAttribute('href'));
+                });
+            });
+        
+            showSection('#home'); // 초기에 홈 섹션 표시
+        });
+        </script>
+        
 
 </head>
 
 <body>
     <nav>
+        <a href="#home">홈</a>
         <a href="#menu">메뉴</a>
         <a href="#drinks">음료</a>
         <span id="total-amount" style="float: right; padding-right: 20px;">총금액: 0원</span>
     </nav>
 
+    <section id="home" class="content">
+        <div class="introduction">
+            <h1>환영합니다!</h1>
+            <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
+            <p>봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.</p>
+            <p>여기는 단순한 식사를 넘어선, 맛과 행복이 공존하는 곳입니다.</p>
+            <p>우리의 비밀 레시피로 완성된 금빛 바삭함과 속살의 육즙이 어우러진 치킨은, 한 입 베어 물 때마다 봉헤찌로의 열정과 정성이 느껴집니다.</p>
+            <p>지역 사랑으로 시작해 전국적인 사랑을 받게 된 우리 치킨집은, 매 순간 최고의 맛과 서비스로 여러분을 맞이할 준비가 되어 있습니다.</p>
+            <p>함께하는 모든 순간이 즐거움으로 가득 차길 바라며, 봉헤찌로에서 가장 맛있고 유명한 치킨의 세계로 여러분을 초대합니다.</p>
+        </div>
+    </section>
+
+
     <section id="menu" class="content">
         <div class="menu">
-            <h2>메뉴판</h2> <span id="total-amount">총금액: 0원</span>
+            <h2>메뉴판</h2>
             <div class="menu-item" id="menu1">
                 <p>Original chicken: crispy and crunchy</p>
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image">
@@ -134,57 +199,57 @@
                 <span class="total-price">0</span>원
             </div>
             <div class="menu-item" id="menu2">
-                <p>메뉴 2: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 2 사진">
+                <p>양념치킨: 설명부분은 알아서 넣고</p>
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 2 사진">
+                <span class="price-per-item">4000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">3000</span>원
                 <span class="total-price">0</span>원
               </div>
             <div class="menu-item" id="menu3">
                 <p>메뉴 3: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 3 사진">
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 3 사진">
+                <span class="price-per-item">6000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">4000</span>원
                 <span class="total-price">0</span>원
               </div>
             <div class="menu-item" id="menu4">
                 <p>메뉴 4: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 4 사진">
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 4 사진">
+                <span class="price-per-item">3000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">8000</span>원
                 <span class="total-price">0</span>원
               </div>
             <div class="menu-item" id="menu5">
                 <p>메뉴 5: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 5 사진">
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 5 사진">
+                <span class="price-per-item">2000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">7000</span>원
                 <span class="total-price">0</span>원
               </div>
             <div class="menu-item" id="menu6">
                 <p>메뉴 6: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 6 사진">
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 6 사진">
+                <span class="price-per-item">1000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">1000</span>원
                 <span class="total-price">0</span>원
               </div>
             <div class="menu-item" id="menu7">
                 <p>메뉴 7: 설명</p>
-                <img src="path_to_image3.jpg" alt="메뉴 7 사진">
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 7 사진">
+                <span class="price-per-item">8000</span>원
                 <button type="button">-</button>
                 <input type="number" value="0" min="0">
                 <button type="button">+</button>
-                <span class="price-per-item">8000</span>원
                 <span class="total-price">0</span>원
               </div>
         </div>
@@ -192,15 +257,14 @@
 
     <section id="drinks" class="content">
         <div class="menu">
-            <div class="menu-item">
+            <div class="menu-item drink-item" id="drink1">
                 <p>음료 1: 설명</p>
                 <img src="path_to_image8.jpg" alt="음료 1 사진">
-                <div class="quantity-controls">
-                    <button type="button" onclick="decreaseQuantity('quantity1')">-</button>
-                    <input type="number" id="quantity1" value="0" min="0">
-                    <button type="button" onclick="increaseQuantity('quantity1')">+</button>
-                </div>
-            </div>
+                <span class="price-per-item">1500</span>원
+                <button type="button">-</button>
+                <input type="number" id="quantity1" value="0" min="0">
+                <button type="button">+</button>
+                <span class="total-price">0</span>원
             <div class="menu-item">
                 <p>음료 2: 설명</p>
                 <img src="path_to_image9.jpg" alt="음료 2 사진">
