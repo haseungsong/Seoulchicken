@@ -462,7 +462,8 @@
 <body>
     <nav>
         <div class="nav-container">
-            <!-- 드롭다운 메뉴 추가 -->
+        <!-- 상단 섹션: 언어 변경 및 링크 -->
+        <div class="nav-top">
             <div class="language-dropdown">
                 <button class="dropbtn">Language</button>
                 <div class="dropdown-content">
@@ -473,12 +474,15 @@
             <a href="#home" data-lang-key="home">홈</a>
             <a href="#menu" data-lang-key="menu">메뉴</a>
             <a href="#drinks" data-lang-key="drinks">음료</a>
-            <div class="order-section">
-                <span id="total-amount">총금액: 0원</span>
-                <button id="order-button">주문</button>
-                <button id="cancel-button">취소</button>
-            </div>
         </div>
+        <!-- 하단 섹션: 주문 관련 버튼 및 총금액 -->
+        <div class="order-section">
+            <span id="total-amount">총금액: 0원</span>
+            <button id="order-button">주문</button>
+            <button id="cancel-button">취소</button>
+        </div>
+    </div>
+
     </nav>
     
     <section id="home" class="content">
