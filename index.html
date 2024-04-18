@@ -22,8 +22,6 @@
             top: 0;
             z-index: 1000;
             line-height: 40px; /* 높이 조정 */
-            overflow-x: auto; /* 가로 스크롤 가능하도록 설정 */
-            white-space: nowrap; /* 메뉴들이 한 줄에 표시되도록 설정 */
         }
         nav a {
             color: white;
@@ -185,6 +183,37 @@
     }
 
     </style>
+
+    <script>
+        // 드래그 시작 지점을 저장하는 변수
+        let startX;
+
+        // 터치 시작 이벤트 리스너
+        function handleTouchStart(event) {
+            startX = event.touches[0].clientX;
+        }
+
+        // 터치 끝 이벤트 리스너
+        function handleTouchEnd(event) {
+            const endX = event.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            // 일정 거리 이상 드래그 되었을 때 메뉴 이동
+            if (Math.abs(diff) > 50) { // 50은 임의의 값입니다. 필요에 따라 조정 가능합니다.
+                const nav = document.querySelector('nav');
+                if (diff > 0) {
+                    nav.scrollLeft += 100; // 오른쪽으로 이동
+                } else {
+                    nav.scrollLeft -= 100; // 왼쪽으로 이동
+                }
+            }
+        }
+
+        // 터치 이벤트 리스너 등록
+        document.querySelector('nav').addEventListener('touchstart', handleTouchStart, false);
+        document.querySelector('nav').addEventListener('touchend', handleTouchEnd, false);
+    </script>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
