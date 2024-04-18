@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈화면과 메뉴 및 주문</title>
+    <title>메뉴와 예약</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -25,9 +25,9 @@
         }
         nav a {
             color: white;
-            padding: 5px 10px;
+            padding: 10px 20px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 20px;
         }
         .content {
             padding-top: 60px;
@@ -63,18 +63,23 @@
         .content {
         display: none; /* 기본적으로 모든 섹션을 숨김 */
         }
+        button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 20px;
+        }
         input[type=number] {
             width: 50px;
             margin: 0 5px;
         }
-        /* 미디어 쿼리로 모바일 화면 최적화 */
         @media (max-width: 768px) {
-            .nav-container {
-                display: flex;
-                justify-content: space-between; /* 요소들을 양쪽 끝으로 정렬 */
-                align-items: center; /* 요소들을 중앙에 정렬 */
-                padding: 0 20px; /* 좌우 패딩 */
-                flex-wrap: nowrap; /* 모든 내용을 한 줄로 강제 */
+            .menu, .reservation-form {
+                padding: 10px;
+            }
         }
         /* 여기에 새로운 스타일 추가 */
         .introduction {
@@ -93,28 +98,28 @@
         }
         #order-button {
             float: right; /* 오른쪽 정렬 유지 */
-            margin-right: 5px; /* 필요에 따라 margin 조정 */
+            margin-right: 10px; /* 필요에 따라 margin 조정 */
             background-color: #ff6f61; /* 버튼 배경 색상 */
             border: none;
             color: white;
-            padding: 5px 0;
+            padding: 5px 20px;
             border-radius: 5px; /* 둥근 모서리 스타일 */
-            font-size: 14px; /* 글씨 크기 */
+            font-size: 16px; /* 글씨 크기 */
         }
         #cancel-button {
         float: right; /* 오른쪽 정렬 유지 */
-        margin-right: 10px; /* 필요에 따라 margin 조정, 여기서는 버튼 사이의 간격을 위해 조금 줄임 */
+        margin-right: 5px; /* 필요에 따라 margin 조정, 여기서는 버튼 사이의 간격을 위해 조금 줄임 */
         background-color: #ff6f61; /* 버튼 배경 색상 */
         border: none;
         color: white;
-        padding: 10px 0;
+        padding: 5px 20px;
         border-radius: 5px; /* 둥근 모서리 스타일 */
-        font-size: 14px; /* 글씨 크기 */
+        font-size: 16px; /* 글씨 크기 */
         }
         #total-amount {
             float: right;
-            margin-right: 10px;
-            font-size: 16px;
+            margin-right: 20px;
+            font-size: 20px;
             color: white;
             font-weight: bold; /* 글자를 더 굵게 */
         }
@@ -134,97 +139,58 @@
         background: rgba(0, 0, 0, 0.5);
         z-index: 1050;
         font-family: 'Noto Sans KR', sans-serif; /* 폰트 설정 */
-        }
+    }
 
-        #order-modal div {
-            background: white;
-            width: 60%;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 5px;
-        }
+    #order-modal div {
+        background: white;
+        width: 60%;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 5px;
+    }
 
-        #order-modal h2 {
-            color: #333; /* 헤더 색상 변경 */
-            font-size: 24px; /* 헤더 글씨 크기 */
-        }
+    #order-modal h2 {
+        color: #333; /* 헤더 색상 변경 */
+        font-size: 24px; /* 헤더 글씨 크기 */
+    }
 
-        #order-modal ul {
-            list-style-type: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
+    #order-modal ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
 
-        #order-modal li {
-            padding: 8px;
-            margin-bottom: 4px;
-            border-bottom: 1px solid #ccc;
-            background-color: #f9f9f9; /* 배경색 조정 */
-            color: #333; /* 글씨 색상 변경 */
-            font-size: 16px; /* 글씨 크기 조정 */
-        }
+    #order-modal li {
+        padding: 8px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #ccc;
+        background-color: #f9f9f9; /* 배경색 조정 */
+        color: #333; /* 글씨 색상 변경 */
+        font-size: 16px; /* 글씨 크기 조정 */
+    }
 
-        #order-modal button {
-            background-color: #ff6f61;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            margin-top: 5px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
-        }
-        .nav-container {
-        display: flex;
-        justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
-        align-items: center; /* 요소를 수직으로 가운데 정렬 */
-        padding: 0 20px; /* 좌우 여백 추가 */
-        }
+    #order-modal button {
+        background-color: #ff6f61;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
+    }
+    .nav-container {
+    display: flex;
+    justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
+    align-items: center; /* 요소를 수직으로 가운데 정렬 */
+    padding: 0 20px; /* 좌우 여백 추가 */
+    }
 
-        .order-section {
-        display: flex;
-        align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
-        justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
-        }
-        
-        /* 드롭다운 메뉴 스타일 */
-        .language-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .language-dropdown .dropbtn {
-            background-color: #333;
-            color: white;
-            padding: 5px 10px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .language-dropdown .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            padding: 5px 10px; /* 드롭다운 링크 패딩 줄임 */
-            z-index: 1;
-        }
-
-        .language-dropdown .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .language-dropdown .dropdown-content a:hover {background-color: #f1f1f1;}
-
-        .language-dropdown:hover .dropdown-content {display: block;}
-
-        .language-dropdown:hover .dropbtn {background-color: #555;}
+    .order-section {
+    display: flex;
+    align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
+    justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
+    }
 
     </style>
 
@@ -252,7 +218,7 @@
             });
         });
         
-    // 취소 버튼 이벤트 리스너
+        // 취소 버튼 이벤트 리스너
     document.getElementById('cancel-button').addEventListener('click', function() {
         // 모든 수량 입력 필드를 0으로 설정
         document.querySelectorAll('input[type=number]').forEach(input => {
@@ -375,10 +341,10 @@
         
         
 
-    </script>  
+        </script>  
         
 
-    <script>
+        <script>
         document.getElementById('order-button').addEventListener('click', function() {
             const orderDetails = [];
             document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
@@ -397,42 +363,7 @@
             }
         });
 
-    </script>  
-
-        
-    <script>
-            function changeLanguage(language) {
-                // 언어 별 텍스트 설정
-                var texts = {
-                    'ko': {
-                        'home': '홈',
-                        'menu': '메뉴',
-                        'drinks': '음료',
-                        'welcome': '서울치킨에 오신걸 환영합니다!'
-                    },
-                    'po': {
-                        'home': 'Início',
-                        'menu': 'Cardápio',
-                        'drinks': 'Bebidas',
-                        'welcome': 'Bem-vindo ao Seoul Chicken!'
-                    }
-                };
-            
-                // 선택된 언어의 텍스트로 업데이트
-                document.querySelectorAll('[data-lang-key]').forEach(element => {
-                    var key = element.getAttribute('data-lang-key');
-                    if (texts[language][key]) {
-                        element.textContent = texts[language][key];
-                    }
-                toggleDropdown(); // 언어 변경 후 드롭다운이 닫히도록 보장
-                });
-            }
-            
-            document.addEventListener('DOMContentLoaded', function() {
-                // 초기 언어 설정 (한국어)
-                changeLanguage('ko');
-            });
-            </script>
+        </script>  
 
 
 
@@ -453,33 +384,22 @@
 
 <body>
     <nav>
-        <div class="nav-container">
-        <!-- 상단 섹션: 언어 변경 및 링크 -->
-        <div class="nav-top">
-            <div class="language-dropdown">
-                <button class="dropbtn">Language</button>
-                <div class="dropdown-content" id="dropdown-content">
-                    <a href="#" onclick="changeLanguage('ko')">한국어</a>
-                    <a href="#" onclick="changeLanguage('po')">Portugues</a>
-                </div>
-            </div>
-            <a href="#home" data-lang-key="home">홈</a>
-            <a href="#menu" data-lang-key="menu">메뉴</a>
-            <a href="#drinks" data-lang-key="drinks">음료</a>
-        </div>
-        <!-- 하단 섹션: 주문 관련 버튼 및 총금액 -->
-        <div class="order-section">
-            <span id="total-amount">총금액: 0원</span>
-            <button id="order-button">주문</button>
-            <button id="cancel-button">취소</button>
-        </div>
-    </div>
+        <a href="#home">홈</a>
+        <a href="#menu">메뉴</a>
+        <a href="#drinks">음료</a>
+            <div class="order-section">
+                <span id="total-amount">총금액: 0원</span>
+                <button id="order-button">주문</button>
+                <!-- 주문 버튼 옆에 취소 버튼 추가 -->
+                <button id="cancel-button">취소</button>
 
+            </div>
+        </div>
     </nav>
-    
+
     <section id="home" class="content">
         <div class="introduction">
-            <h1 data-lang-key="welcome">서울치킨에 오신걸 환영합니다!</h1>
+            <h1>서울치킨에 오신걸 환영합니다!</h1>
             <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
             <p>봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.</p>
             <p>여기는 단순한 식사를 넘어선, 맛과 행복이 공존하는 곳입니다.</p>
@@ -487,9 +407,6 @@
             <p>지역 사랑으로 시작해 전국적인 사랑을 받게 된 우리 치킨집은, 매 순간 최고의 맛과 서비스로 여러분을 맞이할 준비가 되어 있습니다.</p>
             <p>함께하는 모든 순간이 즐거움으로 가득 차길 바라며, 봉헤찌로에서 가장 맛있고 유명한 치킨의 세계로 여러분을 초대합니다.</p>
         </div>
-    </section>
-
-
         <iframe width="560" height="315" 
         src="https://www.youtube.com/embed/ZsOeLHG2wBE?si=zc6krYWFUgGKb6py" 
         frameborder="0" 
