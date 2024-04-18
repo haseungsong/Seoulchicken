@@ -139,58 +139,96 @@
         background: rgba(0, 0, 0, 0.5);
         z-index: 1050;
         font-family: 'Noto Sans KR', sans-serif; /* 폰트 설정 */
-    }
+        }
 
-    #order-modal div {
-        background: white;
-        width: 60%;
-        margin: 50px auto;
-        padding: 20px;
-        border-radius: 5px;
-    }
+        #order-modal div {
+            background: white;
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
 
-    #order-modal h2 {
-        color: #333; /* 헤더 색상 변경 */
-        font-size: 24px; /* 헤더 글씨 크기 */
-    }
+        #order-modal h2 {
+            color: #333; /* 헤더 색상 변경 */
+            font-size: 24px; /* 헤더 글씨 크기 */
+        }
 
-    #order-modal ul {
-        list-style-type: none;
-        padding: 0;
-        margin-bottom: 20px;
-    }
+        #order-modal ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
 
-    #order-modal li {
-        padding: 8px;
-        margin-bottom: 4px;
-        border-bottom: 1px solid #ccc;
-        background-color: #f9f9f9; /* 배경색 조정 */
-        color: #333; /* 글씨 색상 변경 */
-        font-size: 16px; /* 글씨 크기 조정 */
-    }
+        #order-modal li {
+            padding: 8px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f9f9f9; /* 배경색 조정 */
+            color: #333; /* 글씨 색상 변경 */
+            font-size: 16px; /* 글씨 크기 조정 */
+        }
 
-    #order-modal button {
-        background-color: #ff6f61;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        margin-top: 5px;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
-    }
-    .nav-container {
-    display: flex;
-    justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
-    align-items: center; /* 요소를 수직으로 가운데 정렬 */
-    padding: 0 20px; /* 좌우 여백 추가 */
-    }
+        #order-modal button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
+        }
+        .nav-container {
+        display: flex;
+        justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
+        align-items: center; /* 요소를 수직으로 가운데 정렬 */
+        padding: 0 20px; /* 좌우 여백 추가 */
+        }
 
-    .order-section {
-    display: flex;
-    align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
-    justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
-    }
+        .order-section {
+        display: flex;
+        align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
+        justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
+        }
+        
+        /* 드롭다운 메뉴 스타일 */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-dropdown .dropbtn {
+            background-color: #333;
+            color: white;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .language-dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .language-dropdown .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .language-dropdown .dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .language-dropdown:hover .dropdown-content {display: block;}
+
+        .language-dropdown:hover .dropbtn {background-color: #555;}
 
     </style>
 
@@ -218,7 +256,7 @@
             });
         });
         
-        // 취소 버튼 이벤트 리스너
+    // 취소 버튼 이벤트 리스너
     document.getElementById('cancel-button').addEventListener('click', function() {
         // 모든 수량 입력 필드를 0으로 설정
         document.querySelectorAll('input[type=number]').forEach(input => {
@@ -341,10 +379,10 @@
         
         
 
-        </script>  
+    </script>  
         
 
-        <script>
+    <script>
         document.getElementById('order-button').addEventListener('click', function() {
             const orderDetails = [];
             document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
@@ -363,10 +401,10 @@
             }
         });
 
-        </script>  
+    </script>  
 
         
-        <script>
+    <script>
             function changeLanguage(language) {
                 // 언어 별 텍스트 설정
                 var texts = {
@@ -419,13 +457,17 @@
 <body>
     <nav>
         <div class="nav-container">
-            <div>
-                <button onclick="changeLanguage('ko')">한국어</button>
-                <button onclick="changeLanguage('po')">Portugues</button>
+            <!-- 드롭다운 메뉴 추가 -->
+            <div class="language-dropdown">
+                <button class="dropbtn">Language</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="changeLanguage('ko')">한국어</a>
+                    <a href="#" onclick="changeLanguage('po')">Portugues</a>
+                </div>
             </div>
-        <a href="#home" data-lang-key="home">홈</a>
-        <a href="#menu" data-lang-key="menu">메뉴</a>
-        <a href="#drinks" data-lang-key="drinks">음료</a>
+            <a href="#home" data-lang-key="home">홈</a>
+            <a href="#menu" data-lang-key="menu">메뉴</a>
+            <a href="#drinks" data-lang-key="drinks">음료</a>
             <div class="order-section">
                 <span id="total-amount">총금액: 0원</span>
                 <button id="order-button">주문</button>
