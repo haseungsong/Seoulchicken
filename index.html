@@ -27,7 +27,7 @@
             color: white;
             padding: 10px 20px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 20px;
         }
         .content {
             padding-top: 60px;
@@ -43,6 +43,7 @@
             max-width: 360px;
             margin-bottom: 20px;
             text-align: center;
+            color: #fff; /* 텍스트 색상을 흰색(#fff)으로 지정 */
         }
         .menu-item img, .drink-item img {
             width: 100%;
@@ -69,7 +70,7 @@
             padding: 10px 20px;
             margin: 5px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 20px;
         }
         input[type=number] {
             width: 50px;
@@ -95,73 +96,232 @@
             max-width: 800px;
             margin: 20px auto;
         }
+        #order-button {
+            float: right; /* 오른쪽 정렬 유지 */
+            margin-right: 30px; /* 필요에 따라 margin 조정 */
+            background-color: #ff6f61; /* 버튼 배경 색상 */
+            border: none;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 5px; /* 둥근 모서리 스타일 */
+            font-size: 16px; /* 글씨 크기 */
+        }
+        #total-amount {
+            float: right;
+            margin-right: 20px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold; /* 글자를 더 굵게 */
+        }
+        #order-list li {
+            padding: 8px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #ccc; /* 각 주문 항목을 구분하기 위한 하단 경계선 */
+            background-color: #f9f9f9; /* 배경색 추가 */
+        }
+        #order-modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1050;
+        font-family: 'Noto Sans KR', sans-serif; /* 폰트 설정 */
+    }
+
+    #order-modal div {
+        background: white;
+        width: 60%;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    #order-modal h2 {
+        color: #333; /* 헤더 색상 변경 */
+        font-size: 24px; /* 헤더 글씨 크기 */
+    }
+
+    #order-modal ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    #order-modal li {
+        padding: 8px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #ccc;
+        background-color: #f9f9f9; /* 배경색 조정 */
+        color: #333; /* 글씨 색상 변경 */
+        font-size: 16px; /* 글씨 크기 조정 */
+    }
+
+    #order-modal button {
+        background-color: #ff6f61;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
+    }
+
     </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 메뉴 아이템과 음료 아이템 모두에 이벤트 리스너 추가
-    document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
-        button.addEventListener('click', function() {
-            const container = this.closest('.menu-item, .drink-item');
-            const inputField = container.querySelector('input[type=number]');
-            let currentValue = parseInt(inputField.value);
-            const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 메뉴 아이템과 음료 아이템 모두에 이벤트 리스너 추가
+        document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+            button.addEventListener('click', function() {
+                const container = this.closest('.menu-item, .drink-item');
+                const inputField = container.querySelector('input[type=number]');
+                let currentValue = parseInt(inputField.value);
+                const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
 
-            let newValue = currentValue + delta;
-            inputField.value = newValue;
+                let newValue = currentValue + delta;
+                inputField.value = newValue;
 
-            // 가격 계산
-            const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-            const totalPriceElement = container.querySelector('.total-price');
-            totalPriceElement.textContent = newValue * pricePerItem; // 각 아이템의 총 가격 업데이트
+                // 가격 계산
+                const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                const totalPriceElement = container.querySelector('.total-price');
+                totalPriceElement.textContent = newValue * pricePerItem; // 각 아이템의 총 가격 업데이트
 
-            // 총금액 업데이트
-            updateTotalAmount();
+                // 총금액 업데이트
+                updateTotalAmount();
+            });
         });
-    });
 
-    // 초기 총금액 계산
-    updateTotalAmount();
-    });
-    
-    // 총금액 업데이트 함수
-    function updateTotalAmount() {
-      let totalAmount = 0;
-      document.querySelectorAll('.total-price').forEach(priceElement => {
-        totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
-      });
-      document.getElementById('total-amount').textContent = `총금액: ${totalAmount}원`; // 총금액 표시
-    }
+        // 초기 총금액 계산
+        updateTotalAmount();
+        });
+        
+        // 총금액 업데이트 함수
+        function updateTotalAmount() {
+        let totalAmount = 0;
+        document.querySelectorAll('.total-price').forEach(priceElement => {
+            totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
+        });
+        document.getElementById('total-amount').textContent = `총금액: ${totalAmount}원`; // 총금액 표시
+        }
     </script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('.content');
-            const navLinks = document.querySelectorAll('nav a');
+        const navLinks = document.querySelectorAll('nav a');
         
-            function hideAllSections() {
-                sections.forEach(section => {
-                    section.style.display = 'none'; // 모든 섹션 숨김
-                });
+        function hideAllSections() {
+            sections.forEach(section => {
+                section.style.display = 'none'; // 모든 섹션 숨김
+            });
+        }
+        
+        function showSection(id) {
+            hideAllSections();
+            const section = document.querySelector(id);
+            section.style.display = 'block'; // 선택된 섹션만 표시
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                showSection(this.getAttribute('href'));
+            });
+        });
+        
+        showSection('#home'); // 초기에 홈 섹션 표시
+
+        // 이벤트 리스너를 DOMContentLoaded 안으로 이동
+        document.getElementById('order-button').addEventListener('click', function() {
+            const orderDetails = [];
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('p').textContent;
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push(`${name}: ${quantity}개`);
+                }
+            });
+
+            if (orderDetails.length > 0) {
+                document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
+                document.getElementById('order-modal').style.display = 'block';
+            } else {
+                alert('주문할 메뉴를 선택해주세요.');
             }
-        
-            function showSection(id) {
-                hideAllSections();
-                const section = document.querySelector(id);
-                section.style.display = 'block'; // 선택된 섹션만 표시
+        });
+    });
+        </script>
+
+        <script>
+        document.getElementById('order-button').addEventListener('click', function() {
+            const orderDetails = [];
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('p').textContent;
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push(`${name}: ${quantity}개`);
+                }
+            });
+
+            if (orderDetails.length > 0) {
+                document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
+                document.getElementById('order-modal').style.display = 'block';
+            } else {
+                alert('주문할 메뉴를 선택해주세요.');
             }
+        });
+
+        function confirmOrder() {
+            // 최종 주문을 처리하는 로직
+            alert('주문이 완료되었습니다!');
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('order-modal').style.display = 'none';
+        }
         
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    showSection(this.getAttribute('href'));
-                });
+        </script>  
+        
+
+        <script>
+        document.getElementById('order-button').addEventListener('click', function() {
+            const orderDetails = [];
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('p').textContent;
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push(`<li>${name}: ${quantity}개</li>`); // li 요소로 각 주문 항목 추가
+                }
             });
         
-            showSection('#home'); // 초기에 홈 섹션 표시
+            if (orderDetails.length > 0) {
+                document.getElementById('order-list').innerHTML = orderDetails.join('');
+                document.getElementById('order-modal').style.display = 'block';
+            } else {
+                alert('주문할 메뉴를 선택해주세요.');
+            }
         });
-        </script>
-        
+
+        </script>  
+
+
+
+        <!-- 주문 확인 모달 -->
+        <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1050;">
+            <div style="background:white; width:60%; margin:50px auto; padding:20px; border-radius:5px;">
+                <h2>주문 확인</h2>
+                <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
+                    <!-- 주문 목록이 여기에 표시됩니다 -->
+                </ul>
+                <button onclick="confirmOrder()">최종 확인</button>
+                <button onclick="closeModal()">닫기</button>
+            </div>
+        </div>
 
 </head>
 
@@ -171,11 +331,13 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="#menu">메뉴</a>
         <a href="#drinks">음료</a>
         <span id="total-amount" style="float: right; padding-right: 20px;">총금액: 0원</span>
+        <button id="order-button" style="float: right;">주문</button>
+
     </nav>
 
     <section id="home" class="content">
         <div class="introduction">
-            <h1>환영합니다!</h1>
+            <h1>서울치킨에 오신걸 환영합니다!</h1>
             <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
             <p>봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.</p>
             <p>여기는 단순한 식사를 넘어선, 맛과 행복이 공존하는 곳입니다.</p>
@@ -311,5 +473,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </section>
 
 
+
+
 </body>
+
 </html>
