@@ -22,12 +22,19 @@
             top: 0;
             z-index: 1000;
             line-height: 40px; /* 높이 조정 */
+            min-height: 50px; /* 최소 높이 설정 */
+            display: flex;
+            justify-content: center; /* 센터 정렬 */
+            align-items: center; /* 수직 중앙 정렬 */
         }
         nav a {
             color: white;
             padding: 10px 20px;
             text-decoration: none;
-            font-size: 20px;
+            font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1600 - 320))); /* 반응형 폰트 사이즈 */
+            white-space: nowrap; /* 텍스트가 네비게이션 바에서 줄바꿈 되지 않도록 */
+            overflow: hidden; /* 넘치는 내용 숨김 */
+            text-overflow: ellipsis; /* 텍스트가 넘칠 경우 말줄임표 사용 */
         }
         .content {
             padding-top: 60px;
