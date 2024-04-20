@@ -296,7 +296,7 @@
         document.querySelectorAll('.total-price').forEach(priceElement => {
             totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
         });
-        document.getElementById('total-amount').textContent = `Total: ${totalAmount}R$`; // 총금액 표시
+        document.getElementById('total-amount').textContent = `Total: R$${totalAmount}`;
     }
 
     // 처음에 총금액 업데이트
