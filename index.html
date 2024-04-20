@@ -194,6 +194,48 @@
 
     </style>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const languagePack = {
+            korean: {
+                'welcome': '서울치킨에 오신걸 환영합니다!',
+                'originalChicken': '오리지널 치킨: 바삭하고 고소함',
+                'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
+                // 나머지 메뉴도 이와 같이 추가
+            },
+            portuguese: {
+                'welcome': 'Bem-vindo ao Seoul Chicken!',
+                'originalChicken': 'Frango original: crocante e saboroso',
+                'seasonedChicken': 'Frango temperado: doce e picante',
+                // 나머지 메뉴도 포르투갈어로 번역하여 추가
+            }
+        };
+    
+        document.getElementById('language-select').addEventListener('change', function() {
+            updateLanguage(this.value);
+        });
+    
+        function updateLanguage(language) {
+            document.querySelector('.introduction h1').textContent = languagePack[language]['welcome'];
+            document.querySelectorAll('.menu-item p').forEach((item, index) => {
+                switch (index) {
+                    case 0:
+                        item.textContent = languagePack[language]['originalChicken'];
+                        break;
+                    case 1:
+                        item.textContent = languagePack[language]['seasonedChicken'];
+                        break;
+                    // 나머지 경우에 대해서도 처리
+                }
+            });
+            // 기타 필요한 텍스트 업데이트
+        }
+    
+        // 초기 언어 설정 (한국어)
+        updateLanguage('korean');
+    });
+    </script>
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -384,9 +426,14 @@
 
 <body>
     <nav>
+        <select id="language-select">
+            <option value="korean">한국어</option>
+            <option value="portuguese">Português</option>
+        </select>
         <a href="#home">홈</a>
         <a href="#menu">메뉴</a>
         <a href="#drinks">음료</a>
+        
             <div class="order-section">
                 <span id="total-amount">총금액: 0원</span>
                 <button id="order-button">주문</button>
