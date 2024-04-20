@@ -227,8 +227,14 @@
     
         document.getElementById('language-select').addEventListener('change', function() {
             updateLanguage(this.value);
+            adjustContentPadding();
         });
-    
+        
+        function adjustContentPadding() {
+            const navHeight = document.querySelector('nav').offsetHeight;
+            document.querySelector('.content').style.paddingTop = `${navHeight + 20}px`; // nav 높이 + 추가 여백
+        }
+
         function updateLanguage(language) {
             document.querySelector('.introduction h1').textContent = languagePack[language]['welcome'];
             document.querySelectorAll('nav a').forEach((link, index) => {
@@ -253,6 +259,9 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        adjustContentPadding(); // 초기 설정
+        updateLanguage('korean'); // 기본 언어 설정
+        
         // 메뉴 아이템과 음료 아이템 모두에 이벤트 리스너 추가
         document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
             button.addEventListener('click', function() {
