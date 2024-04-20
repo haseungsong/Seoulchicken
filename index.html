@@ -201,12 +201,18 @@
                 'welcome': '서울치킨에 오신걸 환영합니다!',
                 'originalChicken': '오리지널 치킨: 바삭하고 고소함',
                 'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
+                'home': '홈',
+                'menu': '메뉴',
+                'drinks': '음료'
                 // 나머지 메뉴도 이와 같이 추가
             },
             portuguese: {
                 'welcome': 'Bem-vindo ao Seoul Chicken!',
                 'originalChicken': 'Frango original: crocante e saboroso',
                 'seasonedChicken': 'Frango temperado: doce e picante',
+                'home': 'Início',
+                'menu': 'Cardápio',
+                'drinks': 'Bebidas'
                 // 나머지 메뉴도 포르투갈어로 번역하여 추가
             }
         };
@@ -217,17 +223,15 @@
     
         function updateLanguage(language) {
             document.querySelector('.introduction h1').textContent = languagePack[language]['welcome'];
-            document.querySelectorAll('.menu-item p').forEach((item, index) => {
-                switch (index) {
-                    case 0:
-                        item.textContent = languagePack[language]['originalChicken'];
-                        break;
-                    case 1:
-                        item.textContent = languagePack[language]['seasonedChicken'];
-                        break;
-                    // 나머지 경우에 대해서도 처리
-                }
+            document.querySelectorAll('nav a').forEach((link, index) => {
+                link.textContent = languagePack[language][link.getAttribute('data-key')]; // 링크에 data-key 속성 사용
             });
+            document.querySelectorAll('.menu-item p, .drink-item p').forEach((item) => {
+                item.textContent = languagePack[language][item.getAttribute('data-key')]; // 각 메뉴와 음료 아이템에 data-key 속성 사용
+            });
+            document.getElementById('order-button').textContent = languagePack[language]['order'];
+            document.getElementById('cancel-button').textContent = languagePack[language]['cancel'];
+            
             // 기타 필요한 텍스트 업데이트
         }
     
@@ -427,12 +431,12 @@
 <body>
     <nav>
         <select id="language-select">
-            <option value="korean">한국어</option>
+            <option value="korean">Coreano</option>
             <option value="portuguese">Português</option>
         </select>
-        <a href="#home">홈</a>
-        <a href="#menu">메뉴</a>
-        <a href="#drinks">음료</a>
+        <a href="#home" data-key="home">홈</a>
+        <a href="#menu" data-key="menu">메뉴</a>
+        <a href="#drinks" data-key="drinks">음료</a>
         
             <div class="order-section">
                 <span id="total-amount">총금액: 0원</span>
