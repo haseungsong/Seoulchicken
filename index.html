@@ -209,7 +209,7 @@
                 'intro3': '우리의 비밀 레시피로 완성된 금빛 바삭함과 속살의 육즙이 어우러진 치킨은, 한 입 베어 물 때마다 봉헤찌로의 열정과 정성이 느껴집니다.',
                 'intro4': '지역 사랑으로 시작해 전국적인 사랑을 받게 된 우리 치킨집은, 매 순간 최고의 맛과 서비스로 여러분을 맞이할 준비가 되어 있습니다.',
                 'intro5': '함께하는 모든 순간이 즐거움으로 가득 차길 바라며, 봉헤찌로에서 가장 맛있고 유명한 치킨의 세계로 여러분을 초대합니다.'
-            },
+                },
             portuguese: {
                 'welcome': 'Bem-vindo ao Seoul Chicken!',
                 'originalChicken': 'Frango original: crocante e saboroso',
@@ -240,8 +240,7 @@
                     element.textContent = languagePack[language][key];
                 }
             });
-            document.getElementById('order-button').textContent = languagePack[language]['order'];
-            document.getElementById('cancel-button').textContent = languagePack[language]['cancel'];
+
             
             // 기타 필요한 텍스트 업데이트
         }
@@ -297,7 +296,7 @@
         document.querySelectorAll('.total-price').forEach(priceElement => {
             totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
         });
-        document.getElementById('total-amount').textContent = `총금액: ${totalAmount}원`; // 총금액 표시
+        document.getElementById('total-amount').textContent = `Total: ${totalAmount}R$`; // 총금액 표시
     }
 
     // 처음에 총금액 업데이트
@@ -360,7 +359,7 @@
                 document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
                 document.getElementById('order-modal').style.display = 'block';
             } else {
-                alert('주문할 메뉴를 선택해주세요.');
+                alert('주문할 메뉴를 선택해주세요.\nPor favor, selecione um menu para pedir.');
             }
         });
     });
@@ -450,10 +449,10 @@
         <a href="#drinks" data-key="drinks">음료</a>
         
             <div class="order-section">
-                <span id="total-amount">총금액: 0원</span>
-                <button id="order-button">주문</button>
+                <span id="total-amount" data-key="totalAmount">총금액: 0원</span>
+                <button id="order-button">Pedido</button>
                 <!-- 주문 버튼 옆에 취소 버튼 추가 -->
-                <button id="cancel-button">취소</button>
+                <button id="cancel-button">Cancela</button>
 
             </div>
         </div>
