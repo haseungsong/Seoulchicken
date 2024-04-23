@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메뉴와 예약</title>
+    <title>메뉴와 주문</title>
+    <style>
+        /* Existing styles remain unchanged */
+    </style>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴와 주문</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -257,12 +266,10 @@
     </script>
 
 
-    <script>
+<script>
+    // Ensure the event listener for DOMContentLoaded is properly set
     document.addEventListener('DOMContentLoaded', function() {
-        adjustContentPadding(); // 초기 설정
-        updateLanguage('korean'); // 기본 언어 설정
-        
-        // 메뉴 아이템과 음료 아이템 모두에 이벤트 리스너 추가
+        // Adding event listeners to all + and - buttons for increment and decrement operations
         document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
             button.addEventListener('click', function() {
                 const container = this.closest('.menu-item, .drink-item');
@@ -273,57 +280,30 @@
                 let newValue = currentValue + delta;
                 inputField.value = newValue;
 
-                // 가격 계산
+                // Price calculation per item
                 const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
                 const totalPriceElement = container.querySelector('.total-price');
-                totalPriceElement.textContent = newValue * pricePerItem; // 각 아이템의 총 가격 업데이트
+                totalPriceElement.textContent = newValue * pricePerItem; // Update total price per item
 
-                // 총금액 업데이트
+                // Update total amount for the order
                 updateTotalAmount();
             });
         });
-        
-        // 취소 버튼 이벤트 리스너
-    document.getElementById('cancel-button').addEventListener('click', function() {
-        // 모든 수량 입력 필드를 0으로 설정
-        document.querySelectorAll('input[type=number]').forEach(input => {
-            input.value = 0;
-        });
 
-        // 모든 항목의 총 가격을 0원으로 설정
-        document.querySelectorAll('.total-price').forEach(total => {
-            total.textContent = '0원';
-        });
+        // Function to update the total amount based on all items
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.total-price').forEach(priceElement => {
+                totalAmount += parseInt(priceElement.textContent);
+            });
+            document.getElementById('total-amount').textContent = `총금액: R$${totalAmount}`;
+        }
 
-        // 총금액을 0원으로 업데이트
+        // Initial update for total amount
         updateTotalAmount();
     });
 
-    // 총금액 업데이트 함수
-    function updateTotalAmount() {
-        let totalAmount = 0;
-        document.querySelectorAll('.total-price').forEach(priceElement => {
-            totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
-        });
-        document.getElementById('total-amount').textContent = `Total: R$${totalAmount}`;
-    }
-
-    // 처음에 총금액 업데이트
-    updateTotalAmount();
-
-
-        // 초기 총금액 계산
-        updateTotalAmount();
-        });
-        
-        // 총금액 업데이트 함수
-        function updateTotalAmount() {
-        let totalAmount = 0;
-        document.querySelectorAll('.total-price').forEach(priceElement => {
-            totalAmount += parseInt(priceElement.textContent); // 각 메뉴 아이템의 가격을 합산
-        });
-        document.getElementById('total-amount').textContent = `Total: R$ ${totalAmount}`; // 총금액 표시
-        }
+    
     </script>
     
     <script>
@@ -367,6 +347,8 @@
             if (orderDetails.length > 0) {
                 document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
                 document.getElementById('order-modal').style.display = 'block';
+                updateTotalAmount(); // 주문 모달 열릴 때 총 금액 업데이트
+                updateModalTotalAmount(); // 모달의 총 금액 업데이트
             } else {
                 alert('주문할 메뉴를 선택해주세요.\nPor favor, selecione um menu para pedir.');
             }
@@ -428,7 +410,38 @@
             }
         });
 
+
+        // Update total amount for the order
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.total-price').forEach(priceElement => {
+                totalAmount += parseInt(priceElement.textContent);
+            });
+            const formattedTotalAmount = `Total amount: ${totalAmount} won`; // Update the text format
+            document.getElementById('total-amount').textContent = formattedTotalAmount;
+            updateModalTotalAmount(formattedTotalAmount); // Update the modal total amount as well
+        }
+
+        // Function to update the total amount in the modal
+        function updateModalTotalAmount(totalAmountText) {
+            document.getElementById('modal-total').textContent = totalAmountText;
+        }
+
+        function sendOrderData() {
+            // 주문 목록을 가져옵니다.
+            var orderList = document.getElementById('order-list').innerHTML;
+            // 총 금액을 가져옵니다.
+            var totalAmount = document.getElementById('modal-total').innerText;
+
+            // 구글 앱 스크립트로 데이터를 전송합니다.
+            google.script.run.receiveOrderData(orderList, totalAmount);
+
+            // 모달을 닫습니다.
+            closeModal();
+}
+
         </script>  
+
 
 
 
@@ -439,15 +452,107 @@
                 <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
                     <!-- 주문 목록이 여기에 표시됩니다 -->
                 </ul>
-                <button onclick="confirmOrder()">최종 확인</button>
+            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">총 금액: 0원</div>
+                <button onclick="sendOrderData()">최종 확인</button>
                 <button onclick="closeModal()">닫기</button>
             </div>
         </div>
        
+        <script>
+            // Function to send order data to the web app URL
+            function sendOrderData() {
+                // Get order list and total amount from the modal
+                var orderList = document.getElementById('order-list').innerHTML;
+                var totalAmount = document.getElementById('modal-total').innerText;
+    
+                // Create the URL for the web app
+                var url = "https://script.google.com/a/macros/kotra.com.br/s/AKfycbxZbLw94-EsTrm6kayjiDgFCGPJteEZGPzVsNJKtnt_8fMJy6O-y68j-XLReJSEw_Ex/exec";
+    
+                // Create the request parameters
+                var params = {
+                    orderList: orderList,
+                    totalAmount: totalAmount
+                };
+    
+                // Use fetch API to send POST request to the web app URL with order data
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(params)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Order data sent successfully.");
+                        // Optionally, you can close the modal or perform other actions here
+                    } else {
+                        console.error("Failed to send order data.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error sending order data:", error);
+                });
+            }
+    
+            // Function to close the modal
+            function closeModal() {
+                document.getElementById('order-modal').style.display = 'none';
+            }
+        </script> 
+        
 
-</head>
+</head><body>
 
-<body>
+    <!-- Body content remains unchanged -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderButton = document.getElementById('order-button');
+        const modal = document.getElementById('order-modal');
+        const orderList = document.getElementById('order-list');
+        const modalTotal = document.getElementById('modal-total');
+
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+                totalAmount += quantity * pricePerItem;
+            });
+            modalTotal.textContent = '총 금액: ' + totalAmount + '원';
+        }
+
+        orderButton.addEventListener('click', function() {
+            orderList.innerHTML = '';
+            let hasItems = false;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                if (quantity > 0) {
+                    hasItems = true;
+                    const name = item.querySelector('p').textContent;
+                    const price = item.querySelector('.price-per-item').textContent;
+                    const itemTotal = quantity * parseInt(price);
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`;
+                    orderList.appendChild(listItem);
+            }
+        });
+
+        if (hasItems) {
+            modal.style.display = 'block';
+        } else {
+            alert('주문할 메뉴를 선택해주세요.');
+        }
+        updateTotalAmount();
+    });
+});
+</script>
+
+
+
+
+
     <nav>
         <select id="language-select">
             <option value="korean">Coreano</option>
@@ -605,10 +710,80 @@
             <!-- Additional drink items as needed -->
         </div>
     </section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('cancel-button').addEventListener('click', function() {
+        // Reset all input fields to 0
+        document.querySelectorAll('input[type=number]').forEach(input => {
+            input.value = 0;
+        });
+        // Reset all total price fields to 0
+        document.querySelectorAll('.total-price').forEach(total => {
+            total.textContent = '0원';
+        });
+        // Reset the total amount display to 0
+        document.getElementById('total-amount').textContent = '총금액: 0원';
+    });
+});
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderButton = document.getElementById('order-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const modal = document.getElementById('order-modal');
+        const orderList = document.getElementById('order-list');
+        const totalAmountDisplay = document.getElementById('total-amount');
+    
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+                totalAmount += quantity * pricePerItem;
+            });
+            totalAmountDisplay.textContent = '총금액: ' + totalAmount + '원';
+            document.getElementById('modal-total').textContent = 'Total: ' + totalAmount + '원';
+        }
+    
+        orderButton.addEventListener('click', function() {
+            orderList.innerHTML = '';
+            let hasItems = false;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                if (quantity > 0) {
+                    hasItems = true;
+                    const name = item.querySelector('p').textContent;
+                    const price = item.querySelector('.price-per-item').textContent;
+                    const itemTotal = quantity * parseInt(price);
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`;
+                    orderList.appendChild(listItem);
+                }
+            });
+    
+            if (hasItems) {
+                modal.style.display = 'block';
+            } else {
+                alert('주문할 메뉴를 선택해주세요.');
+            }
+            updateTotalAmount();
+        });
+    
+        cancelButton.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.querySelectorAll('input[type=number]').forEach(input => input.value = 0);
+            updateTotalAmount();
+        });
+    
+        updateTotalAmount();
+    });
+    </script>
+    
+
 
 
 
 
 </body>
-
 </html>
