@@ -215,19 +215,31 @@
         }
 
         function updateLanguage(language) {
-            document.querySelector('.introduction h1').textContent = languagePack[language]['welcome'];
-            document.querySelectorAll('nav a').forEach((link, index) => {
-                link.textContent = languagePack[language][link.getAttribute('data-key')]; // 링크에 data-key 속성 사용
-            });
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (languagePack[language][key]) {
-                    element.textContent = languagePack[language][key];
-                }
-            });
+            // Check if the elements exist before updating their textContent
+            var introductionHeading = document.querySelector('.introduction h1');
+            if (introductionHeading) {
+                introductionHeading.textContent = languagePack[language]['welcome'];
+            }
 
-            
-            // 기타 필요한 텍스트 업데이트
+            var navLinks = document.querySelectorAll('nav a');
+            if (navLinks) {
+                navLinks.forEach((link, index) => {
+                    var dataKey = link.getAttribute('data-key');
+                    if (dataKey && languagePack[language][dataKey]) {
+                        link.textContent = languagePack[language][dataKey];
+                    }
+                });
+            }
+
+            var elementsWithDataKey = document.querySelectorAll('[data-key]');
+            if (elementsWithDataKey) {
+                elementsWithDataKey.forEach(element => {
+                    var key = element.getAttribute('data-key');
+                    if (key && languagePack[language][key]) {
+                        element.textContent = languagePack[language][key];
+                    }
+                });
+            }
         }
     
         // 초기 언어 설정 (한국어)
@@ -239,37 +251,43 @@
 <script>
     // Ensure the event listener for DOMContentLoaded is properly set
     document.addEventListener('DOMContentLoaded', function() {
-        // Adding event listeners to all + and - buttons for increment and decrement operations
         document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
             button.addEventListener('click', function() {
                 const container = this.closest('.menu-item, .drink-item');
-                const inputField = container.querySelector('input[type=number]');
-                let currentValue = parseInt(inputField.value);
-                const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
+                if (container) {
+                    const inputField = container.querySelector('input[type=number]');
+                    if (inputField) {
+                        let currentValue = parseInt(inputField.value);
+                        const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
+                        let newValue = currentValue + delta;
+                        inputField.value = newValue;
 
-                let newValue = currentValue + delta;
-                inputField.value = newValue;
+                        const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                        const totalPriceElement = container.querySelector('.total-price');
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = newValue * pricePerItem; // Update total price per item
+                        }
 
-                // Price calculation per item
-                const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-                const totalPriceElement = container.querySelector('.total-price');
-                totalPriceElement.textContent = newValue * pricePerItem; // Update total price per item
-
-                // Update total amount for the order
-                updateTotalAmount();
+                        updateTotalAmount();
+                    }
+                }
             });
         });
 
-        // Function to update the total amount based on all items
         function updateTotalAmount() {
             let totalAmount = 0;
-            document.querySelectorAll('.total-price').forEach(priceElement => {
-                totalAmount += parseInt(priceElement.textContent);
-            });
-            document.getElementById('total-amount').textContent = `총금액: R$${totalAmount}`;
+            const totalPriceElements = document.querySelectorAll('.total-price');
+            if (totalPriceElements) {
+                totalPriceElements.forEach(priceElement => {
+                    totalAmount += parseInt(priceElement.textContent);
+                });
+                const totalAmountDisplay = document.getElementById('total-amount');
+                if (totalAmountDisplay) {
+                    totalAmountDisplay.textContent = `Total: R$${totalAmount}`;
+                }
+            }
         }
 
-        // Initial update for total amount
         updateTotalAmount();
     });
 
@@ -588,8 +606,6 @@
 
 
 
-
-
     <nav>
         <select id="language-select">
             <option value="korean">Coreano</option>
@@ -600,7 +616,7 @@
         <a href="#drinks" data-key="drinks">음료</a>
         
             <div class="order-section">
-                <span id="total-amount" data-key="totalAmount">총금액: 0원</span>
+                <span id="total-amount" data-key="totalAmount">Total: 0원</span>
                 <button id="order-button">Pedido</button>
                 <!-- 주문 버튼 옆에 취소 버튼 추가 -->
                 <button id="cancel-button">Cancela</button>
@@ -780,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
                 totalAmount += quantity * pricePerItem;
             });
-            totalAmountDisplay.textContent = '총금액: ' + totalAmount + '원';
+            totalAmountDisplay.textContent = 'Total: R$' + totalAmount;
             document.getElementById('modal-total').textContent = 'Total: ' + totalAmount + '원';
         }
     
