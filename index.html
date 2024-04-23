@@ -79,7 +79,6 @@
             border-radius: 5px;
             font-size: 18px; /* Larger font size for visibility */
             cursor: pointer;
-}
         }
         input[type=number] {
             width: 50px;
@@ -99,9 +98,18 @@
             color: #ff6f61;
         }
         .introduction p {
-            font-size: 16px;
-            max-width: 800px;
-            margin: 10px auto;
+            font-size: 16px;  /* maintains existing font size */
+            color: #EAEAEA;  /* lighter than pure white for subtlety */
+            letter-spacing: 0.08em; /* slightly increased for clarity */
+            text-align: center; /* ensures text is centered */
+            margin: 10px auto; /* maintains existing margins */
+            max-width: 800px; /* keeps text within a readable width */
+            line-height: 1.8; /* more space between lines for better readability */
+            font-weight: 400; /* slightly bolder than normal to stand out */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* stronger shadow for depth */
+            background-color: rgba(255, 255, 255, 0.1); /* subtle background highlight */
+            padding: 10px; /* adds space around the text */
+            border-radius: 5px; /* softens the edges of the text background */
         }
         #order-button, #cancel-button {
             float: right;
@@ -209,11 +217,9 @@
                 'home': '홈',
                 'menu': '메뉴',
                 'drinks': '음료',
-                'intro1': '봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.',
-                'intro2': '여기는 단순한 식사를 넘어선, 맛과 행복이 공존하는 곳입니다.',
-                'intro3': '우리의 비밀 레시피로 완성된 금빛 바삭함과 속살의 육즙이 어우러진 치킨은, 한 입 베어 물 때마다 봉헤찌로의 열정과 정성이 느껴집니다.',
-                'intro4': '지역 사랑으로 시작해 전국적인 사랑을 받게 된 우리 치킨집은, 매 순간 최고의 맛과 서비스로 여러분을 맞이할 준비가 되어 있습니다.',
-                'intro5': '함께하는 모든 순간이 즐거움으로 가득 차길 바라며, 봉헤찌로에서 가장 맛있고 유명한 치킨의 세계로 여러분을 초대합니다.'
+                'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다.',
+                'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
+                
                 },
             portuguese: {
                 'welcome': 'Bem-vindo ao Seoul Chicken!',
@@ -222,12 +228,10 @@
                 'home': 'Início',
                 'menu': 'Cardápio',
                 'drinks': 'Bebidas',
-                'intro1': 'Sabor que toca o coração de Bonhejiro, bem-vindo à nova lenda do frango.',
-                'intro2': 'Este é um lugar onde o sabor e a felicidade coexistem, além de uma simples refeição.',
-                'intro3': 'Nossos frangos, completos com uma receita secreta de crocância dourada e suculência, trazem a cada mordida a paixão e o carinho de Bonhejiro.',
-                'intro4': 'Nossa casa de frango, começando com amor local e agora amada nacionalmente, está sempre pronta para recebê-lo com o melhor sabor e serviço a cada momento.',
-                'intro5': 'Esperamos que cada momento com você seja cheio de diversão e o convidamos para o mundo do frango mais delicioso e famoso de Bonhejiro.'
-            }
+                'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem. Nosso frango crocante e suculento, feito com nossa receita secreta, transmite a paixão de Bong retiro.',
+                'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
+                
+                }
         };
     
         document.getElementById('language-select').addEventListener('change', function() {
@@ -574,13 +578,12 @@
         <div class="introduction">
             <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1>
             <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
-            <p data-key="intro1">봉헤찌로의 심장을 울리는 맛, 치킨의 새로운 전설에 오신 것을 환영합니다.</p>
-            <p data-key="intro2">여기는 단순한 식사를 넘어선, 맛과 행복이 공존하는 곳입니다.</p>
-            <p data-key="intro3">우리의 비밀 레시피로 완성된 금빛 바삭함과 속살의 육즙이 어우러진 치킨은, 한 입 베어 물 때마다 봉헤찌로의 열정과 정성이 느껴집니다.</p>
-            <p data-key="intro4">지역 사랑으로 시작해 전국적인 사랑을 받게 된 우리 치킨집은, 매 순간 최고의 맛과 서비스로 여러분을 맞이할 준비가 되어 있습니다.</p>
-            <p data-key="intro5">함께하는 모든 순간이 즐거움으로 가득 차길 바라며, 봉헤찌로에서 가장 맛있고 유명한 치킨의 세계로 여러분을 초대합니다.</p>
+            <div></div>
+            <div></div>
+            <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p>
+            <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p>     
         </div>
-        </div>
+        
         <iframe width="560" height="315" 
         src="https://www.youtube.com/embed/ZsOeLHG2wBE?si=zc6krYWFUgGKb6py" 
         frameborder="0" 
