@@ -428,18 +428,39 @@
         }
 
         function sendOrderData() {
-            // 주문 목록을 가져옵니다.
+            // Get order list and total amount from the modal
             var orderList = document.getElementById('order-list').innerHTML;
-            // 총 금액을 가져옵니다.
             var totalAmount = document.getElementById('modal-total').innerText;
 
-            // 구글 앱 스크립트로 데이터를 전송합니다.
-            google.script.run.receiveOrderData(orderList, totalAmount);
+            // Create the URL for the web app
+            var url = "https://script.google.com/a/macros/kotra.com.br/s/AKfycbxZbLw94-EsTrm6kayjiDgFCGPJteEZGPzVsNJKtnt_8fMJy6O-y68j-XLReJSEw_Ex/exec";
 
-            // 모달을 닫습니다.
-            closeModal();
-}
+            // Create the request body as JSON
+            var requestBody = JSON.stringify({
+                orderList: orderList,
+                totalAmount: totalAmount
+            });
 
+            // Use fetch API to send POST request to the web app URL with order data
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: requestBody
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Order data sent successfully.");
+                    // Optionally, you can close the modal or perform other actions here
+                } else {
+                    console.error("Failed to send order data. Status:", response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error sending order data:", error);
+            });
+        }
         </script>  
 
 
@@ -452,7 +473,7 @@
                 <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
                     <!-- 주문 목록이 여기에 표시됩니다 -->
                 </ul>
-            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">총 금액: 0원</div>
+                <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">총 금액: 0원</div>
                 <button onclick="sendOrderData()">최종 확인</button>
                 <button onclick="closeModal()">닫기</button>
             </div>
@@ -497,8 +518,49 @@
     
             // Function to close the modal
             function closeModal() {
-                document.getElementById('order-modal').style.display = 'none';
+            document.getElementById('order-modal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderButton = document.getElementById('order-button');
+            const modal = document.getElementById('order-modal');
+            const orderList = document.getElementById('order-list');
+            const modalTotal = document.getElementById('modal-total');
+
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('input[type=number]').value);
+                    const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+                    totalAmount += quantity * pricePerItem;
+                });
+                modalTotal.textContent = '총 금액: ' + totalAmount + '원';
             }
+
+            orderButton.addEventListener('click', function() {
+                orderList.innerHTML = '';
+                let hasItems = false;
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('input[type=number]').value);
+                    if (quantity > 0) {
+                        hasItems = true;
+                        const name = item.querySelector('p').textContent;
+                        const price = item.querySelector('.price-per-item').textContent;
+                        const itemTotal = quantity * parseInt(price);
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`;
+                        orderList.appendChild(listItem);
+                    }
+                });
+
+                if (hasItems) {
+                    modal.style.display = 'block';
+                } else {
+                    alert('주문할 메뉴를 선택해주세요.');
+                }
+                updateTotalAmount();
+            });
+        });
         </script> 
         
 
