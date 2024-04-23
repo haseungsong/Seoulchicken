@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu & Ordaer</title>
+    <title>메뉴와 주문</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -399,8 +399,11 @@
 
         function sendOrderData() {
             // Get order list and total amount from the modal
-            var orderList = document.getElementById('order-list').innerHTML;
-            var totalAmount = document.getElementById('modal-total').innerText;
+            function sendOrder() {
+            var orderList = document.getElementById("orderList").value;
+            var totalAmount = document.getElementById("totalAmount").value;
+            google.script.run.receiveOrderData(orderList, totalAmount);
+            }
 
             // Create the URL for the web app
             var url = "https://script.google.com/a/macros/kotra.com.br/s/AKfycbxZbLw94-EsTrm6kayjiDgFCGPJteEZGPzVsNJKtnt_8fMJy6O-y68j-XLReJSEw_Ex/exec";
@@ -439,13 +442,18 @@
         <!-- 주문 확인 모달 -->
         <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;">
             <div style="background:#6e5454; width:60%; margin:50px auto; padding:20px; border-radius:5px;">
-                <h2>주문 확인</h2>
+                <h2>Order Confirmation</h2>
                 <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
-                    <!-- 주문 목록이 여기에 표시됩니다 -->
+                    <!-- Order items will be displayed here -->
                 </ul>
-                <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">총 금액: 0원</div>
-                <button onclick="sendOrderData()">최종 확인</button>
-                <button onclick="closeModal()">닫기</button>
+                <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
+                
+                <form id="orderForm" onsubmit="sendOrder(); return false;">
+                    <!-- Order information input field -->
+                    <button type="submit">Order completed</button>
+                </form>
+                
+                <button onclick="closeModal()">Close</button>
             </div>
         </div>
        
@@ -813,8 +821,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     </script>
     
-
-
 
 </body>
 </html>
