@@ -399,14 +399,11 @@
 
         function sendOrderData() {
             // Get order list and total amount from the modal
-            function sendOrder() {
-            var orderList = document.getElementById("orderList").value;
-            var totalAmount = document.getElementById("totalAmount").value;
-            google.script.run.receiveOrderData(orderList, totalAmount);
-            }
+            var orderList = document.getElementById('order-list').innerHTML;
+            var totalAmount = document.getElementById('modal-total').innerText;
 
             // Create the URL for the web app
-            var url = "https://script.google.com/macros/s/AKfycbxZbLw94-EsTrm6kayjiDgFCGPJteEZGPzVsNJKtnt_8fMJy6O-y68j-XLReJSEw_Ex/exec";
+            var url = "https://script.google.com/a/macros/kotra.com.br/s/AKfycbxZbLw94-EsTrm6kayjiDgFCGPJteEZGPzVsNJKtnt_8fMJy6O-y68j-XLReJSEw_Ex/exec";
 
             // Create the request body as JSON
             var requestBody = JSON.stringify({
