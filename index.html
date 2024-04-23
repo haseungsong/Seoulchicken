@@ -40,10 +40,10 @@
             padding: 20px;
             width: 100%;
             max-width: 360px;
-            margin: auto; /* This centers the menu in the flex container */
+            margin: auto;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Ensures content within these divs is centered */
+            align-items: center;
         }
         .menu-item, .drink-item {
             margin-bottom: 20px;
@@ -59,6 +59,16 @@
             margin-right: 10px;
             font-weight: bold;
         }
+        #drinks .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        #drinks .menu-item {
+            width: calc(50% - 10px); /* Adapted for mobile - ensure it's always half */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
         button {
             background-color: #ff6f61;
             border: none;
@@ -72,11 +82,6 @@
         input[type=number] {
             width: 50px;
             margin: 0 5px;
-        }
-        @media (max-width: 768px) {
-            .menu, .reservation-form {
-                padding: 10px;
-            }
         }
         .introduction {
             text-align: center;
@@ -133,16 +138,14 @@
             padding: 0;
             margin-bottom: 20px;
         }
-
         #order-modal li {
             padding: 8px;
             margin-bottom: 4px;
             border-bottom: 1px solid #ccc;
             background-color: #f9f9f9;
-            color: #333333; /* 색상을 약간 더 진하게 조정 */
+            color: #333333;
             font-size: 16px;
         }
-
         #order-modal button {
             background-color: #ff6f61;
             border: none;
@@ -152,24 +155,38 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease; /* 애니메이션 효과 추가 */
+            transition: background-color 0.3s ease;
         }
-
         #order-modal button:hover {
-            background-color: #e55550; /* 버튼 호버 시 색상 변경 */
+            background-color: #e55550;
         }
-
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px; /* 좌우 패딩 조정 */
+            padding: 0 40px;
         }
-
         .order-section {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+        }
+
+        /* 반응형 디자인 적용 */
+        @media (max-width: 600px) {
+            #drinks .menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 화면이 600px 이하일 때 두 줄에 두 개의 아이템 표시 */
+                gap: 10px; /* 그리드 사이 간격 추가 */
+            }
+
+            #drinks .menu-item {
+                width: 100%; /* 모바일에서는 너비를 100%로 설정하여 그리드 칼럼에 맞게 조정 */
+            }
+
+            #drinks .menu-item img {
+                height: 150px; /* 모바일에서 이미지 높이 축소 */
+            }
         }
     </style>
 
