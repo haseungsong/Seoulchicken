@@ -51,10 +51,11 @@
             color: #fff;
         }
         .menu-item img, .drink-item img {
-            width: 100%;
-            height: auto;
+            width: 100%; /* Ensures the width is always 100% of its container */
+            height: 200px; /* Fixed height for uniformity */
+            object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
             border-radius: 10px;
-        }
+                }
         .menu-item span.price-per-item, .drink-item span.price-per-item {
             margin-right: 10px;
             font-weight: bold;
@@ -73,11 +74,12 @@
             background-color: #ff6f61;
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 15px; /* Increased padding for easier interaction */
             margin: 5px;
             border-radius: 5px;
-            font-size: 20px;
+            font-size: 18px; /* Larger font size for visibility */
             cursor: pointer;
+}
         }
         input[type=number] {
             width: 50px;
@@ -174,11 +176,15 @@
 
         /* 반응형 디자인 적용 */
         @media (max-width: 600px) {
-            .drink-menu {
-                grid-template-columns: repeat(2, 1fr); /* 모바일에서도 두 칼럼 유지 */
-            }
-            .drink-item img {
-                height: 150px; /* 모바일에서 이미지 높이 조절 */
+         #drinks .menu {
+            grid-template-columns: repeat(2, 1fr); /* Keeps two columns on mobile for consistency */
+        }
+        .menu-item img {
+            height: 150px; /* Adjust height specifically for mobile */
+        }
+        button {
+            padding: 15px 18px; /* Even larger padding for mobile devices */
+            font-size: 20px; /* Increase font size for readability */
             }
         }
     </style>
