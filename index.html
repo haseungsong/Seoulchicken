@@ -96,20 +96,24 @@
         }
         .introduction h1 {
             color: #ff6f61;
+            padding-top: 10px; /* Adjust as needed */
+            margin-top: 0;
+            line-height: 1.4; /* Ensure enough space for text */
         }
         .introduction p {
-            font-size: 16px;  /* maintains existing font size */
-            color: #EAEAEA;  /* lighter than pure white for subtlety */
-            letter-spacing: 0.08em; /* slightly increased for clarity */
+            font-size: 16px;  /* existing font size */
+            color: #EAEAEA;  /* updated color for softer appearance */
+            letter-spacing: 0.05em; /* existing letter spacing */
+            word-spacing: 0.1em; /* new word spacing added */
             text-align: center; /* ensures text is centered */
-            margin: 10px auto; /* maintains existing margins */
-            max-width: 800px; /* keeps text within a readable width */
-            line-height: 1.8; /* more space between lines for better readability */
-            font-weight: 400; /* slightly bolder than normal to stand out */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* stronger shadow for depth */
-            background-color: rgba(255, 255, 255, 0.1); /* subtle background highlight */
-            padding: 10px; /* adds space around the text */
-            border-radius: 5px; /* softens the edges of the text background */
+            margin: 10px auto; /* existing margins */
+            max-width: 800px; /* limits the width for optimal line length */
+            line-height: 1.8; /* increased line height for better readability */
+            font-weight: 400; /* slightly bolder to improve visibility */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* enhances text legibility */
+            background-color: rgba(255, 255, 255, 0.1); /* subtle background to help text stand out */
+            padding: 10px; /* adds padding for visual comfort */
+            border-radius: 5px; /* rounds the corners of the text background */
         }
         #order-button, #cancel-button {
             float: right;
@@ -241,7 +245,7 @@
         
         function adjustContentPadding() {
             const navHeight = document.querySelector('nav').offsetHeight;
-            document.querySelector('.content').style.paddingTop = `${navHeight + 20}px`; // nav 높이 + 추가 여백
+            document.querySelector('.content').style.paddingTop = `${navHeight}px`; // nav 높이
         }
 
         function updateLanguage(language) {
