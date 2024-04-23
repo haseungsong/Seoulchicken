@@ -4,15 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메뉴와 주문</title>
-    <style>
-        /* Existing styles remain unchanged */
-    </style>
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메뉴와 주문</title>
+    <title>Menu & Ordaer</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -30,7 +22,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            line-height: 40px; /* 높이 조정 */
+            line-height: 40px;
         }
         nav a {
             color: white;
@@ -40,37 +32,32 @@
         }
         .content {
             padding-top: 60px;
-        }
-        .menu, .reservation-form {
-            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .menu-item, .drink-item {
+        .menu, .reservation-form {
+            padding: 20px;
             width: 100%;
             max-width: 360px;
+            margin: auto; /* This centers the menu in the flex container */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Ensures content within these divs is centered */
+        }
+        .menu-item, .drink-item {
             margin-bottom: 20px;
             text-align: center;
-            color: #fff; /* 텍스트 색상을 흰색(#fff)으로 지정 */
+            color: #fff;
         }
         .menu-item img, .drink-item img {
             width: 100%;
             height: auto;
             border-radius: 10px;
         }
-        /* 추가된 스타일 */
-        .menu-item span.price-per-item {
-            margin-right: 10px; /* 가격과 "-" 버튼 사이의 간격을 조정 */
-            font-weight: bold; /* 가격의 글씨체를 굵게 */
-        }
-        /* 추가된 스타일 */
-        .menu-item span.price-per-item {
+        .menu-item span.price-per-item, .drink-item span.price-per-item {
             margin-right: 10px;
             font-weight: bold;
-        }
-        .content {
-        display: none; /* 기본적으로 모든 섹션을 숨김 */
         }
         button {
             background-color: #ff6f61;
@@ -80,6 +67,7 @@
             margin: 5px;
             border-radius: 5px;
             font-size: 20px;
+            cursor: pointer;
         }
         input[type=number] {
             width: 50px;
@@ -90,7 +78,6 @@
                 padding: 10px;
             }
         }
-        /* 여기에 새로운 스타일 추가 */
         .introduction {
             text-align: center;
             padding: 20px;
@@ -100,107 +87,90 @@
             color: #ff6f61;
         }
         .introduction p {
-            color: #fff;
             font-size: 16px;
             max-width: 800px;
             margin: 20px auto;
         }
-        #order-button {
-            float: right; /* 오른쪽 정렬 유지 */
-            margin-right: 10px; /* 필요에 따라 margin 조정 */
-            background-color: #ff6f61; /* 버튼 배경 색상 */
-            border: none;
-            color: white;
+        #order-button, #cancel-button {
+            float: right;
+            background-color: #ff6f61;
             padding: 5px 20px;
-            border-radius: 5px; /* 둥근 모서리 스타일 */
-            font-size: 16px; /* 글씨 크기 */
+            font-size: 16px;
+            margin-right: 10px;
         }
         #cancel-button {
-        float: right; /* 오른쪽 정렬 유지 */
-        margin-right: 5px; /* 필요에 따라 margin 조정, 여기서는 버튼 사이의 간격을 위해 조금 줄임 */
-        background-color: #ff6f61; /* 버튼 배경 색상 */
-        border: none;
-        color: white;
-        padding: 5px 20px;
-        border-radius: 5px; /* 둥근 모서리 스타일 */
-        font-size: 16px; /* 글씨 크기 */
+            margin-right: 5px;
         }
         #total-amount {
             float: right;
             margin-right: 20px;
             font-size: 20px;
-            color: white;
-            font-weight: bold; /* 글자를 더 굵게 */
-        }
-        #order-list li {
-            padding: 8px;
-            margin-bottom: 4px;
-            border-bottom: 1px solid #ccc; /* 각 주문 항목을 구분하기 위한 하단 경계선 */
-            background-color: #f9f9f9; /* 배경색 추가 */
+            font-weight: bold;
         }
         #order-modal {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1050;
-        font-family: 'Noto Sans KR', sans-serif; /* 폰트 설정 */
-    }
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+        }
+        #order-modal div {
+            background: white;
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #order-modal h2, #order-modal li {
+            color: #333;
+            font-size: 24px;
+        }
+        #order-modal ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
 
-    #order-modal div {
-        background: white;
-        width: 60%;
-        margin: 50px auto;
-        padding: 20px;
-        border-radius: 5px;
-    }
+        #order-modal li {
+            padding: 8px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f9f9f9;
+            color: #333333; /* 색상을 약간 더 진하게 조정 */
+            font-size: 16px;
+        }
 
-    #order-modal h2 {
-        color: #333; /* 헤더 색상 변경 */
-        font-size: 24px; /* 헤더 글씨 크기 */
-    }
+        #order-modal button {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* 애니메이션 효과 추가 */
+        }
 
-    #order-modal ul {
-        list-style-type: none;
-        padding: 0;
-        margin-bottom: 20px;
-    }
+        #order-modal button:hover {
+            background-color: #e55550; /* 버튼 호버 시 색상 변경 */
+        }
 
-    #order-modal li {
-        padding: 8px;
-        margin-bottom: 4px;
-        border-bottom: 1px solid #ccc;
-        background-color: #f9f9f9; /* 배경색 조정 */
-        color: #333; /* 글씨 색상 변경 */
-        font-size: 16px; /* 글씨 크기 조정 */
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px; /* 좌우 패딩 조정 */
+        }
 
-    #order-modal button {
-        background-color: #ff6f61;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        margin-top: 5px;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer; /* 버튼 위에 마우스를 올렸을 때 커서 변경 */
-    }
-    .nav-container {
-    display: flex;
-    justify-content: space-between; /* 요소 사이의 공간을 최대화하여 요소를 양쪽에 정렬 */
-    align-items: center; /* 요소를 수직으로 가운데 정렬 */
-    padding: 0 20px; /* 좌우 여백 추가 */
-    }
-
-    .order-section {
-    display: flex;
-    align-items: center; /* 주문 버튼과 총금액을 수직으로 가운데 정렬 */
-    justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
-    }
-
+        .order-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
     </style>
 
 <script>
@@ -772,6 +742,7 @@
             <!-- Additional drink items as needed -->
         </div>
     </section>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('cancel-button').addEventListener('click', function() {
@@ -842,8 +813,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     </script>
     
-
-
 
 
 
