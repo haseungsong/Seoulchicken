@@ -445,39 +445,34 @@
         }
 
         function sendOrderData() {
-            // Get order list and total amount from the modal
-            var orderList = document.getElementById('order-list').innerHTML;
-            var totalAmount = document.getElementById('modal-total').innerText;
+                var orderList = document.getElementById('order-list').innerHTML;
+                var totalAmount = document.getElementById('modal-total').innerText;
 
-            // Create the URL for the web app
-            var url = "https://script.google.com/macros/s/AKfycbxIp2ffTKHjVV0yZyEYY1LiT1G7atzfZp60LItQXgSIBZSseZ1YyYxLZqaxGQlXXDF1/exec";
+                var url = "https://script.google.com/macros/s/AKfycbwn3Ii8IRYWLBfenKUQjIvshszDDBH8X3yi272EEXoW0xcZ98txq21ZJLze0_jKdt4C/exec";
 
-            // Create the request body as JSON
-            var requestBody = JSON.stringify({
-                orderList: orderList,
-                totalAmount: totalAmount
-            });
+                var requestBody = JSON.stringify({
+                    orderList: orderList,
+                    totalAmount: totalAmount
+                });
 
-            // Use fetch API to send POST request to the web app URL with order data
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: requestBody
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log("Order data sent successfully.");
-                    // Optionally, you can close the modal or perform other actions here
-                } else {
-                    console.error("Failed to send order data. Status:", response.status);
-                }
-            })
-            .catch(error => {
-                console.error("Error sending order data:", error);
-            });
-        }
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: requestBody
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Order data sent successfully.");
+                    } else {
+                        console.error("Failed to send order data. Status:", response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error sending order data:", error);
+                });
+            }
             // JavaScript 코드 내에서 이벤트 리스너를 추가합니다.
             document.getElementById('orderForm').addEventListener('submit', function(event) {
                 event.preventDefault(); // 기본 동작인 폼 제출을 방지합니다.
