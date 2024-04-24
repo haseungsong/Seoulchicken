@@ -445,40 +445,45 @@
         }
 
         function sendOrderData() {
-                var orderList = document.getElementById('order-list').innerHTML;
-                var totalAmount = document.getElementById('modal-total').innerText;
+            var orderDetails = [];
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('p').textContent;
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push({name: name, quantity: quantity});
+                }
+            });
+            var totalAmount = document.getElementById('modal-total').textContent;
 
-                var url = "https://script.google.com/macros/s/AKfycbwn3Ii8IRYWLBfenKUQjIvshszDDBH8X3yi272EEXoW0xcZ98txq21ZJLze0_jKdt4C/exec";
+            var url = "https://script.google.com/macros/s/AKfycbxtzIq8j4S8feb7hGjoZcciNTiSn0_QO8gEtgMeLL-HOgQHnXDOYpFWVi_VGANSDHOM/exec"; // 실제 Google Apps Script 웹 앱의 URL로 교체해야 합니다.
 
-                var requestBody = JSON.stringify({
-                    orderList: orderList,
-                    totalAmount: totalAmount
-                });
-
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: requestBody
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log("Order data sent successfully.");
-                    } else {
-                        console.error("Failed to send order data. Status:", response.status);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error sending order data:", error);
-                });
-            }
-            // JavaScript 코드 내에서 이벤트 리스너를 추가합니다.
-            document.getElementById('orderForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // 기본 동작인 폼 제출을 방지합니다.
-                sendOrderData(); // sendOrderData 함수를 호출합니다. ← 수정된 부분
+            var requestBody = JSON.stringify({
+                orderList: orderDetails,
+                totalAmount: totalAmount
             });
 
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: requestBody
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Order processed:", data);
+                alert('주문이 성공적으로 처리되었습니다.');
+                closeModal(); // 모달 닫기 함수 호출
+            })
+            .catch(error => {
+                console.error("Error sending order data:", error);
+                alert('주문 처리 중 오류가 발생했습니다: ' + error.message);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('order-modal').style.display = 'none';
+        }
         </script>  
 
 
