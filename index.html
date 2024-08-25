@@ -1,226 +1,226 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seoulchicken</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트 불러오기 */
+<!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
+<html lang="ko"> <!-- 문서의 언어를 한국어로 설정 -->
+<head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
+    <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
+    <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
+    <style> <!-- 내장 스타일 시트 시작 -->
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
         body {
-            font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
-            margin: 0;
-            padding: 0;
-            background-color: #F7F7F7; /* 배경색 변경 */
-            color: #333; /* 글자색 변경 */
+            font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
+            margin: 0; /* 기본 여백 없앰 */
+            padding: 0; /* 기본 패딩 없앰 */
+            background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
+            color: #333; /* 본문 글자색을 어두운 회색으로 설정 */
         }
         nav {
-            background-color: #FF6F61; /* 네비게이션 바 배경색 변경 */
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            line-height: 40px;
+            background-color: #FF6F61; /* 네비게이션 바 배경색을 연한 빨강으로 설정 */
+            color: white; /* 네비게이션 바 안의 글자색을 흰색으로 설정 */
+            padding: 10px 0; /* 위아래로 10px 패딩 추가 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            position: fixed; /* 네비게이션 바를 페이지 상단에 고정 */
+            width: 100%; /* 네비게이션 바의 너비를 전체 화면 크기로 설정 */
+            top: 0; /* 네비게이션 바를 화면의 가장 위로 위치시킴 */
+            z-index: 1000; /* 다른 요소들보다 네비게이션 바가 위에 위치하도록 설정 */
+            line-height: 40px; /* 줄 간격을 40px로 설정 */
         }
         nav a {
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 18px; /* 폰트 크기 조정 */
+            color: white; /* 네비게이션 바 안의 링크 텍스트 색상을 흰색으로 설정 */
+            padding: 10px 20px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
+            text-decoration: none; /* 링크에 밑줄 제거 */
+            font-size: 18px; /* 링크 텍스트 크기를 18px로 설정 */
         }
         .content {
-            padding-top: 80px; /* 상단 패딩 조정 */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #F7F7F7; /* 배경색 변경 */
+            padding-top: 80px; /* 상단에 80px 패딩 추가 (네비게이션 바 높이만큼 여백 설정) */
+            display: flex; /* 요소들을 Flexbox로 배치 */
+            flex-direction: column; /* 요소들을 세로로 배치 */
+            align-items: center; /* 요소들을 가운데 정렬 */
+            background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
         }
         .menu, .reservation-form {
-            padding: 20px;
-            width: 100%;
-            max-width: 400px; /* 최대 너비 조정 */
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: white; /* 배경색 추가 */
-            border-radius: 10px; /* 모서리 둥글게 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            padding: 20px; /* 내부에 20px 패딩 추가 */
+            width: 100%; /* 너비를 100%로 설정 */
+            max-width: 400px; /* 최대 너비를 400px로 제한 */
+            margin: auto; /* 요소를 가운데로 정렬 */
+            display: flex; /* 요소들을 Flexbox로 배치 */
+            flex-direction: column; /* 요소들을 세로로 배치 */
+            align-items: center; /* 요소들을 가운데 정렬 */
+            background-color: white; /* 배경색을 흰색으로 설정 */
+            border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가해 입체감 부여 */
         }
         .menu-item, .drink-item {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #333; /* 글자색 변경 */
+            margin-bottom: 20px; /* 요소들 아래에 20px의 여백 추가 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            color: #333; /* 글자색을 어두운 회색으로 설정 */
         }
         .menu-item img, .drink-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
+            width: 100%; /* 이미지의 너비를 요소에 맞춤 */
+            height: 200px; /* 이미지의 높이를 200px로 설정 */
+            object-fit: cover; /* 이미지를 요소 안에 꽉 차게 표시 */
+            border-radius: 10px; /* 이미지의 모서리를 10px 둥글게 설정 */
         }
         .menu-item span.price-per-item, .drink-item span.price-per-item {
-            margin-right: 10px;
-            font-weight: bold;
-            color: #FF6F61; /* 색상 변경 */
+            margin-right: 10px; /* 요소 오른쪽에 10px 여백 추가 */
+            font-weight: bold; /* 텍스트를 굵게 표시 */
+            color: #FF6F61; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
         }
         .drink-menu {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            display: grid; /* 그리드 레이아웃 사용 */
+            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
+            gap: 10px; /* 그리드 아이템 간격을 10px로 설정 */
         }
         .drink-item {
-            width: 100%;
+            width: 100%; /* 음료 항목의 너비를 100%로 설정 */
         }
         button {
-            background-color: #FF6F61;
-            border: none;
-            color: white;
-            padding: 12px 15px;
-            margin: 5px;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s; /* 배경색 변화 애니메이션 추가 */
+            background-color: #FF6F61; /* 버튼의 배경색을 연한 빨강으로 설정 */
+            border: none; /* 버튼에 테두리 없음 */
+            color: white; /* 버튼 텍스트를 흰색으로 설정 */
+            padding: 12px 15px; /* 버튼에 12px 위아래, 15px 좌우 패딩 추가 */
+            margin: 5px; /* 버튼 주위에 5px 여백 추가 */
+            border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+            font-size: 18px; /* 버튼 텍스트 크기를 18px로 설정 */
+            cursor: pointer; /* 버튼에 마우스 커서 포인터 모양 적용 */
+            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
         }
         button:hover {
-            background-color: #E55550; /* 호버 시 색상 변경 */
+            background-color: #E55550; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
         }
         input[type=number] {
-            width: 50px;
-            padding: 8px;
-            margin: 0 5px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            text-align: center;
+            width: 50px; /* 입력창 너비를 50px로 설정 */
+            padding: 8px; /* 입력창 내부 패딩을 8px로 설정 */
+            margin: 0 5px; /* 좌우에 5px 여백 추가 */
+            border-radius: 4px; /* 입력창 모서리를 4px 둥글게 설정 */
+            border: 1px solid #ccc; /* 회색 테두리 추가 */
+            font-size: 16px; /* 입력창 글자 크기를 16px로 설정 */
+            text-align: center; /* 입력된 숫자를 가운데 정렬 */
         }
         .introduction {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            padding: 20px; /* 내부에 20px 패딩 추가 */
+            margin-top: 20px; /* 요소의 위쪽에 20px 여백 추가 */
         }
         .introduction h1 {
-            color: #FF6F61;
-            padding-top: 10px;
-            margin-top: 0;
-            line-height: 1.4;
+            color: #FF6F61; /* 제목 색상을 연한 빨강으로 설정 */
+            padding-top: 10px; /* 상단에 10px 패딩 추가 */
+            margin-top: 0; /* 상단 여백 없앰 */
+            line-height: 1.4; /* 줄 간격을 1.4로 설정 */
         }
         .introduction p {
-            font-size: 16px;
-            color: #666; /* 글자색 변경 */
-            letter-spacing: 0.05em;
-            word-spacing: 0.1em;
-            text-align: center;
-            margin: 10px auto;
-            max-width: 800px;
-            line-height: 1.8;
-            font-weight: 400;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            background-color: rgba(255, 255, 255, 0.8); /* 배경색 변경 */
-            padding: 10px;
-            border-radius: 5px;
+            font-size: 16px; /* 본문 글자 크기를 16px로 설정 */
+            color: #666; /* 글자색을 중간 회색으로 설정 */
+            letter-spacing: 0.05em; /* 글자 간격을 약간 넓게 설정 */
+            word-spacing: 0.1em; /* 단어 간격을 약간 넓게 설정 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            margin: 10px auto; /* 요소 위아래에 10px 여백, 좌우 가운데 정렬 */
+            max-width: 800px; /* 최대 너비를 800px로 제한 */
+            line-height: 1.8; /* 줄 간격을 1.8로 설정 */
+            font-weight: 400; /* 글자 두께를 기본 설정으로 유지 */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* 텍스트에 그림자 효과 추가 */
+            background-color: rgba(255, 255, 255, 0.8); /* 반투명 흰색 배경 추가 */
+            padding: 10px; /* 내부에 10px 패딩 추가 */
+            border-radius: 5px; /* 모서리를 5px 둥글게 설정 */
         }
         #order-button, #cancel-button {
-            float: right;
-            background-color: #FF6F61;
-            padding: 5px 20px;
-            font-size: 16px;
-            margin-right: 10px;
+            float: right; /* 버튼을 오른쪽으로 배치 */
+            background-color: #FF6F61; /* 버튼 배경색을 연한 빨강으로 설정 */
+            padding: 5px 20px; /* 위아래로 5px, 좌우로 20px 패딩 추가 */
+            font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
+            margin-right: 10px; /* 오른쪽에 10px 여백 추가 */
         }
         #cancel-button {
-            margin-right: 5px;
+            margin-right: 5px; /* 취소 버튼 오른쪽에 5px 여백 추가 */
         }
         #total-amount {
-            float: right;
-            margin-right: 20px;
-            font-size: 20px;
-            font-weight: bold;
+            float: right; /* 총 금액 표시를 오른쪽으로 배치 */
+            margin-right: 20px; /* 오른쪽에 20px 여백 추가 */
+            font-size: 20px; /* 텍스트 크기를 20px로 설정 */
+            font-weight: bold; /* 텍스트를 굵게 표시 */
         }
         #order-modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1050;
+            display: none; /* 기본적으로 모달 창을 숨김 */
+            position: fixed; /* 모달 창을 화면에 고정 */
+            left: 0; /* 왼쪽 끝에 배치 */
+            top: 0; /* 위쪽 끝에 배치 */
+            width: 100%; /* 모달 창 너비를 전체 화면으로 설정 */
+            height: 100%; /* 모달 창 높이를 전체 화면으로 설정 */
+            background: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 추가 */
+            z-index: 1050; /* 다른 요소들보다 모달 창이 위에 위치하도록 설정 */
         }
         #order-modal div {
-            background: white;
-            width: 60%;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px; /* 모서리 둥글게 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            background: white; /* 모달 창 안의 내용 배경을 흰색으로 설정 */
+            width: 60%; /* 너비를 화면의 60%로 설정 */
+            margin: 50px auto; /* 위아래로 50px 여백 추가, 좌우는 가운데 정렬 */
+            padding: 20px; /* 내부에 20px 패딩 추가 */
+            border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
         }
         #order-modal h2, #order-modal li {
-            color: #333;
-            font-size: 24px;
+            color: #333; /* 제목과 목록 글자색을 어두운 회색으로 설정 */
+            font-size: 24px; /* 제목과 목록의 글자 크기를 24px로 설정 */
         }
         #order-modal ul {
-            list-style-type: none;
-            padding: 0;
-            margin-bottom: 20px;
+            list-style-type: none; /* 목록 앞에 기본 목록 기호 없앰 */
+            padding: 0; /* 목록의 기본 패딩 없앰 */
+            margin-bottom: 20px; /* 목록 아래에 20px 여백 추가 */
         }
         #order-modal li {
-            padding: 8px;
-            margin-bottom: 4px;
-            border-bottom: 1px solid #ccc;
-            background-color: #f9f9f9;
-            color: #333333;
-            font-size: 16px;
+            padding: 8px; /* 목록 항목 내부에 8px 패딩 추가 */
+            margin-bottom: 4px; /* 목록 항목 아래에 4px 여백 추가 */
+            border-bottom: 1px solid #ccc; /* 목록 항목 아래에 회색 선 추가 */
+            background-color: #f9f9f9; /* 목록 항목의 배경색을 밝은 회색으로 설정 */
+            color: #333333; /* 목록 항목의 글자색을 어두운 회색으로 설정 */
+            font-size: 16px; /* 목록 항목의 글자 크기를 16px로 설정 */
         }
         #order-modal button {
-            background-color: #FF6F61;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            margin-top: 5px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            background-color: #FF6F61; /* 버튼 배경색을 연한 빨강으로 설정 */
+            border: none; /* 버튼 테두리 없음 */
+            color: white; /* 버튼 글자색을 흰색으로 설정 */
+            padding: 10px 20px; /* 버튼 내부에 10px 위아래, 20px 좌우 패딩 추가 */
+            margin-top: 5px; /* 위쪽에 5px 여백 추가 */
+            border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+            font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
+            cursor: pointer; /* 마우스 커서가 포인터 모양으로 변경 */
+            transition: background-color 0.3s ease; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
         }
         #order-modal button:hover {
-            background-color: #E55550;
+            background-color: #E55550; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
         }
         .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
+            display: flex; /* Flexbox 레이아웃 사용 */
+            justify-content: space-between; /* 요소들을 좌우로 배치 */
+            align-items: center; /* 요소들을 수직으로 가운데 정렬 */
+            padding: 0 40px; /* 좌우에 40px 패딩 추가 */
         }
         .order-section {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            display: flex; /* 요소들을 Flexbox로 배치 */
+            align-items: center; /* 요소들을 수직으로 가운데 정렬 */
+            justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
         }
-        @media (max-width: 600px) {
+        @media (max-width: 600px) { /* 화면 너비가 600px 이하일 때 적용 */
             #drinks .menu {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 그리드 레이아웃을 두 개의 열로 설정 */
             }
             .menu-item img {
-                height: 150px;
+                height: 150px; /* 메뉴 이미지의 높이를 150px로 줄임 */
             }
             button {
-                padding: 13px 15px;
-                font-size: 15px;
+                padding: 13px 15px; /* 버튼의 패딩을 조금 줄임 */
+                font-size: 15px; /* 버튼 텍스트 크기를 15px로 줄임 */
             }
             input[type="number"] {
-                width: 30px;
-                padding: 6px;
-                font-size: 14px;
+                width: 30px; /* 숫자 입력창의 너비를 30px로 줄임 */
+                padding: 6px; /* 입력창의 패딩을 조금 줄임 */
+                font-size: 14px; /* 입력창의 글자 크기를 14px로 줄임 */
             }
         }
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const languagePack = {
-                korean: {
+        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+            const languagePack = { /* 다국어 지원을 위한 언어팩 객체 선언 */
+                korean: { /* 한국어 번역 */
                     'welcome': '서울치킨에 오신걸 환영합니다!',
                     'originalChicken': '오리지널 치킨: 바삭하고 고소함',
                     'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
@@ -230,7 +230,7 @@
                     'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다.',
                     'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
                 },
-                portuguese: {
+                portuguese: { /* 포르투갈어 번역 */
                     'welcome': 'Bem-vindo ao Seoul Chicken!',
                     'originalChicken': 'Frango original: crocante e saboroso',
                     'seasonedChicken': 'Frango temperado: doce e picante',
@@ -241,278 +241,297 @@
                     'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
                 }
             };
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const languageSelect = document.getElementById('language-select');
 
-            document.getElementById('language-select').addEventListener('change', function() {
-                updateLanguage(this.value);
-                adjustContentPadding();
+                // 포르투갈어로 기본 언어 설정
+                updateLanguage('portuguese');
+                
+                // 드롭다운의 선택값을 포르투갈어로 설정
+                languageSelect.value = 'portuguese';
+
+                // 드롭다운 변경 이벤트 처리
+                languageSelect.addEventListener('change', function() {
+                    updateLanguage(this.value);
+                    adjustContentPadding();
+                });
             });
 
-            function updateLanguage(language) {
-                var introductionHeading = document.querySelector('.introduction h1');
-                if (introductionHeading) {
-                    introductionHeading.textContent = languagePack[language]['welcome'];
+
+
+
+            document.getElementById('language-select').addEventListener('change', function() { /* 언어 선택 변경 시 호출 */
+                updateLanguage(this.value); /* 선택된 언어로 업데이트 */
+                adjustContentPadding(); /* 콘텐츠 패딩 조정 함수 호출 */
+            });
+
+            function updateLanguage(language) { /* 선택된 언어로 텍스트를 업데이트하는 함수 */
+                var introductionHeading = document.querySelector('.introduction h1'); /* 소개 섹션의 제목 선택 */
+                if (introductionHeading) { /* 제목이 있으면 */
+                    introductionHeading.textContent = languagePack[language]['welcome']; /* 해당 언어로 제목 변경 */
                 }
 
-                var navLinks = document.querySelectorAll('nav a');
-                if (navLinks) {
-                    navLinks.forEach((link, index) => {
-                        var dataKey = link.getAttribute('data-key');
-                        if (dataKey && languagePack[language][dataKey]) {
+                var navLinks = document.querySelectorAll('nav a'); /* 네비게이션 링크들 선택 */
+                if (navLinks) { /* 네비게이션 링크들이 있으면 */
+                    navLinks.forEach((link, index) => { /* 각 링크에 대해 반복 */
+                        var dataKey = link.getAttribute('data-key'); /* 데이터 키 속성 값 가져오기 */
+                        if (dataKey && languagePack[language][dataKey]) { /* 데이터 키가 있으면 해당 언어로 텍스트 변경 */
                             link.textContent = languagePack[language][dataKey];
                         }
                     });
                 }
 
-                var elementsWithDataKey = document.querySelectorAll('[data-key]');
-                if (elementsWithDataKey) {
-                    elementsWithDataKey.forEach(element => {
-                        var key = element.getAttribute('data-key');
-                        if (key && languagePack[language][key]) {
+                var elementsWithDataKey = document.querySelectorAll('[data-key]'); /* data-key 속성을 가진 모든 요소 선택 */
+                if (elementsWithDataKey) { /* 요소들이 있으면 */
+                    elementsWithDataKey.forEach(element => { /* 각 요소에 대해 반복 */
+                        var key = element.getAttribute('data-key'); /* data-key 속성 값 가져오기 */
+                        if (key && languagePack[language][key]) { /* 데이터 키가 있으면 해당 언어로 텍스트 변경 */
                             element.textContent = languagePack[language][key];
                         }
                     });
                 }
             }
 
-            updateLanguage('korean');
+            updateLanguage('portuguese'); /* 기본 언어를 한국어로 설정하여 초기화 */
         });
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const container = this.closest('.menu-item, .drink-item');
-                    if (container) {
-                        const inputField = container.querySelector('input[type=number]');
-                        if (inputField) {
-                            let currentValue = parseInt(inputField.value);
-                            const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0);
-                            let newValue = currentValue + delta;
-                            inputField.value = newValue;
+        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+            document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => { /* 메뉴 항목 및 음료 항목의 모든 버튼 선택 */
+                button.addEventListener('click', function() { /* 각 버튼 클릭 시 이벤트 추가 */
+                    const container = this.closest('.menu-item, .drink-item'); /* 버튼이 포함된 상위 요소 선택 */
+                    if (container) { /* 상위 요소가 있으면 */
+                        const inputField = container.querySelector('input[type=number]'); /* 상위 요소 내의 숫자 입력 필드 선택 */
+                        if (inputField) { /* 숫자 입력 필드가 있으면 */
+                            let currentValue = parseInt(inputField.value); /* 현재 입력된 값을 숫자로 변환 */
+                            const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0); /* 버튼 텍스트에 따라 값 증가 또는 감소 설정 */
+                            let newValue = currentValue + delta; /* 새로 계산된 값 */
+                            inputField.value = newValue; /* 숫자 입력 필드에 새 값 설정 */
 
-                            const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-                            const totalPriceElement = container.querySelector('.total-price');
-                            if (totalPriceElement) {
-                                totalPriceElement.textContent = newValue * pricePerItem;
+                            const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent); /* 항목 가격 가져오기 */
+                            const totalPriceElement = container.querySelector('.total-price'); /* 총 가격 요소 선택 */
+                            if (totalPriceElement) { /* 총 가격 요소가 있으면 */
+                                totalPriceElement.textContent = newValue * pricePerItem; /* 새 값에 따라 총 가격 계산 후 설정 */
                             }
 
-                            updateTotalAmount();
+                            updateTotalAmount(); /* 전체 금액 업데이트 함수 호출 */
                         }
                     }
                 });
             });
 
-            function updateTotalAmount() {
-                let totalAmount = 0;
-                const totalPriceElements = document.querySelectorAll('.total-price');
-                if (totalPriceElements) {
-                    totalPriceElements.forEach(priceElement => {
-                        totalAmount += parseInt(priceElement.textContent);
+            function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
+                let totalAmount = 0; /* 총 금액을 0으로 초기화 */
+                const totalPriceElements = document.querySelectorAll('.total-price'); /* 모든 총 가격 요소 선택 */
+                if (totalPriceElements) { /* 총 가격 요소들이 있으면 */
+                    totalPriceElements.forEach(priceElement => { /* 각 요소에 대해 반복 */
+                        totalAmount += parseInt(priceElement.textContent); /* 총 금액에 요소의 금액 추가 */
                     });
-                    const totalAmountDisplay = document.getElementById('total-amount');
-                    if (totalAmountDisplay) {
-                        totalAmountDisplay.textContent = `Total: R$${totalAmount}`;
+                    const totalAmountDisplay = document.getElementById('total-amount'); /* 총 금액 표시 요소 선택 */
+                    if (totalAmountDisplay) { /* 총 금액 표시 요소가 있으면 */
+                        totalAmountDisplay.textContent = `Total: R$${totalAmount}`; /* 총 금액 표시 업데이트 */
                     }
                 }
             }
 
-            updateTotalAmount();
+            updateTotalAmount(); /* 초기 총 금액 업데이트 */
         });
     </script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.content');
-            const navLinks = document.querySelectorAll('nav a');
+        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+            const sections = document.querySelectorAll('.content'); /* 모든 콘텐츠 섹션 선택 */
+            const navLinks = document.querySelectorAll('nav a'); /* 모든 네비게이션 링크 선택 */
         
-            function hideAllSections() {
-                sections.forEach(section => {
-                    section.style.display = 'none';
+            function hideAllSections() { /* 모든 섹션을 숨기는 함수 */
+                sections.forEach(section => { /* 각 섹션에 대해 반복 */
+                    section.style.display = 'none'; /* 섹션을 숨김 */
                 });
             }
         
-            function showSection(id) {
-                hideAllSections();
-                const section = document.querySelector(id);
-                section.style.display = 'block';
+            function showSection(id) { /* 특정 섹션을 보여주는 함수 */
+                hideAllSections(); /* 먼저 모든 섹션을 숨김 */
+                const section = document.querySelector(id); /* 보여줄 섹션 선택 */
+                section.style.display = 'block'; /* 선택된 섹션을 표시 */
             }
         
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    showSection(this.getAttribute('href'));
+            navLinks.forEach(link => { /* 각 네비게이션 링크에 대해 반복 */
+                link.addEventListener('click', function(event) { /* 링크 클릭 시 이벤트 추가 */
+                    event.preventDefault(); /* 기본 링크 동작을 방지 */
+                    showSection(this.getAttribute('href')); /* 링크의 href 속성 값에 해당하는 섹션을 표시 */
                 });
             });
         
-            showSection('#home');
+            showSection('#home'); /* 초기화 시 홈 섹션을 표시 */
 
-            document.getElementById('order-button').addEventListener('click', function() {
-                const orderDetails = [];
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const name = item.querySelector('p').textContent;
-                    const quantity = item.querySelector('input[type=number]').value;
-                    if (parseInt(quantity) > 0) {
-                        orderDetails.push(`${name}: ${quantity}개`);
+            document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
+                const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                    const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                    const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
+                    if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
+                        orderDetails.push(`${name}: ${quantity}개`); /* 주문 내역에 추가 */
                     }
                 });
 
-                if (orderDetails.length > 0) {
-                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
-                    document.getElementById('order-modal').style.display = 'block';
-                    updateTotalAmount();
-                    updateModalTotalAmount();
-                } else {
-                    alert('주문할 메뉴를 선택해주세요.\nPor favor, selecione um menu para pedir.');
+                if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
+                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>'); /* 주문 내역을 모달 창에 표시 */
+                    document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
+                    updateTotalAmount(); /* 전체 금액 업데이트 */
+                    updateModalTotalAmount(); /* 모달 창 내 금액 업데이트 */
+                } else { /* 주문 내역이 없으면 */
+                    alert('주문할 메뉴를 선택해주세요.\nPor favor, selecione um menu para pedir.'); /* 경고 메시지 표시 */
                 }
             });
         });
     </script>
 
     <script>
-        document.getElementById('order-button').addEventListener('click', function() {
-            const orderButton = document.getElementById('order-button');
-            const orderDetails = [];
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const name = item.querySelector('p').textContent;
-                const quantity = item.querySelector('input[type=number]').value;
-                if (parseInt(quantity) > 0) {
-                    orderDetails.push(`${name}: ${quantity}개`);
+        document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
+            const orderButton = document.getElementById('order-button'); /* 주문 버튼 선택 */
+            const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
+                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
+                    orderDetails.push(`${name}: ${quantity}개`); /* 주문 내역에 추가 */
                 }
             });
 
-            if (orderDetails.length > 0) {
-                document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
-                document.getElementById('order-modal').style.display = 'block';
-            } else {
-                alert('주문할 메뉴를 선택해주세요.');
+            if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
+                document.getElementById('order-list').innerHTML = orderDetails.join('<br>'); /* 주문 내역을 모달 창에 표시 */
+                document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
+            } else { /* 주문 내역이 없으면 */
+                alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
             }
         });
 
-        function confirmOrder() {
-            alert('주문이 완료되었습니다!');
-            closeModal();
+        function confirmOrder() { /* 주문을 확정하는 함수 */
+            alert('주문이 완료되었습니다!'); /* 주문 완료 메시지 표시 */
+            closeModal(); /* 모달 창 닫기 함수 호출 */
         }
 
-        function closeModal() {
-            document.getElementById('order-modal').style.display = 'none';
+        function closeModal() { /* 모달 창을 닫는 함수 */
+            document.getElementById('order-modal').style.display = 'none'; /* 모달 창 숨기기 */
         }
     </script>  
         
     <script>
-        document.getElementById('order-button').addEventListener('click', function() {
-            const orderDetails = [];
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const name = item.querySelector('p').textContent;
-                const quantity = item.querySelector('input[type=number]').value;
-                if (parseInt(quantity) > 0) {
-                    orderDetails.push(`<li>${name}: ${quantity}개</li>`);
+        document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
+            const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
+                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
+                    orderDetails.push(`<li>${name}: ${quantity}개</li>`); /* 주문 내역을 리스트 아이템 형식으로 추가 */
                 }
             });
         
-            if (orderDetails.length > 0) {
-                document.getElementById('order-list').innerHTML = orderDetails.join('');
-                document.getElementById('order-modal').style.display = 'block';
-            } else {
-                alert('주문할 메뉴를 선택해주세요.');
+            if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
+                document.getElementById('order-list').innerHTML = orderDetails.join(''); /* 주문 내역을 모달 창에 표시 */
+                document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
+            } else { /* 주문 내역이 없으면 */
+                alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
             }
         });
 
-        function updateTotalAmount() {
-            let totalAmount = 0;
-            document.querySelectorAll('.total-price').forEach(priceElement => {
-                totalAmount += parseInt(priceElement.textContent);
+        function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
+            let totalAmount = 0; /* 총 금액을 0으로 초기화 */
+            document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소에 대해 반복 */
+                totalAmount += parseInt(priceElement.textContent); /* 총 금액에 각 요소의 금액 추가 */
             });
-            const formattedTotalAmount = `Total amount: ${totalAmount} won`;
-            document.getElementById('total-amount').textContent = formattedTotalAmount;
-            updateModalTotalAmount(formattedTotalAmount);
+            const formattedTotalAmount = `Total amount: ${totalAmount} won`; /* 총 금액을 포맷팅 */
+            document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
+            updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
         }
 
-        function updateModalTotalAmount(totalAmountText) {
-            document.getElementById('modal-total').textContent = totalAmountText;
+        function updateModalTotalAmount(totalAmountText) { /* 모달 창 내 총 금액을 업데이트하는 함수 */
+            document.getElementById('modal-total').textContent = totalAmountText; /* 모달 창 내 총 금액 표시 업데이트 */
         }
 
-        function sendOrderData() {
-            var orderDetails = [];
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const name = item.querySelector('p').textContent;
-                const quantity = item.querySelector('input[type=number]').value;
-                if (parseInt(quantity) > 0) {
-                    orderDetails.push({name: name, quantity: quantity});
+        function sendOrderData() { /* 주문 데이터를 전송하는 함수 */
+            var orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
+                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
+                    orderDetails.push({name: name, quantity: quantity}); /* 주문 내역을 객체 형식으로 배열에 추가 */
                 }
             });
-            var totalAmount = document.getElementById('modal-total').textContent;
+            var totalAmount = document.getElementById('modal-total').textContent; /* 모달 창 내 총 금액 가져오기 */
 
-            var url = "https://script.google.com/macros/s/AKfycbxtzIq8j4S8feb7hGjoZcciNTiSn0_QO8gEtgMeLL-HOgQHnXDOYpFWVi_VGANSDHOM/exec";
+            var url = "https://script.google.com/macros/s/AKfycbxtzIq8j4S8feb7hGjoZcciNTiSn0_QO8gEtgMeLL-HOgQHnXDOYpFWVi_VGANSDHOM/exec"; /* Google Apps Script URL 설정 */
 
             var requestBody = JSON.stringify({
-                orderList: orderDetails,
-                totalAmount: totalAmount
+                orderList: orderDetails, /* 주문 내역을 JSON 형식으로 변환 */
+                totalAmount: totalAmount /* 총 금액 추가 */
             });
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+            fetch(url, { /* fetch API를 사용해 POST 요청 전송 */
+                method: 'POST', /* HTTP 메서드를 POST로 설정 */
+                headers: { /* 요청 헤더 설정 */
+                    'Content-Type': 'application/json' /* 요청 본문의 콘텐츠 타입을 JSON으로 설정 */
                 },
-                body: requestBody
+                body: requestBody /* 요청 본문에 JSON 데이터 전송 */
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Order processed:", data);
-                alert('주문이 성공적으로 처리되었습니다.');
-                closeModal();
+            .then(response => response.json()) /* 응답을 JSON 형식으로 변환 */
+            .then(data => { /* 성공 시 실행 */
+                console.log("Order processed:", data); /* 콘솔에 처리된 주문 내역 출력 */
+                alert('주문이 성공적으로 처리되었습니다.'); /* 성공 메시지 표시 */
+                closeModal(); /* 모달 창 닫기 함수 호출 */
             })
-            .catch(error => {
-                console.error("Error sending order data:", error);
-                alert('주문 처리 중 오류가 발생했습니다: ' + error.message);
+            .catch(error => { /* 오류 발생 시 실행 */
+                console.error("Error sending order data:", error); /* 콘솔에 오류 메시지 출력 */
+                alert('주문 처리 중 오류가 발생했습니다: ' + error.message); /* 오류 메시지 표시 */
             });
         }
 
-        function closeModal() {
-            document.getElementById('order-modal').style.display = 'none';
+        function closeModal() { /* 모달 창을 닫는 함수 */
+            document.getElementById('order-modal').style.display = 'none'; /* 모달 창 숨기기 */
         }
     </script>  
 
-    <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;">
-        <div style="background:#FFF; width:60%; margin:50px auto; padding:20px; border-radius:10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h2>Order Confirmation</h2>
-            <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
+    <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;"> <!-- 주문 확인 모달 창 -->
+        <div style="background:#FFF; width:60%; margin:50px auto; padding:20px; border-radius:10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> <!-- 모달 창 안의 내용 -->
+            <h2>Order Confirmation</h2> <!-- 주문 확인 제목 -->
+            <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;"> <!-- 주문 내역을 표시할 리스트 -->
             </ul>
-            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
+            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div> <!-- 모달 창 내 총 금액 표시 -->
             
-            <form id="orderForm" onsubmit="sendOrderData(); return false;">
-                <button type="submit">Order completed</button>
+            <form id="orderForm" onsubmit="sendOrderData(); return false;"> <!-- 주문 데이터를 전송하는 폼 -->
+                <button type="submit">Order completed</button> <!-- 주문 완료 버튼 -->
             </form>
                             
-            <button onclick="closeModal()">Close</button>
+            <button onclick="closeModal()">Close</button> <!-- 모달 창 닫기 버튼 -->
         </div>
     </div>
 
 </head>
-<body>
-    <nav>
+<body> <!-- 본문 시작 -->
+    <nav> <!-- 네비게이션 바 -->
         <select id="language-select">
             <option value="korean">Coreano</option>
-            <option value="portuguese">Português</option>
+            <option value="portuguese" selected>Português</option>
         </select>
-        <a href="#home" data-key="home">홈</a>
-        <a href="#menu" data-key="menu">메뉴</a>
-        <a href="#drinks" data-key="drinks">음료</a>
+        <a href="#home" data-key="home">홈</a> <!-- 홈 링크 -->
+        <a href="#menu" data-key="menu">메뉴</a> <!-- 메뉴 링크 -->
+        <a href="#drinks" data-key="drinks">음료</a> <!-- 음료 링크 -->
         
-        <div class="order-section">
-            <span id="total-amount" data-key="totalAmount">Total: 0원</span>
-            <button id="order-button">Pedido</button>
-            <button id="cancel-button">Cancela</button>
+        <div class="order-section"> <!-- 주문 섹션 -->
+            <span id="total-amount" data-key="totalAmount">Total: 0원</span> <!-- 총 금액 표시 -->
+            <button id="order-button">Pedido</button> <!-- 주문 버튼 -->
+            <button id="cancel-button">Cancela</button> <!-- 취소 버튼 -->
         </div>
     </nav>
 
-    <section id="home" class="content">
-        <div class="introduction">
-            <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1>
-            <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;">
-            <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p>
-            <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p>     
+    <section id="home" class="content"> <!-- 홈 섹션 -->
+        <div class="introduction"> <!-- 소개 섹션 -->
+            <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1> <!-- 소개 섹션 제목 -->
+            <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;"> <!-- 레스토랑 외관 이미지 -->
+            <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p> <!-- 소개 문구 1 -->
+            <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p> <!-- 소개 문구 2 -->     
         </div>
         
         <iframe width="560" height="315" 
@@ -520,197 +539,198 @@
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
         allowfullscreen
-        style="display:none;"></iframe>
+        style="display:none;"></iframe> <!-- 유튜브 영상 임베드 (현재 숨김 처리) -->
     </section>
 
-    <section id="menu" class="content">
-        <div class="menu">
-            <h2></h2>
-            <div class="menu-item" id="menu1">
-                <p>Original chicken: crispy and crunchy</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image">
-                <span class="price-per-item">70</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+    <section id="menu" class="content"> <!-- 메뉴 섹션 -->
+        <div class="menu"> <!-- 메뉴 리스트 -->
+            <h2></h2> <!-- 메뉴 제목 (비어 있음) -->
+            <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
+                <p>Original chicken: crispy and crunchy</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu2">
-                <p>양념치킨: 설명부분은 알아서 넣고</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 2 사진">
-                <span class="price-per-item">70</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
+                <p>양념치킨: 설명부분은 알아서 넣고</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu3">
-                <p>메뉴 3: 설명</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 3 사진">
-                <span class="price-per-item">65</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
+                <p>메뉴 3: 설명</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">65</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu4">
-                <p>메뉴 4: 설명</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 4 사진">
-                <span class="price-per-item">75</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
+                <p>메뉴 4: 설명</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">75</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu5">
-                <p>메뉴 5: 설명</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 5 사진">
-                <span class="price-per-item">70</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
+                <p>메뉴 5: 설명</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu6">
-                <p>메뉴 6: 설명</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 6 사진">
-                <span class="price-per-item">70</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
+                <p>메뉴 6: 설명</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu7">
-                <p>메뉴 7: 설명</p>
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 7 사진">
-                <span class="price-per-item">70</span>R$
-                <button type="button">-</button>
-                <input type="number" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item" id="menu7"> <!-- 메뉴 항목 7 -->
+                <p>메뉴 7: 설명</p> <!-- 메뉴 설명 -->
+                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 7 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
         </div>
     </section>
 
-    <div id="drinks" class="content">
-        <div class="drink-menu">
-            <div class="menu-item drink-item">
-                <p>음료 1: 설명</p>
-                <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1">
-                <span class="price-per-item">40</span>R$
-                <button type="button">-</button>
-                <input type="number" id="quantity1" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+    <div id="drinks" class="content"> <!-- 음료 섹션 -->
+        <div class="drink-menu"> <!-- 음료 리스트 -->
+            <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
+                <p>음료 1: 설명</p> <!-- 음료 설명 -->
+                <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
+                <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item">
-                <p>음료 2: 설명</p>
-                <img src="https://i.imgur.com/Jbn9C7a.jpeg" alt="drink2">
-                <span class="price-per-item">30</span>R$
-                <button type="button">-</button>
-                <input type="number" id="quantity1" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item"> <!-- 음료 항목 2 -->
+                <p>음료 2: 설명</p> <!-- 음료 설명 -->
+                <img src="https://i.imgur.com/Jbn9C7a.jpeg" alt="drink2"> <!-- 음료 이미지 -->
+                <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item">
-                <p>음료 3: 설명</p>
-                <img src="path_to_image10.jpg" alt="drink3">
-                <span class="price-per-item">50</span>R$
-                <button type="button">-</button>
-                <input type="number" id="quantity1" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item"> <!-- 음료 항목 3 -->
+                <p>음료 3: 설명</p> <!-- 음료 설명 -->
+                <img src="path_to_image10.jpg" alt="drink3"> <!-- 음료 이미지 -->
+                <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item">
-                <p>음료 4: 설명</p>
-                <img src="path_to_image11.jpg" alt="drink4">
-                <span class="price-per-item">30</span>R$
-                <button type="button">-</button>
-                <input type="number" id="quantity1" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item"> <!-- 음료 항목 4 -->
+                <p>음료 4: 설명</p> <!-- 음료 설명 -->
+                <img src="path_to_image11.jpg" alt="drink4"> <!-- 음료 이미지 -->
+                <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item">
-                <p>음료 5: 설명</p>
-                <img src="path_to_image12.jpg" alt="drink5">
-                <span class="price-per-item">20</span>R$
-                <button type="button">-</button>
-                <input type="number" id="quantity1" value="0" min="0">
-                <button type="button">+</button>
-                <span class="total-price">0</span>R$
+            <div class="menu-item"> <!-- 음료 항목 5 -->
+                <p>음료 5: 설명</p> <!-- 음료 설명 -->
+                <img src="path_to_image12.jpg" alt="drink5"> <!-- 음료 이미지 -->
+                <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('cancel-button').addEventListener('click', function() {
-                document.querySelectorAll('input[type=number]').forEach(input => {
-                    input.value = 0;
+        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+            document.getElementById('cancel-button').addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
+                document.querySelectorAll('input[type=number]').forEach(input => { /* 모든 숫자 입력 필드 선택 */
+                    input.value = 0; /* 입력값을 0으로 초기화 */
                 });
-                document.querySelectorAll('.total-price').forEach(total => {
-                    total.textContent = '0원';
+                document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
+                    total.textContent = '0원'; /* 총 가격을 0원으로 초기화 */
                 });
-                document.getElementById('total-amount').textContent = '총금액: 0원';
+                document.getElementById('total-amount').textContent = '총금액: 0원'; /* 총 금액 표시를 0원으로 초기화 */
             });
         });
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const orderButton = document.getElementById('order-button');
-            const cancelButton = document.getElementById('cancel-button');
-            const modal = document.getElementById('order-modal');
-            const orderList = document.getElementById('order-list');
-            const totalAmountDisplay = document.getElementById('total-amount');
+        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+            const orderButton = document.getElementById('order-button'); /* 주문 버튼 선택 */
+            const cancelButton = document.getElementById('cancel-button'); /* 취소 버튼 선택 */
+            const modal = document.getElementById('order-modal'); /* 모달 창 선택 */
+            const orderList = document.getElementById('order-list'); /* 주문 내역 리스트 선택 */
+            const totalAmountDisplay = document.getElementById('total-amount'); /* 총 금액 표시 선택 */
 
-            function updateTotalAmount() {
-                let totalAmount = 0;
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const quantity = parseInt(item.querySelector('input[type=number]').value);
-                    const pricePerItemElement = item.querySelector('.price-per-item');
-                    if (pricePerItemElement) {
-                        const pricePerItem = parseInt(pricePerItemElement.textContent);
-                        totalAmount += quantity * pricePerItem;
-                    } else {
+            function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
+                let totalAmount = 0; /* 총 금액을 0으로 초기화 */
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                    const quantity = parseInt(item.querySelector('input[type=number]').value); /* 수량 가져오기 */
+                    const pricePerItemElement = item.querySelector('.price-per-item'); /* 가격 요소 선택 */
+                    if (pricePerItemElement) { /* 가격 요소가 있으면 */
+                        const pricePerItem = parseInt(pricePerItemElement.textContent); /* 가격 가져오기 */
+                        totalAmount += quantity * pricePerItem; /* 총 금액에 수량 * 가격 추가 */
+                    } else { /* 가격 요소가 없으면 오류 메시지 출력 */
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                const formattedTotalAmount = `Total: ${totalAmount}`;
-                totalAmountDisplay.textContent = formattedTotalAmount;
-                updateModalTotalAmount(formattedTotalAmount);
+                const formattedTotalAmount = `Total: ${totalAmount}`; /* 총 금액을 포맷팅 */
+                totalAmountDisplay.textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
+                updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
             }
 
-            orderButton.addEventListener('click', function() {
-                orderList.innerHTML = '';
-                let hasItems = false;
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const quantity = parseInt(item.querySelector('input[type=number]').value);
-                    if (quantity > 0) {
-                        hasItems = true;
-                        const name = item.querySelector('p').textContent;
-                        const price = item.querySelector('.price-per-item').textContent;
-                        const itemTotal = quantity * parseInt(price);
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`;
-                        orderList.appendChild(listItem);
+            orderButton.addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
+                orderList.innerHTML = ''; /* 주문 내역 초기화 */
+                let hasItems = false; /* 주문 항목이 있는지 여부를 확인하는 변수 */
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
+                    const quantity = parseInt(item.querySelector('input[type=number]').value); /* 수량 가져오기 */
+                    if (quantity > 0) { /* 수량이 0보다 크면 */
+                        hasItems = true; /* 주문 항목이 있음을 표시 */
+                        const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                        const price = item.querySelector('.price-per-item').textContent; /* 가격 가져오기 */
+                        const itemTotal = quantity * parseInt(price); /* 항목 총 금액 계산 */
+                        const listItem = document.createElement('li'); /* 리스트 아이템 생성 */
+                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`; /* 리스트 아이템 내용 설정 */
+                        orderList.appendChild(listItem); /* 리스트에 추가 */
                     }
                 });
 
-                if (hasItems) {
-                    modal.style.display = 'block';
-                } else {
-                    alert('주문할 메뉴를 선택해주세요.');
+                if (hasItems) { /* 주문 항목이 있으면 */
+                    modal.style.display = 'block'; /* 모달 창 표시 */
+                } else { /* 주문 항목이 없으면 */
+                    alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
                 }
-                updateTotalAmount();
+                updateTotalAmount(); /* 전체 금액 업데이트 */
             });
 
-            cancelButton.addEventListener('click', function() {
-                modal.style.display = 'none';
-                updateTotalAmount();
+            cancelButton.addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
+                modal.style.display = 'none'; /* 모달 창 숨기기 */
+                updateTotalAmount(); /* 전체 금액 업데이트 */
             });
 
         });
     </script>
 </body>
 </html>
+
