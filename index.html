@@ -1,6 +1,6 @@
-<!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
+<!DOCTYPE html> <!-- HTML 문서의 형식을 선언 -->
 <html lang="ko"> <!-- 문서의 언어를 한국어로 설정 -->
-<head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
+<head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 -->
     <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
@@ -41,16 +41,16 @@
             box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비 계산 */
         }
         .menu, .reservation-form {
-            padding: 20px;
-            width: 100%;
+            padding: 20px; /* 내부에 20px 패딩 추가 */
+            width: 100%; /* 너비를 100%로 설정 */
             max-width: 400px; /* 최대 너비를 400px로 제한 */
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto; /* 좌우 가운데 정렬 */
+            display: flex; /* 요소들을 Flexbox로 배치 */
+            flex-direction: column; /* 요소들을 세로로 배치 */
+            align-items: center; /* 요소들을 가운데 정렬 */
+            background-color: white; /* 배경색을 흰색으로 설정 */
+            border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
             box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비 계산 */
         }
         .menu-item, .drink-item {
@@ -59,10 +59,10 @@
             color: #333; /* 글자색을 어두운 회색으로 설정 */
         }
         .menu-item img, .drink-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
+            width: 100%; /* 이미지의 너비를 100%로 설정 */
+            height: 200px; /* 이미지의 높이를 200px로 설정 */
+            object-fit: cover; /* 이미지 비율을 유지하며 채우기 */
+            border-radius: 10px; /* 이미지의 모서리를 10px 둥글게 설정 */
             max-width: 100%; /* 이미지의 최대 너비를 100%로 제한 */
         }
         .menu-item span.price-per-item, .drink-item span.price-per-item {
@@ -71,10 +71,10 @@
             color: #FF6F61; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
         }
         .drink-menu {
-            display: grid;
+            display: grid; /* 요소들을 그리드로 배치 */
             grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
-            gap: 10px;
-            width: 100%;
+            gap: 10px; /* 요소들 사이에 10px 간격 추가 */
+            width: 100%; /* 너비를 100%로 설정 */
             max-width: 100%; /* 최대 너비를 100%로 제한 */
             box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비 계산 */
         }
@@ -231,6 +231,7 @@
                 korean: { /* 한국어 번역 */
                     'welcome': '서울치킨에 오신걸 환영합니다!',
                     'originalChicken': '오리지널 치킨: 바삭하고 고소함',
+                    'yangneumChicken': '양념치킨: 달콤하고 매콤한 양념', // 잘못된 항목 수정
                     'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
                     'home': '홈',
                     'menu': '메뉴',
@@ -241,6 +242,7 @@
                 portuguese: { /* 포르투갈어 번역 */
                     'welcome': 'Bem-vindo ao Seoul Chicken!',
                     'originalChicken': 'Frango original: crocante e saboroso',
+                    'yangneumChicken': 'Frango temperado: doce e picante', // 양념치킨 항목 수정
                     'seasonedChicken': 'Frango temperado: doce e picante',
                     'home': 'Home',
                     'menu': 'Menu',
@@ -249,32 +251,23 @@
                     'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
                 }
             };
+
+            // 언어 선택 드롭다운 요소 선택
+            const languageSelect = document.getElementById('language-select');
+
+            // 포르투갈어로 기본 언어 설정
+            updateLanguage('portuguese');
             
-            document.addEventListener('DOMContentLoaded', function() {
-                const languageSelect = document.getElementById('language-select');
+            // 드롭다운의 선택값을 포르투갈어로 설정
+            languageSelect.value = 'portuguese';
 
-                // 포르투갈어로 기본 언어 설정
-                updateLanguage('portuguese');
-                
-                // 드롭다운의 선택값을 포르투갈어로 설정
-                languageSelect.value = 'portuguese';
-
-                // 드롭다운 변경 이벤트 처리
-                languageSelect.addEventListener('change', function() {
-                    updateLanguage(this.value);
-                    adjustContentPadding();
-                });
+            // 드롭다운 변경 이벤트 처리
+            languageSelect.addEventListener('change', function() {
+                updateLanguage(this.value); // 선택된 언어로 텍스트 업데이트
             });
 
-
-
-
-            document.getElementById('language-select').addEventListener('change', function() { /* 언어 선택 변경 시 호출 */
-                updateLanguage(this.value); /* 선택된 언어로 업데이트 */
-                adjustContentPadding(); /* 콘텐츠 패딩 조정 함수 호출 */
-            });
-
-            function updateLanguage(language) { /* 선택된 언어로 텍스트를 업데이트하는 함수 */
+            // 언어 변경 시 텍스트를 업데이트하는 함수
+            function updateLanguage(language) {
                 var introductionHeading = document.querySelector('.introduction h1'); /* 소개 섹션의 제목 선택 */
                 if (introductionHeading) { /* 제목이 있으면 */
                     introductionHeading.textContent = languagePack[language]['welcome']; /* 해당 언어로 제목 변경 */
@@ -282,7 +275,7 @@
 
                 var navLinks = document.querySelectorAll('nav a'); /* 네비게이션 링크들 선택 */
                 if (navLinks) { /* 네비게이션 링크들이 있으면 */
-                    navLinks.forEach((link, index) => { /* 각 링크에 대해 반복 */
+                    navLinks.forEach(link => { /* 각 링크에 대해 반복 */
                         var dataKey = link.getAttribute('data-key'); /* 데이터 키 속성 값 가져오기 */
                         if (dataKey && languagePack[language][dataKey]) { /* 데이터 키가 있으면 해당 언어로 텍스트 변경 */
                             link.textContent = languagePack[language][dataKey];
@@ -300,8 +293,6 @@
                     });
                 }
             }
-
-            updateLanguage('portuguese'); /* 기본 언어를 한국어로 설정하여 초기화 */
         });
     </script>
 
@@ -554,7 +545,7 @@
         <div class="menu"> <!-- 메뉴 리스트 -->
             <h2></h2> <!-- 메뉴 제목 (비어 있음) -->
             <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
-                <p>Original chicken: crispy and crunchy</p> <!-- 메뉴 설명 -->
+                <p data-key="originalChicken">Original chicken: crispy and crunchy</p>
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
@@ -563,7 +554,7 @@
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
             <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
-                <p>양념치킨: 설명부분은 알아서 넣고</p> <!-- 메뉴 설명 -->
+                <p data-key="yangneumChicken">Yangneum chicken: crispy and crunchy</p>
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
@@ -741,4 +732,3 @@
     </script>
 </body>
 </html>
-
