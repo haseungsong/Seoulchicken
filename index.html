@@ -1,3 +1,7 @@
+'AKfycbwa8GyFUvz0jP2QxjoIKEH85bWryHphR-XoLKK_P6sd15nP4FcNzcZYxhh60ejlG8jFCg'
+'https://script.google.com/macros/s/AKfycbwa8GyFUvz0jP2QxjoIKEH85bWryHphR-XoLKK_P6sd15nP4FcNzcZYxhh60ejlG8jFCg/exec'
+
+
 <!DOCTYPE html> <!-- HTML 문서의 형식을 선언 -->
 <html lang="ko"> <!-- 문서의 언어를 한국어로 설정 -->
 <head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 -->
@@ -450,40 +454,51 @@
             document.getElementById('modal-total').textContent = totalAmountText; /* 모달 창 내 총 금액 표시 업데이트 */
         }
 
-        function sendOrderData() { /* 주문 데이터를 전송하는 함수 */
-            var orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
-                    orderDetails.push({name: name, quantity: quantity}); /* 주문 내역을 객체 형식으로 배열에 추가 */
+        function sendOrderData() {
+            var orderDetails = [];
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('p').textContent;
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push({name: name, quantity: quantity});
                 }
             });
-            var totalAmount = document.getElementById('modal-total').textContent; /* 모달 창 내 총 금액 가져오기 */
 
-            var url = "https://script.google.com/macros/s/AKfycbxtzIq8j4S8feb7hGjoZcciNTiSn0_QO8gEtgMeLL-HOgQHnXDOYpFWVi_VGANSDHOM/exec"; /* Google Apps Script URL 설정 */
+            var totalAmount = document.getElementById('modal-total').textContent;
+            var tableNumber = document.getElementById('table-number').value; // 테이블 번호 가져오기
+            var currentTime = new Date().toISOString(); // 현재 시간을 ISO 형식으로 가져오기
+
+            // 디버그: 주문 내역, 총 금액, 테이블 번호, 현재 시간 출력
+            console.log("Order Details: ", orderDetails);
+            console.log("Total Amount: ", totalAmount);
+            console.log("Table Number: ", tableNumber);
+            console.log("Order Time: ", currentTime);
+
+            var url = "https://script.google.com/macros/s/AKfycbwa8GyFUvz0jP2QxjoIKEH85bWryHphR-XoLKK_P6sd15nP4FcNzcZYxhh60ejlG8jFCg/exec";
 
             var requestBody = JSON.stringify({
-                orderList: orderDetails, /* 주문 내역을 JSON 형식으로 변환 */
-                totalAmount: totalAmount /* 총 금액 추가 */
+                orderList: orderDetails,
+                totalAmount: totalAmount,
+                tableNumber: tableNumber,
+                orderTime: currentTime  // 주문 시간 추가
             });
 
-            fetch(url, { /* fetch API를 사용해 POST 요청 전송 */
-                method: 'POST', /* HTTP 메서드를 POST로 설정 */
-                headers: { /* 요청 헤더 설정 */
-                    'Content-Type': 'application/json' /* 요청 본문의 콘텐츠 타입을 JSON으로 설정 */
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                body: requestBody /* 요청 본문에 JSON 데이터 전송 */
+                body: requestBody
             })
-            .then(response => response.json()) /* 응답을 JSON 형식으로 변환 */
-            .then(data => { /* 성공 시 실행 */
-                console.log("Order processed:", data); /* 콘솔에 처리된 주문 내역 출력 */
-                alert('주문이 성공적으로 처리되었습니다.'); /* 성공 메시지 표시 */
-                closeModal(); /* 모달 창 닫기 함수 호출 */
+            .then(response => response.json())
+            .then(data => {
+                console.log("Order processed:", data);
+                alert('주문이 성공적으로 처리되었습니다.');
+                closeModal();
             })
-            .catch(error => { /* 오류 발생 시 실행 */
-                console.error("Error sending order data:", error); /* 콘솔에 오류 메시지 출력 */
-                alert('주문 처리 중 오류가 발생했습니다: ' + error.message); /* 오류 메시지 표시 */
+            .catch(error => {
+                console.error("Error sending order data:", error);
+                alert('주문 처리 중 오류가 발생했습니다: ' + error.message);
             });
         }
 
@@ -499,6 +514,11 @@
             </ul>
             <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div> <!-- 모달 창 내 총 금액 표시 -->
             
+            <label for="table-number">Table:</label>
+            <input type="text" id="table-number" placeholder="Enter your table number" required style="display: block; margin-bottom: 20px; padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+            
+
+
             <form id="orderForm" onsubmit="sendOrderData(); return false;"> <!-- 주문 데이터를 전송하는 폼 -->
                 <button type="submit">Order completed</button> <!-- 주문 완료 버튼 -->
             </form>
