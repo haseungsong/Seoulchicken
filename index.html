@@ -7,6 +7,25 @@
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
+        .menu {
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 10px;
+            box-sizing: border-box;
+            justify-items: start; /* Ensure grid items align to the start (left) */
+            align-items: start; /* Ensure items are aligned at the top */
+        }
+        .menu-item {
+            text-align: center;
+            width: 100%; /* Ensure menu items take up the full width of the grid column */
+        }
         body {
             font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
             margin: 0; /* 기본 여백 없앰 */
@@ -32,11 +51,8 @@
             font-size: 18px; /* 링크 텍스트 크기를 18px로 설정 */
         }
         .content {
-            padding-top: 80px; /* 상단에 80px 패딩 추가 (네비게이션 바 높이만큼 여백 설정) */
-            display: flex; /* 요소들을 Flexbox로 배치 */
-            flex-direction: column; /* 요소들을 세로로 배치 */
-            align-items: center; /* 요소들을 가운데 정렬 */
-            background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
+            padding-top: 80px;
+            background-color: #F7F7F7;
         }
         .order-section button {
             width: 40px; /* 버튼의 너비를 40px로 설정 */
@@ -51,23 +67,6 @@
             border-radius: 5px; /* 모서리를 둥글게 설정 */
             cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
             transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
-        .menu, .reservation-form {
-            padding: 20px; /* 내부에 20px 패딩 추가 */
-            width: 100%; /* 너비를 100%로 설정 */
-            max-width: 400px; /* 최대 너비를 400px로 제한 */
-            margin: auto; /* 요소를 가운데로 정렬 */
-            display: flex; /* 요소들을 Flexbox로 배치 */
-            flex-direction: column; /* 요소들을 세로로 배치 */
-            align-items: center; /* 요소들을 가운데 정렬 */
-            background-color: white; /* 배경색을 흰색으로 설정 */
-            border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가해 입체감 부여 */
-        }
-        .menu-item, .drink-item {
-            margin-bottom: 20px; /* 요소들 아래에 20px의 여백 추가 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            color: #333; /* 글자색을 어두운 회색으로 설정 */
         }
         .menu-item img, .drink-item img {
             width: 100%; /* 이미지의 너비를 요소에 맞춤 */
@@ -217,7 +216,19 @@
             justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
         }
         @media (max-width: 600px) { /* 화면 너비가 600px 이하일 때 적용 */
+
+            .menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 그리드 설정 */
+                gap: 10px; /* 각 항목 사이의 간격 설정 */
+                justify-items: start; /* 그리드 항목을 왼쪽에 정렬 */
+                align-items: start; /* 그리드 항목을 상단에 정렬 */
+            }
+
             #drinks .menu {
+                grid-template-columns: repeat(2, 1fr); /* 그리드 레이아웃을 두 개의 열로 설정 */
+            }
+            #menu-item {
                 grid-template-columns: repeat(2, 1fr); /* 그리드 레이아웃을 두 개의 열로 설정 */
             }
             .menu-item img {
@@ -228,9 +239,9 @@
                 font-size: 15px; /* 버튼 텍스트 크기를 15px로 줄임 */
             }
             input[type="number"] {
-                width: 30px; /* 숫자 입력창의 너비를 30px로 줄임 */
-                padding: 6px; /* 입력창의 패딩을 조금 줄임 */
-                font-size: 14px; /* 입력창의 글자 크기를 14px로 줄임 */
+                width: 20px; /* 숫자 입력창의 너비를 30px로 줄임 */
+                padding: 4px; /* 입력창의 패딩을 조금 줄임 */
+                font-size: 12px; /* 입력창의 글자 크기를 14px로 줄임 */
             }
         }
                 /* 모달 백그라운드 스타일 */.modal {
