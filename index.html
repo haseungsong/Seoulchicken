@@ -2,6 +2,7 @@
 <html lang="pt"> <!-- 문서의 언어를 한국어로 설정 -->
 <head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
     <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
@@ -36,6 +37,11 @@
             flex-direction: column; /* 요소들을 세로로 배치 */
             align-items: center; /* 요소들을 가운데 정렬 */
             background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
+        }
+        .order-section button {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
         }
         .menu, .reservation-form {
             padding: 20px; /* 내부에 20px 패딩 추가 */
@@ -215,9 +221,76 @@
                 font-size: 14px; /* 입력창의 글자 크기를 14px로 줄임 */
             }
         }
+                /* 모달 백그라운드 스타일 */.modal {
+            display: none; /* 기본적으로 숨김 처리 */
+            position: fixed; /* 화면에 고정 */
+            z-index: 1000; /* 다른 요소보다 위에 표시 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* 반투명 검정 배경 */
+        }
+
+        /* 모달 내부 이미지 스타일 */.modal-content {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* 닫기 버튼 스타일 */.close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 추가 */
+            padding: 5px; /* 버튼에 약간의 패딩 추가 */
+            color: white; /* 텍스트 색상을 흰색으로 설정 */
+            font-size: 35px;
+            font-weight: bold;
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+            cursor: pointer;
+            z-index: 1001; /* 모달보다 위에 표시되도록 설정 */
+        }
+
+        .close:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 배경색을 더 어둡게 변경 */
+        }
+
     </style>
 
     <script>
+
+        // DOM이 로드되면 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 메뉴 1에서 7의 이미지 요소 선택
+            const menuImages = document.querySelectorAll('.menu-item img');
+            const modal = document.getElementById('imageModal'); // 모달 요소 선택
+            const modalImage = document.getElementById('modalImage'); // 모달 내부 이미지 선택
+            const closeBtn = document.querySelector('.close'); // 닫기 버튼 선택
+
+            // 각 이미지에 대해 클릭 이벤트 추가
+            menuImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    modal.style.display = 'block'; // 모달 표시
+                    modalImage.src = this.src; // 클릭된 이미지의 src를 모달 이미지에 설정
+                });
+            });
+
+            // 닫기 버튼 클릭 시 모달 닫기
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none'; // 모달 숨기기
+            });
+
+            // 모달 외부 클릭 시 모달 닫기
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none'; // 모달 숨기기
+                }
+            });
+        });
+
+
         document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
             const languagePack = { /* 다국어 지원을 위한 언어팩 객체 선언 */
                 korean: { /* 한국어 번역 */
@@ -237,7 +310,7 @@
                     'home': 'Home',
                     'menu': 'Menu',
                     'drinks': 'Bebidas',
-                    'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem. Nosso frango crocante e suculento, feito com nossa receita secreta, transmite a paixão de Bong retiro.',
+                    'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem. Nosso frango crocante e suculento, feito com nossa receita secreta, transmite a paixão de Bom retiro.',
                     'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
                 }
             };
@@ -584,8 +657,12 @@
         
         <div class="order-section"> <!-- 주문 섹션 -->
             <span id="total-amount" data-key="totalAmount">Total: 0원</span> <!-- 총 금액 표시 -->
-            <button id="order-button">Pedido</button> <!-- 주문 버튼 -->
-            <button id="cancel-button">Cancela</button> <!-- 취소 버튼 -->
+            <button id="order-button">
+                <i class="fas fa-shopping-cart"></i> <!-- Shopping cart icon for "Pedido" -->
+            </button>
+            <button id="cancel-button">
+                <i class="fas fa-times"></i> <!-- Close icon for "Cancela" -->
+            </button></div>
         </div>
     </nav>
 
@@ -799,5 +876,10 @@
 
         });
     </script>
+
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span> <!-- 닫기 버튼 -->
+            <img class="modal-content" id="modalImage"> <!-- 모달 내부 이미지 -->
+        </div>
 </body>
 </html>
