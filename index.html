@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
-    <style> <!-- 내장 스타일 시트 시작 -->
+    <style> 
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
         body {
             font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
@@ -304,20 +304,15 @@
             });
 
             function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
-                let totalAmount = 0; /* 총 금액을 0으로 초기화 */
-                const totalPriceElements = document.querySelectorAll('.total-price'); /* 모든 총 가격 요소 선택 */
-                if (totalPriceElements) { /* 총 가격 요소들이 있으면 */
-                    totalPriceElements.forEach(priceElement => { /* 각 요소에 대해 반복 */
-                        totalAmount += parseInt(priceElement.textContent); /* 총 금액에 요소의 금액 추가 */
-                    });
-                    const totalAmountDisplay = document.getElementById('total-amount'); /* 총 금액 표시 요소 선택 */
-                    if (totalAmountDisplay) { /* 총 금액 표시 요소가 있으면 */
-                        totalAmountDisplay.textContent = `Total: R$${totalAmount}`; /* 총 금액 표시 업데이트 */
-                    }
-                }
-            }
+            let totalAmount = 0; /* 총 금액을 0으로 초기화 */
+            document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소에 대해 반복 */
+                totalAmount += parseInt(priceElement.textContent); /* 총 금액에 각 요소의 금액 추가 */
+            });
+            const formattedTotalAmount = `Total amount: ${totalAmount} won`; /* 총 금액을 포맷팅 */
+            document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
+            updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
+        }
 
-            updateTotalAmount(); /* 초기 총 금액 업데이트 */
         });
     </script>
     
@@ -369,125 +364,212 @@
         });
     </script>
 
-    <script>
-        document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
-            const orderButton = document.getElementById('order-button'); /* 주문 버튼 선택 */
-            const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
-                    orderDetails.push(`${name}: ${quantity}개`); /* 주문 내역에 추가 */
+        <script>
+            // DOM이 완전히 로드된 후에 실행
+            document.addEventListener('DOMContentLoaded', function() {
+                // 주문 버튼을 선택하고 클릭 이벤트 리스너 추가
+                const orderButton = document.getElementById('order-button');
+                if (orderButton) {  // 요소가 존재하는지 확인
+                    orderButton.addEventListener('click', function() {
+                        const orderDetails = [];  // 주문 상세 정보를 저장할 배열
+                        // 모든 메뉴 및 음료 항목을 반복 처리
+                        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                            const name = item.querySelector('p').textContent;  // 항목 이름 가져오기
+                            const quantity = item.querySelector('input[type=number]').value;  // 항목 수량 가져오기
+                            if (parseInt(quantity) > 0) {  // 수량이 0보다 클 경우
+                                orderDetails.push(`${name}: ${quantity} items`);  // 주문 상세 정보에 추가
+                            }
+                        });
+
+                        if (orderDetails.length > 0) {  // 주문 상세 정보가 있으면
+                            document.getElementById('order-list').innerHTML = orderDetails.join('<br>');  // 모달 창에 주문 내역 표시
+                            document.getElementById('order-modal').style.display = 'block';  // 모달 창 표시
+                        } else {  // 주문 내역이 없으면
+                            alert('주문할 메뉴를 선택해 주세요.');  // 경고 메시지 표시
+                        }
+                    });
+                }
+
+                // 주문 확인 함수
+                function confirmOrder() {
+                    alert('주문이 완료되었습니다!');  // 주문 완료 메시지 표시
+                    closeModal();  // 모달 창 닫기 함수 호출
+                }
+
+                // 모달 창 닫기 함수
+                function closeModal() {
+                    document.getElementById('order-modal').style.display = 'none';  // 모달 창 숨기기
+                }
+
+                // 확인 버튼에도 이벤트 리스너를 추가해야 한다면, 여기서 추가
+                const confirmButton = document.getElementById('confirm-button');
+                if (confirmButton) {
+                    confirmButton.addEventListener('click', confirmOrder);  // 주문 확인 버튼에 클릭 이벤트 리스너 추가
+                }
+
+                const closeButton = document.getElementById('close-modal-button');
+                if (closeButton) {
+                    closeButton.addEventListener('click', closeModal);  // 모달 창 닫기 버튼에 클릭 이벤트 리스너 추가
                 }
             });
+        </script>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 주문 버튼을 선택하고 클릭 이벤트 리스너 추가
+                const orderButton = document.getElementById('order-button');
+                if (orderButton) {  // 요소가 존재하는지 확인
+                    orderButton.addEventListener('click', function() { /* 주문 버튼이 클릭되었을 때 이벤트 추가 */
+                        const orderDetails = []; /* 주문 상세 정보를 저장할 배열 */
+                        
+                        // 모든 메뉴 및 음료 항목을 반복 처리
+                        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                            const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
+                            const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
+                            if (parseInt(quantity) > 0) { /* 수량이 0보다 클 경우 */
+                                orderDetails.push(`<li>${name}: ${quantity}</li>`); /* 주문 상세 정보를 목록 항목 형식으로 추가 */
+                            }
+                        });
+                
+                        if (orderDetails.length > 0) { /* 주문 상세 정보가 있으면 */
+                            document.getElementById('order-list').innerHTML = orderDetails.join(''); /* 모달 창에 주문 내역 표시 */
+                            document.getElementById('order-modal').style.display = 'block'; /* 모달 창 표시 */
+                        } else { /* 주문 내역이 없으면 */
+                            alert('주문할 메뉴를 선택해 주세요.'); /* 경고 메시지 표시 */
+                        }
+                    });
+                }
+        
+                // 총 금액 업데이트 함수
+                function updateTotalAmount() {
+                    let totalAmount = 0; /* 총 금액을 0으로 초기화 */
+                    document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소를 반복 처리 */
+                        totalAmount += parseInt(priceElement.textContent); /* 각 요소의 금액을 총 금액에 더하기 */
+                    });
+                    const formattedTotalAmount = `총 금액: ${totalAmount} 원`; /* 총 금액 형식화 */
+                    document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
+                    updateModalTotalAmount(formattedTotalAmount); /* 모달 창에서 금액 업데이트 */
+                }
+        
+                // 모달 창에서 총 금액 업데이트 함수
+                function updateModalTotalAmount(totalAmountText) { /* 모달 창 내 총 금액을 업데이트하는 함수 */
+                document.getElementById('modal-total').textContent = totalAmountText; /* 모달 창 내 총 금액 표시 업데이트 */
+                }
+        
+                // 모달 창 닫기 버튼 및 확인 버튼에 이벤트 리스너 추가
+                const confirmButton = document.getElementById('confirm-button');
+                if (confirmButton) {
+                    confirmButton.addEventListener('click', function() {
+                        alert('주문이 완료되었습니다!');  // 주문 완료 메시지 표시
+                        closeModal();  // 모달 창 닫기 함수 호출
+                    });
+                }
+        
+                const closeButton = document.getElementById('close-modal-button');
+                if (closeButton) {
+                    closeButton.addEventListener('click', closeModal);  // 모달 창 닫기 버튼에 클릭 이벤트 리스너 추가
+                }
+        
+                // 모달 창 닫기 함수
+                function closeModal() {
+                    document.getElementById('order-modal').style.display = 'none';  // 모달 창 숨기기
+                }
+            });
+        </script>    
 
-            if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
-                document.getElementById('order-list').innerHTML = orderDetails.join('<br>'); /* 주문 내역을 모달 창에 표시 */
-                document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
-            } else { /* 주문 내역이 없으면 */
-                alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
+    <script>
+    // 주문 데이터를 Firebase에 전송하는 함수
+    function sendOrderData() {
+        var orderDetails = [];
+    
+        // Get the table number from the input field
+        var tableNumber = document.getElementById('table-number').value; // Ensure this matches your table number input field ID
+    
+        // Collect order details
+        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+            const name = item.querySelector('p').textContent;
+            const quantity = item.querySelector('input[type=number]').value;
+            if (parseInt(quantity) > 0) {
+                orderDetails.push({ name: name, quantity: quantity });
             }
         });
-
-        function confirmOrder() { /* 주문을 확정하는 함수 */
-            alert('주문이 완료되었습니다!'); /* 주문 완료 메시지 표시 */
-            closeModal(); /* 모달 창 닫기 함수 호출 */
-        }
-
-        function closeModal() { /* 모달 창을 닫는 함수 */
-            document.getElementById('order-modal').style.display = 'none'; /* 모달 창 숨기기 */
-        }
-    </script>  
-        
-    <script>
-        document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
-            const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
-                    orderDetails.push(`<li>${name}: ${quantity}개</li>`); /* 주문 내역을 리스트 아이템 형식으로 추가 */
-                }
-            });
-        
-            if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
-                document.getElementById('order-list').innerHTML = orderDetails.join(''); /* 주문 내역을 모달 창에 표시 */
-                document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
-            } else { /* 주문 내역이 없으면 */
-                alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
-            }
+    
+        // Get the total amount from the modal
+        var totalAmount = document.getElementById('modal-total').textContent;
+    
+        // Send the data to Firebase with the new order
+        firebase.database().ref('orders').push({
+            timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // Send timestamp first
+            tableNumber: tableNumber, // Send table number second
+            orderList: orderDetails, // Send order details third
+            totalAmount: totalAmount // Send total amount last
+        }).then(() => {
+            alert('주문이 성공적으로 처리되었습니다.');
+            closeModal();
+        }).catch(error => {
+            console.error("Error sending order data:", error);
+            alert('주문 처리 중 오류가 발생했습니다: ' + error.message);
         });
-
-        function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
-            let totalAmount = 0; /* 총 금액을 0으로 초기화 */
-            document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소에 대해 반복 */
-                totalAmount += parseInt(priceElement.textContent); /* 총 금액에 각 요소의 금액 추가 */
-            });
-            const formattedTotalAmount = `Total amount: ${totalAmount} won`; /* 총 금액을 포맷팅 */
-            document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
-            updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
-        }
-
-        function updateModalTotalAmount(totalAmountText) { /* 모달 창 내 총 금액을 업데이트하는 함수 */
-            document.getElementById('modal-total').textContent = totalAmountText; /* 모달 창 내 총 금액 표시 업데이트 */
-        }
-
-        function sendOrderData() { /* 주문 데이터를 전송하는 함수 */
-            var orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
-                    orderDetails.push({name: name, quantity: quantity}); /* 주문 내역을 객체 형식으로 배열에 추가 */
-                }
-            });
-            var totalAmount = document.getElementById('modal-total').textContent; /* 모달 창 내 총 금액 가져오기 */
-
-            var url = "https://script.google.com/macros/s/AKfycbwn3Ii8IRYWLBfenKUQjIvshszDDBH8X3yi272EEXoW0xcZ98txq21ZJLze0_jKdt4C/exec"; /* Google Apps Script URL 설정 */
-
-            var requestBody = JSON.stringify({
-                orderList: orderDetails, /* 주문 내역을 JSON 형식으로 변환 */
-                totalAmount: totalAmount /* 총 금액 추가 */
-            });
-
-            fetch(url, { /* fetch API를 사용해 POST 요청 전송 */
-                method: 'POST', /* HTTP 메서드를 POST로 설정 */
-                headers: { /* 요청 헤더 설정 */
-                    'Content-Type': 'application/json' /* 요청 본문의 콘텐츠 타입을 JSON으로 설정 */
-                },
-                body: requestBody /* 요청 본문에 JSON 데이터 전송 */
-            })
-            .then(response => response.json()) /* 응답을 JSON 형식으로 변환 */
-            .then(data => { /* 성공 시 실행 */
-                console.log("Order processed:", data); /* 콘솔에 처리된 주문 내역 출력 */
-                alert('주문이 성공적으로 처리되었습니다.'); /* 성공 메시지 표시 */
-                closeModal(); /* 모달 창 닫기 함수 호출 */
-            })
-            .catch(error => { /* 오류 발생 시 실행 */
-                console.error("Error sending order data:", error); /* 콘솔에 오류 메시지 출력 */
-                alert('주문 처리 중 오류가 발생했습니다: ' + error.message); /* 오류 메시지 표시 */
-            });
-        }
-
-        function closeModal() { /* 모달 창을 닫는 함수 */
-            document.getElementById('order-modal').style.display = 'none'; /* 모달 창 숨기기 */
-        }
-    </script>  
+    }
+    
+    // 모달 창을 닫는 함수
+    function closeModal() {
+        document.getElementById('order-modal').style.display = 'none';
+    }
+    </script>
+    
 
     <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;"> <!-- 주문 확인 모달 창 -->
         <div style="background:#FFF; width:60%; margin:50px auto; padding:20px; border-radius:10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> <!-- 모달 창 안의 내용 -->
             <h2>Order Confirmation</h2> <!-- 주문 확인 제목 -->
-            <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;"> <!-- 주문 내역을 표시할 리스트 -->
-            </ul>
-            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div> <!-- 모달 창 내 총 금액 표시 -->
             
-            <form id="orderForm" onsubmit="sendOrderData(); return false;"> <!-- 주문 데이터를 전송하는 폼 -->
+            <!-- 주문 내역을 표시할 리스트 -->
+            <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
+            </ul>
+            
+            <!-- Table Number Input Field (Moved above the total amount) -->
+            <div style="margin-bottom: 20px;">
+                <label for="table-number">Table Number:</label>
+                <input type="number" id="table-number" name="table-number" min="1" required>
+            </div>
+
+            <!-- 모달 창 내 총 금액 표시 -->
+            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
+
+            <!-- 주문 데이터를 전송하는 폼 -->
+            <form id="orderForm" onsubmit="sendOrderData(); return false;">
                 <button type="submit">Order completed</button> <!-- 주문 완료 버튼 -->
             </form>
                             
             <button onclick="closeModal()">Close</button> <!-- 모달 창 닫기 버튼 -->
         </div>
+    
     </div>
+
+
+       <!-- Firebase SDK 추가 (8.x 버전) -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+   
+       <script>
+       // Firebase 프로젝트 설정 정보
+       const firebaseConfig = {
+           apiKey: "AIzaSyBltwkIkocgAMya7_lKglLVikl9dIzegoI",
+           authDomain: "seoulchicken-fa390.firebaseapp.com",
+           databaseURL: "https://seoulchicken-fa390-default-rtdb.firebaseio.com",
+           projectId: "seoulchicken-fa390",
+           storageBucket: "seoulchicken-fa390.appspot.com",
+           messagingSenderId: "159382576680",
+           appId: "1:159382576680:web:8d5440ea41ba4cb89d9f1d",
+           measurementId: "G-FRCNM1T9JB"
+       };
+   
+       // Firebase 초기화
+       firebase.initializeApp(firebaseConfig);
+   
+       // Firebase Realtime Database 참조 설정
+       const database = firebase.database();
+       </script>
 
 </head>
 <body> <!-- 본문 시작 -->
@@ -657,57 +739,62 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-            const orderButton = document.getElementById('order-button'); /* 주문 버튼 선택 */
-            const cancelButton = document.getElementById('cancel-button'); /* 취소 버튼 선택 */
-            const modal = document.getElementById('order-modal'); /* 모달 창 선택 */
-            const orderList = document.getElementById('order-list'); /* 주문 내역 리스트 선택 */
-            const totalAmountDisplay = document.getElementById('total-amount'); /* 총 금액 표시 선택 */
+        document.addEventListener('DOMContentLoaded', function() { 
+            const orderButton = document.getElementById('order-button');
+            const cancelButton = document.getElementById('cancel-button');
+            const modal = document.getElementById('order-modal');
+            const orderList = document.getElementById('order-list');
+            const totalAmountDisplay = document.getElementById('total-amount');
 
-            function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
-                let totalAmount = 0; /* 총 금액을 0으로 초기화 */
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); /* 수량 가져오기 */
-                    const pricePerItemElement = item.querySelector('.price-per-item'); /* 가격 요소 선택 */
-                    if (pricePerItemElement) { /* 가격 요소가 있으면 */
-                        const pricePerItem = parseInt(pricePerItemElement.textContent); /* 가격 가져오기 */
-                        totalAmount += quantity * pricePerItem; /* 총 금액에 수량 * 가격 추가 */
-                    } else { /* 가격 요소가 없으면 오류 메시지 출력 */
+            // Define updateModalTotalAmount before it is called
+            function updateModalTotalAmount(totalAmountText) {
+                document.getElementById('modal-total').textContent = totalAmountText;
+            }
+
+            function updateTotalAmount() { 
+                let totalAmount = 0; 
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
+                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
+                    const pricePerItemElement = item.querySelector('.price-per-item'); 
+                    if (pricePerItemElement) { 
+                        const pricePerItem = parseInt(pricePerItemElement.textContent); 
+                        totalAmount += quantity * pricePerItem; 
+                    } else { 
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                const formattedTotalAmount = `Total: ${totalAmount}`; /* 총 금액을 포맷팅 */
-                totalAmountDisplay.textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
-                updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
+                const formattedTotalAmount = `Total: ${totalAmount}`; 
+                totalAmountDisplay.textContent = formattedTotalAmount; 
+                updateModalTotalAmount(formattedTotalAmount); 
             }
 
-            orderButton.addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
-                orderList.innerHTML = ''; /* 주문 내역 초기화 */
-                let hasItems = false; /* 주문 항목이 있는지 여부를 확인하는 변수 */
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); /* 수량 가져오기 */
-                    if (quantity > 0) { /* 수량이 0보다 크면 */
-                        hasItems = true; /* 주문 항목이 있음을 표시 */
-                        const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                        const price = item.querySelector('.price-per-item').textContent; /* 가격 가져오기 */
-                        const itemTotal = quantity * parseInt(price); /* 항목 총 금액 계산 */
-                        const listItem = document.createElement('li'); /* 리스트 아이템 생성 */
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`; /* 리스트 아이템 내용 설정 */
-                        orderList.appendChild(listItem); /* 리스트에 추가 */
+            orderButton.addEventListener('click', function() { 
+                orderList.innerHTML = ''; 
+                let hasItems = false; 
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
+                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
+                    if (quantity > 0) { 
+                        hasItems = true; 
+                        const name = item.querySelector('p').textContent; 
+                        const price = item.querySelector('.price-per-item').textContent; 
+                        const itemTotal = quantity * parseInt(price); 
+                        const listItem = document.createElement('li'); 
+                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`; 
+                        orderList.appendChild(listItem); 
                     }
                 });
 
-                if (hasItems) { /* 주문 항목이 있으면 */
-                    modal.style.display = 'block'; /* 모달 창 표시 */
-                } else { /* 주문 항목이 없으면 */
-                    alert('주문할 메뉴를 선택해주세요.'); /* 경고 메시지 표시 */
+                if (hasItems) { 
+                    modal.style.display = 'block'; 
+                } else { 
+                    alert('주문할 메뉴를 선택해주세요.'); 
                 }
-                updateTotalAmount(); /* 전체 금액 업데이트 */
+                updateTotalAmount(); 
             });
 
-            cancelButton.addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
-                modal.style.display = 'none'; /* 모달 창 숨기기 */
-                updateTotalAmount(); /* 전체 금액 업데이트 */
+            cancelButton.addEventListener('click', function() { 
+                modal.style.display = 'none'; 
+                updateTotalAmount(); 
             });
 
         });
