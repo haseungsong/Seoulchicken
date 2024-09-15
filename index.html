@@ -60,9 +60,8 @@
             background-color: #F7F7F7;
         }
         .order-section button {
-            flex: 1; /* 각 버튼이 동일한 너비를 차지하도록 설정 */
-            max-width: 40px; /* 최대 너비를 40px로 설정 */
-            height: 40px; /* 높이는 40px로 동일하게 설정 */
+            width: 40px; /* 버튼의 너비를 40px로 설정 */
+            height: 40px; /* 버튼의 높이를 40px로 설정 */
             font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
             display: flex; /* Flexbox 레이아웃 사용 */
             align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
@@ -73,7 +72,6 @@
             border-radius: 5px; /* 모서리를 둥글게 설정 */
             cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
             transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-            margin: 0 5px; /* 버튼 사이에 일정한 간격 추가 */
         }
         .menu-item img, .drink-item img {
             width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
@@ -210,7 +208,7 @@
         .order-section {
             display: flex; /* 요소들을 Flexbox로 배치 */
             align-items: center; /* 요소들을 수직으로 가운데 정렬 */
-            justify-content: space-between; /* 버튼을 양쪽 끝에 배치 */
+            justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
         }
         @media (max-width: 600px) { /* 화면 너비가 600px 이하일 때 적용 */
 
@@ -234,7 +232,7 @@
             }
 
             button {
-                padding: 6px 6px; /* 버튼의 크기 줄이기 */
+                padding: 6px ; /* 버튼의 크기 줄이기 */
                 font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
             }
         }
