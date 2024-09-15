@@ -7,7 +7,7 @@
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
-        .menu {
+        .menu, .drink-menu {
             padding: 20px;
             width: 100%;
             max-width: 800px;
@@ -16,16 +16,21 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
             gap: 10px;
             box-sizing: border-box;
-            justify-items: start; /* Ensure grid items align to the start (left) */
-            align-items: start; /* Ensure items are aligned at the top */
+            justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
+            align-items: start; /* 그리드 항목을 상단 정렬 */
+            grid-auto-flow: row dense; 
         }
-        .menu-item {
+        .menu-item, .drink-item {
             text-align: center;
-            width: 100%; /* Ensure menu items take up the full width of the grid column */
+            width: 100%; /* 메뉴 및 음료 항목이 그리드 열 전체를 차지하도록 설정 */
+            grid-column: auto / span 1; /* 그리드 열을 한 칸만 차지 */
+            margin: 0; /* 불필요한 마진 제거 */
+            padding: 0; /* 불필요한 패딩 제거 */
         }
+
         body {
             font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
             margin: 0; /* 기본 여백 없앰 */
@@ -69,26 +74,16 @@
             transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
         }
         .menu-item img, .drink-item img {
-            width: 100%; /* 이미지의 너비를 요소에 맞춤 */
-            height: 200px; /* 이미지의 높이를 200px로 설정 */
-            object-fit: cover; /* 이미지를 요소 안에 꽉 차게 표시 */
-            border-radius: 10px; /* 이미지의 모서리를 10px 둥글게 설정 */
+            width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
+            height: auto; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 */
+            object-fit: cover; /* 이미지가 그리드 영역을 꽉 채우면서 비율을 유지 */
+            max-width: 100%; /* 최대 너비를 100%로 설정 */
+            border-radius: 10px; /* 이미지를 둥글게 설정 (선택 사항) */
         }
         .menu-item span.price-per-item, .drink-item span.price-per-item {
             margin-right: 10px; /* 요소 오른쪽에 10px 여백 추가 */
             font-weight: bold; /* 텍스트를 굵게 표시 */
             color: #FF6F61; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
-        }
-        .drink-menu {
-            padding-top: 40px; /* 추가할 패딩 공간 */
-            /* 또는 */
-            margin-top: 40px; /* 추가할 여백 공간 */
-            display: grid; /* 그리드 레이아웃 사용 */
-            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
-            gap: 10px; /* 그리드 아이템 간격을 10px로 설정 */
-        }
-        .drink-item {
-            width: 100%; /* 음료 항목의 너비를 100%로 설정 */
         }
         button {
             background-color: #FF6F61; /* 버튼의 배경색을 연한 빨강으로 설정 */
@@ -217,31 +212,28 @@
         }
         @media (max-width: 600px) { /* 화면 너비가 600px 이하일 때 적용 */
 
-            .menu {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 그리드 설정 */
-                gap: 10px; /* 각 항목 사이의 간격 설정 */
-                justify-items: start; /* 그리드 항목을 왼쪽에 정렬 */
-                align-items: start; /* 그리드 항목을 상단에 정렬 */
+            nav a {
+                font-size: 14px; /* 네비게이션 텍스트 크기를 작게 조정 */
+                padding: 8px; /* 패딩을 줄여 모바일 화면에 맞추기 */
             }
 
-            #drinks .menu {
-                grid-template-columns: repeat(2, 1fr); /* 그리드 레이아웃을 두 개의 열로 설정 */
+            .introduction h1 { 
+                font-size: 22px; /* 홈 섹션의 제목 크기를 작게 조정 */
             }
-            #menu-item {
-                grid-template-columns: repeat(2, 1fr); /* 그리드 레이아웃을 두 개의 열로 설정 */
+
+            .introduction p {
+                font-size: 14px; /* 홈 섹션의 소개 문구 글자 크기를 줄임 */
+                padding: 10px; /* 패딩을 줄여 모바일에서 내용이 잘 보이게 조정 */
             }
-            .menu-item img {
-                height: 150px; /* 메뉴 이미지의 높이를 150px로 줄임 */
-            }
-            button {
-                padding: 13px 15px; /* 버튼의 패딩을 조금 줄임 */
-                font-size: 15px; /* 버튼 텍스트 크기를 15px로 줄임 */
-            }
+        
             input[type="number"] {
-                width: 20px; /* 숫자 입력창의 너비를 30px로 줄임 */
-                padding: 4px; /* 입력창의 패딩을 조금 줄임 */
-                font-size: 12px; /* 입력창의 글자 크기를 14px로 줄임 */
+                width: 40px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
+                padding: 6px;
+            }
+
+            button {
+                padding: 10px; /* 버튼 크기를 줄여 모바일에 맞게 조정 */
+                font-size: 14px; /* 버튼 글자 크기를 작게 조정 */
             }
         }
                 /* 모달 백그라운드 스타일 */.modal {
@@ -280,24 +272,27 @@
             background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 배경색을 더 어둡게 변경 */
         }
         
-        /* 메뉴 섹션과 음료 섹션의 스타일 조정 */.menu, .drink-menu {
-            width: 100%; /* 전체 화면 너비에 맞춤 */
-            padding: 10px; /* 내부 패딩 설정 */
-            box-sizing: border-box; /* 패딩 포함한 박스 크기 설정 */
-            overflow-x: hidden; /* 가로 스크롤 제거 */
+        .drink-menu {
+            padding: 20px;
+            width: 100%;5
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
+            gap: 10px;
+            box-sizing: border-box;
+            justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
+            align-items: start; /* 그리드 항목을 상단 정렬 */
         }
 
-        /* 메뉴 항목과 음료 항목 스타일 조정 */.menu-item, .drink-item {
-            width: 100%; /* 각 항목이 전체 화면 너비를 차지하도록 설정 */
-            margin-bottom: 20px; /* 아래쪽에 여백 추가 */
+        .drink-item {
+            text-align: center;
+            width: 100%; /* 음료 항목이 그리드 열 전체를 차지하도록 설정 */
         }
 
-        /* 이미지 스타일 조정 */.menu-item img, .drink-item img {
-            width: 100%; /* 이미지가 항목에 맞춰 늘어나도록 설정 */
-            height: auto; /* 이미지 비율 유지 */
-            object-fit: cover; /* 이미지 비율을 유지하면서 요소를 채움 */
-            border-radius: 10px; /* 둥근 모서리 유지 */
-        }
 
     </style>
 
@@ -334,13 +329,19 @@
 
 
         document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+             // 언어 선택 드롭다운에서 선택된 언어에 따라 텍스트 업데이트
+            document.getElementById('language-select').addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                updateLanguage(selectedLanguage); // 선택된 언어로 텍스트 변경
+            });
+            
             const languagePack = { /* 다국어 지원을 위한 언어팩 객체 선언 */
                 korean: { /* 한국어 번역 */
                     'welcome': '서울치킨에 오신걸 환영합니다!',
                     'originalChicken': '오리지널 치킨: 바삭하고 고소함',
                     'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
                     'home': '홈',
-                    'menu': '메뉴',
+                    'menu': '치킨',
                     'drinks': '음료',
                     'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다.',
                     'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
@@ -350,17 +351,14 @@
                     'originalChicken': 'Frango original: crocante e saboroso',
                     'seasonedChicken': 'Frango temperado: doce e picante',
                     'home': 'Home',
-                    'menu': 'Menu',
+                    'menu': 'Chicken',
+                    'K-food': 'K-food',
                     'drinks': 'Bebidas',
                     'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem. Nosso frango crocante e suculento, feito com nossa receita secreta, transmite a paixão de Bom retiro.',
                     'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
                 }
+                
             };
-
-            document.getElementById('language-select').addEventListener('change', function() { /* 언어 선택 변경 시 호출 */
-                updateLanguage(this.value); /* 선택된 언어로 업데이트 */
-                adjustContentPadding(); /* 콘텐츠 패딩 조정 함수 호출 */
-            });
 
             function updateLanguage(language) { /* 선택된 언어로 텍스트를 업데이트하는 함수 */
                 var introductionHeading = document.querySelector('.introduction h1'); /* 소개 섹션의 제목 선택 */
@@ -418,16 +416,21 @@
                 });
             });
 
-            function updateTotalAmount() { /* 전체 금액을 업데이트하는 함수 */
-            let totalAmount = 0; /* 총 금액을 0으로 초기화 */
-            document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소에 대해 반복 */
-                totalAmount += parseInt(priceElement.textContent); /* 총 금액에 각 요소의 금액 추가 */
-            });
-            const formattedTotalAmount = `Total amount: ${totalAmount} won`; /* 총 금액을 포맷팅 */
-            document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
-            updateModalTotalAmount(formattedTotalAmount); /* 모달 창 내 금액 업데이트 */
-        }
+            function updateTotalAmount() { 
+                let totalAmount = 0; 
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
+                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
+                    const pricePerItemElement = item.querySelector('.price-per-item'); 
+                    if (pricePerItemElement) { 
+                        const pricePerItem = parseInt(pricePerItemElement.textContent); 
+                        totalAmount += quantity * pricePerItem; 
+                    }
+                });
 
+                const formattedTotalAmount = `Total: ${totalAmount} R$`; // 항상 R$로 통화 기호 고정
+                document.getElementById('total-amount').textContent = formattedTotalAmount; 
+                updateModalTotalAmount(formattedTotalAmount); 
+            }
         });
     </script>
     
@@ -561,7 +564,7 @@
                     document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소를 반복 처리 */
                         totalAmount += parseInt(priceElement.textContent); /* 각 요소의 금액을 총 금액에 더하기 */
                     });
-                    const formattedTotalAmount = `총 금액: ${totalAmount} 원`; /* 총 금액 형식화 */
+                    const formattedTotalAmount = `총 금액: ${totalAmount} R$`; /* 총 금액 형식화 */
                     document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
                     updateModalTotalAmount(formattedTotalAmount); /* 모달 창에서 금액 업데이트 */
                 }
@@ -690,15 +693,18 @@
 <body> <!-- 본문 시작 -->
     <nav> <!-- 네비게이션 바 -->
         <select id="language-select"> <!-- 언어 선택 드롭다운 -->
-            <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
             <option value="portuguese">Português</option> <!-- 포르투갈어 옵션 -->
+            <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
+
         </select>
-        <a href="#home" data-key="home">홈</a> <!-- 홈 링크 -->
-        <a href="#menu" data-key="menu">메뉴</a> <!-- 메뉴 링크 -->
-        <a href="#drinks" data-key="drinks">음료</a> <!-- 음료 링크 -->
+        <a href="#home" data-key="home">Home</a> <!-- 홈 링크 -->
+        <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
+        <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
+        <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
+
         
         <div class="order-section"> <!-- 주문 섹션 -->
-            <span id="total-amount" data-key="totalAmount">Total: 0원</span> <!-- 총 금액 표시 -->
+            <span id="total-amount" data-key="totalAmount">Total: 0R$</span> <!-- 총 금액 표시 -->
             <button id="order-button">
                 <i class="fas fa-shopping-cart"></i> <!-- Shopping cart icon for "Pedido" -->
             </button>
@@ -716,82 +722,126 @@
             <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p> <!-- 소개 문구 2 -->     
         </div>
         
-        <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/ZsOeLHG2wBE?si=zc6krYWFUgGKb6py" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen
-        style="display:none;"></iframe> <!-- 유튜브 영상 임베드 (현재 숨김 처리) -->
     </section>
 
     <section id="menu" class="content"> <!-- 메뉴 섹션 -->
         <div class="menu"> <!-- 메뉴 리스트 -->
-            <h2></h2> <!-- 메뉴 제목 (비어 있음) -->
             <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
                 <p>Original chicken: crispy and crunchy</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
+            
             <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
                 <p>양념치킨: 설명부분은 알아서 넣고</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
+            
             <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
                 <p>메뉴 3: 설명</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">65</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity3" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
+            
             <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
                 <p>메뉴 4: 설명</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">75</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity4" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
+            
             <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
                 <p>메뉴 5: 설명</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity5" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
+            
             <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
                 <p>메뉴 6: 설명</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
+                <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
                 <button type="button">+</button> <!-- 수량 증가 버튼 -->
                 <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
             </div>
-            <div class="menu-item" id="menu7"> <!-- 메뉴 항목 7 -->
-                <p>메뉴 7: 설명</p> <!-- 메뉴 설명 -->
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 7 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
+            
         </div>
     </section>
+
+        <section id="K-food" class="content"> <!-- K-food 섹션 -->
+            <div class="menu"> <!-- K-food 리스트 -->
+                <div class="menu-item" id="k-food1"> <!-- K-food 항목 1 -->
+                    <p>Kimchi: Fermented vegetables with a kick</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample1.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
+                    <span class="price-per-item">25</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+        
+                <div class="menu-item" id="k-food2"> <!-- K-food 항목 2 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                    <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="k-food3"> <!-- K-food 항목 2 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                    <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                                
+                <div class="menu-item" id="k-food4"> <!-- K-food 항목 2 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                    <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+
+                <div class="menu-item" id="k-food5"> <!-- K-food 항목 2 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                    <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+            </div>
+        </section>
 
     <div id="drinks" class="content"> <!-- 음료 섹션 -->
         <div class="drink-menu"> <!-- 음료 리스트 -->
@@ -850,9 +900,9 @@
                     input.value = 0; /* 입력값을 0으로 초기화 */
                 });
                 document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
-                    total.textContent = '0원'; /* 총 가격을 0원으로 초기화 */
+                    total.textContent = '0R$'; /* 총 가격을 0원으로 초기화 */
                 });
-                document.getElementById('total-amount').textContent = '총금액: 0원'; /* 총 금액 표시를 0원으로 초기화 */
+                document.getElementById('total-amount').textContent = '총금액: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
             });
         });
     </script>
@@ -882,7 +932,7 @@
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                const formattedTotalAmount = `Total: ${totalAmount}`; 
+                const formattedTotalAmount = `Total: ${totalAmount} R$`; // 총 금액을 R$로 표시
                 totalAmountDisplay.textContent = formattedTotalAmount; 
                 updateModalTotalAmount(formattedTotalAmount); 
             }
@@ -898,7 +948,7 @@
                         const price = item.querySelector('.price-per-item').textContent; 
                         const itemTotal = quantity * parseInt(price); 
                         const listItem = document.createElement('li'); 
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}원`; 
+                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`; 
                         orderList.appendChild(listItem); 
                     }
                 });
