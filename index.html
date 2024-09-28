@@ -772,7 +772,7 @@
         <div class="menu"> <!-- 메뉴 리스트 -->
             <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
                 <p>Original chicken: crispy and crunchy</p> <!-- 메뉴 설명 -->
-                <img src="https://i.imgur.com/bv4CmsY.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
+                <img src="https://i.imgur.com/KbqNb4d.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
                 <button type="button">-</button> <!-- 수량 감소 버튼 -->
                 <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
@@ -1017,5 +1017,61 @@
             <span class="close">&times;</span> <!-- 닫기 버튼 -->
             <img class="modal-content" id="modalImage"> <!-- 모달 내부 이미지 -->
         </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
+            let currentImageIndex = 0;
+    
+            // Menu images array (for multiple images)
+            const menuImages = [
+                'https://i.imgur.com/KbqNb4d.jpeg',
+                'https://i.imgur.com/PquPt3O.jpeg'
+            ];
+    
+            // Open modal when image is clicked
+            document.querySelectorAll('.menu-item img').forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    currentImageIndex = index;
+                    modal.style.display = 'block';
+                    modalImage.src = menuImages[currentImageIndex];
+                });
+            });
+    
+            // Close modal
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+    
+            // Next image
+            document.querySelector('.next').addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % menuImages.length;
+                modalImage.src = menuImages[currentImageIndex];
+            });
+    
+            // Previous image
+            document.querySelector('.prev').addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex - 1 + menuImages.length) % menuImages.length;
+                modalImage.src = menuImages[currentImageIndex];
+            });
+    
+            // Close modal when clicking outside of the image
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
