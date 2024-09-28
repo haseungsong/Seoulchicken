@@ -110,29 +110,50 @@
         }
         .introduction {
             text-align: center; /* 텍스트를 가운데 정렬 */
-            padding: 20px; /* 내부에 20px 패딩 추가 */
-            margin-top: 20px; /* 요소의 위쪽에 20px 여백 추가 */
+            padding: 20px; /* 패딩을 추가 */
+            margin-top: 20px; /* 상단에 여백 추가 */
+            background-image: url('https://i.imgur.com/JLLD580.jpeg'); /* 배경 이미지 설정 */
+            background-size: cover; /* 배경 이미지를 화면에 맞게 확장, 비율 유지 */
+            background-position: center; /* 배경 이미지 중앙 정렬 */
+            background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
+            height: 100vh; /* 화면의 높이를 100%로 설정 */
+            display: flex;
+            flex-direction: column; /* 텍스트를 세로 방향으로 정렬 */
+            justify-content: flex-start; /* 텍스트를 수직으로 가운데 정렬 */
+            align-items: center; /* 텍스트를 가로로 가운데 정렬 */
         }
-        .introduction h1 {
-            color: #FF6F61; /* 제목 색상을 연한 빨강으로 설정 */
-            padding-top: 10px; /* 상단에 10px 패딩 추가 */
-            margin-top: 0; /* 상단 여백 없앰 */
-            line-height: 1.4; /* 줄 간격을 1.4로 설정 */
-        }
-        .introduction p {
-            font-size: 16px; /* 본문 글자 크기를 16px로 설정 */
-            color: #666; /* 글자색을 중간 회색으로 설정 */
-            letter-spacing: 0.05em; /* 글자 간격을 약간 넓게 설정 */
-            word-spacing: 0.1em; /* 단어 간격을 약간 넓게 설정 */
+
+        .introduction-content {
+            position: absolute; /* 텍스트를 절대 위치로 설정 */
+            color: white; /* 텍스트 색상을 흰색으로 설정 */
+            background-color: rgba(0, 0, 0, 0.5); /* 텍스트 배경을 반투명 검정색으로 설정하여 가독성 향상 */
+            padding: 10px; /* 텍스트와 배경 사이에 여백 추가 */
+            border-radius: 5px; /* 모서리를 둥글게 처리 */
+            max-width: 90%; /* 텍스트 박스가 너무 넓어지지 않도록 제한 */
             text-align: center; /* 텍스트를 가운데 정렬 */
-            margin: 10px auto; /* 요소 위아래에 10px 여백, 좌우 가운데 정렬 */
-            max-width: 800px; /* 최대 너비를 800px로 제한 */
-            line-height: 1.8; /* 줄 간격을 1.8로 설정 */
-            font-weight: 400; /* 글자 두께를 기본 설정으로 유지 */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* 텍스트에 그림자 효과 추가 */
-            background-color: rgba(255, 255, 255, 0.8); /* 반투명 흰색 배경 추가 */
-            padding: 10px; /* 내부에 10px 패딩 추가 */
-            border-radius: 5px; /* 모서리를 5px 둥글게 설정 */
+        }
+
+
+        @media (max-width: 768px) {
+            .introduction {
+                height: 300px; /* 모바일에서는 섹션 높이를 더 줄여서 텍스트와 이미지가 한 화면에 보이도록 설정 */
+                background-size: contain; /* 모바일에서는 배경 이미지가 잘리지 않도록 조정 */
+            }
+            
+            .introduction-content {
+                font-size: 14px; /* 모바일에서 글씨 크기를 조금 더 작게 조정 */
+                padding: 5px; /* 모바일에서는 패딩을 줄여서 텍스트 박스 크기를 조정 */
+            }
+        }
+        .introduction h1,
+        .introduction p {
+            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+            color: white; /* 텍스트 색상을 흰색으로 설정 */
+            padding: 10px; /* 텍스트 주변 여백 */
+            border-radius: 5px; /* 모서리를 둥글게 처리 */
+            max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
         }
         #order-button, #cancel-button {
             float: right; /* 버튼을 오른쪽으로 배치 */
@@ -216,21 +237,23 @@
                 font-size: 14px; /* 네비게이션 텍스트 크기를 작게 조정 */
                 padding: 8px; /* 패딩을 줄여 모바일 화면에 맞추기 */
             }
-
-            .introduction h1 { 
-                font-size: 22px; /* 홈 섹션의 제목 크기를 작게 조정 */
+            .introduction {
+                background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
+                height: 100vh; /* 화면의 높이를 100%로 설정 */
             }
-
+            .introduction h1,
+            .introduction p {
+                font-size: 14px; /* 모바일에서 텍스트 크기를 줄임 */
+                padding: 8px; /* 패딩을 조금 줄여서 화면에 맞춤 */
+            }
             .introduction p {
                 font-size: 14px; /* 홈 섹션의 소개 문구 글자 크기를 줄임 */
                 padding: 10px; /* 패딩을 줄여 모바일에서 내용이 잘 보이게 조정 */
-            }
-        
+            }        
             input[type="number"] {
                 width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
                 padding: 4px;
             }
-
             button {
                 padding: 6px ; /* 버튼의 크기 줄이기 */
                 font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
@@ -714,14 +737,14 @@
         </div>
     </nav>
 
-    <section id="home" class="content"> <!-- 홈 섹션 -->
-        <div class="introduction"> <!-- 소개 섹션 -->
-            <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1> <!-- 소개 섹션 제목 -->
-            <img src="https://i.imgur.com/PJHEexp.jpeg" alt="레스토랑 외관" style="max-width: 100%; height: auto;"> <!-- 레스토랑 외관 이미지 -->
-            <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p> <!-- 소개 문구 1 -->
-            <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p> <!-- 소개 문구 2 -->     
+    <section id="home" class="content">
+        <div class="introduction">
+            <div class="introduction-content">
+                <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1>
+                <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p>
+                <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p>
+            </div>
         </div>
-        
     </section>
 
     <section id="menu" class="content"> <!-- 메뉴 섹션 -->
