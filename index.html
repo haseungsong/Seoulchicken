@@ -771,7 +771,7 @@
     <section id="menu" class="content"> <!-- 메뉴 섹션 -->
         <div class="menu"> <!-- 메뉴 리스트 -->
             <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
-                <h2>Original chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Crispy and crunchy</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/KbqNb4d.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
@@ -782,7 +782,7 @@
             </div>
             
             <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
-                <h2>Yangnum chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>"Yangnum" chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Molho de tempero</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/oukwjoa.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
@@ -793,7 +793,7 @@
             </div>
             
             <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
-                <h2>Cebola. chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>" Cebola " chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Molho de cebola</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/SNojYgS.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">65</span>R$ <!-- 가격 표시 -->
@@ -804,7 +804,7 @@
             </div>
             
             <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
-                <h2>Purinkle chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>"Purinkle" chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Tempero de queijo</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/X9c7HGT.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">75</span>R$ <!-- 가격 표시 -->
@@ -815,7 +815,7 @@
             </div>
             
             <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
-                <h2>Shoyu chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>"Shoyu" chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Molho de Shoyu</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
@@ -826,7 +826,7 @@
             </div>
             
             <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
-                <h2>Banban chicken</h2> <!-- 메뉴 제목 설명 -->
+                <h2>"Banban" chicken</h2> <!-- 메뉴 제목 설명 -->
                 <p>Metade/Metade</p> <!-- 메뉴 설명 -->
                 <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
                 <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
@@ -1031,53 +1031,7 @@
         <a class="next">&#10095;</a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const closeBtn = document.querySelector('.close');
-            let currentImageIndex = 0;
-    
-            // Menu images array (for multiple images)
-            const menuImages = [
-                'https://i.imgur.com/KbqNb4d.jpeg',
-                'https://i.imgur.com/PquPt3O.jpeg'
-            ];
-    
-            // Open modal when image is clicked
-            document.querySelectorAll('.menu-item img').forEach((img, index) => {
-                img.addEventListener('click', function() {
-                    currentImageIndex = index;
-                    modal.style.display = 'block';
-                    modalImage.src = menuImages[currentImageIndex];
-                });
-            });
-    
-            // Close modal
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-    
-            // Next image
-            document.querySelector('.next').addEventListener('click', function() {
-                currentImageIndex = (currentImageIndex + 1) % menuImages.length;
-                modalImage.src = menuImages[currentImageIndex];
-            });
-    
-            // Previous image
-            document.querySelector('.prev').addEventListener('click', function() {
-                currentImageIndex = (currentImageIndex - 1 + menuImages.length) % menuImages.length;
-                modalImage.src = menuImages[currentImageIndex];
-            });
-    
-            // Close modal when clicking outside of the image
-            modal.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-    </script>
+
 
 </body>
 </html>
