@@ -38,6 +38,15 @@
             background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
             color: #333; /* 본문 글자색을 어두운 회색으로 설정 */
         }
+        /* h2와 p 사이의 간격 줄이기 */
+        h2 {
+            margin-bottom: 4px; /* h2 태그 아래쪽 간격을 5px로 설정 */
+        }
+
+        p {
+            margin-top: 2px; /* p 태그 위쪽 간격을 5px로 설정 */
+        }
+
         nav {
             background-color: #363434; /* 네비게이션 바 배경색을 연한 빨강으로 설정 */
             color: white; /* 네비게이션 바 안의 글자색을 흰색으로 설정 */
@@ -257,6 +266,13 @@
             nav a {
                 font-size: 14px; /* 네비게이션 텍스트 크기를 작게 조정 */
                 padding: 8px; /* 패딩을 줄여 모바일 화면에 맞추기 */
+            }
+            h2 {
+                margin-bottom: 4px;
+            }
+
+            p {
+                margin-top: 2px;
             }
             .introduction {
                 background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
@@ -502,7 +518,7 @@
                 });
             });
         
-            showSection('#home'); /* 초기화 시 홈 섹션을 표시 */
+            showSection('#menu'); /* 초기화 시 홈 섹션을 표시 */
 
             document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
                 const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
@@ -741,7 +757,6 @@
             <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
 
         </select>
-        <a href="#home" data-key="home">Home</a> <!-- 홈 링크 -->
         <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
         <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
         <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
@@ -758,15 +773,6 @@
         </div>
     </nav>
 
-    <section id="home" class="content">
-        <div class="introduction">
-            <div class="introduction-content">
-                <h1 data-key="welcome">서울치킨에 오신걸 환영합니다!</h1>
-                <p data-key="intro1">봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다</p>
-                <p data-key="intro2">지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다</p>
-            </div>
-        </div>
-    </section>
 
     <section id="menu" class="content"> <!-- 메뉴 섹션 -->
         <div class="menu"> <!-- 메뉴 리스트 -->
@@ -842,8 +848,9 @@
         <section id="K-food" class="content"> <!-- K-food 섹션 -->
             <div class="menu"> <!-- K-food 리스트 -->
                 <div class="menu-item" id="k-food1"> <!-- K-food 항목 1 -->
-                    <p>Kimchi: Fermented vegetables with a kick</p> <!-- K-food 설명 -->
-                    <img src="https://i.imgur.com/sample1.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
+                    <h2>"Teokpoki" </h2> <!-- 메뉴 제목 설명 -->
+                    <p>Street food</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/0ebT7XU.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
                     <span class="price-per-item">25</span>R$ <!-- 가격 표시 -->
                     <button type="button">-</button> <!-- 수량 감소 버튼 -->
                     <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
