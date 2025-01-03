@@ -333,304 +333,191 @@
 
     </style>
 
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // ========== 메뉴 이미지 클릭 시 모달 표시 ==========
+        const menuImages = document.querySelectorAll('.menu-item img');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close');
 
-        // DOM이 로드되면 실행
-        document.addEventListener('DOMContentLoaded', function() {
-            // 메뉴 1에서 7의 이미지 요소 선택
-            const menuImages = document.querySelectorAll('.menu-item img');
-            const modal = document.getElementById('imageModal'); // 모달 요소 선택
-            const modalImage = document.getElementById('modalImage'); // 모달 내부 이미지 선택
-            const closeBtn = document.querySelector('.close'); // 닫기 버튼 선택
-
-            // 각 이미지에 대해 클릭 이벤트 추가
-            menuImages.forEach(image => {
-                image.addEventListener('click', function() {
-                    modal.style.display = 'block'; // 모달 표시
-                    modalImage.src = this.src; // 클릭된 이미지의 src를 모달 이미지에 설정
-                });
-            });
-
-            // 닫기 버튼 클릭 시 모달 닫기
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none'; // 모달 숨기기
-            });
-
-            // 모달 외부 클릭 시 모달 닫기
-            modal.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none'; // 모달 숨기기
-                }
+        menuImages.forEach(image => {
+            image.addEventListener('click', function () {
+                modal.style.display = 'block';
+                modalImage.src = this.src;
             });
         });
 
-
-        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-             // 언어 선택 드롭다운에서 선택된 언어에 따라 텍스트 업데이트
-            document.getElementById('language-select').addEventListener('change', function() {
-                const selectedLanguage = this.value;
-                updateLanguage(selectedLanguage); // 선택된 언어로 텍스트 변경
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
             });
-            
-            const languagePack = { /* 다국어 지원을 위한 언어팩 객체 선언 */
-                korean: { /* 한국어 번역 */
-                    'welcome': '서울치킨에 오신걸 환영합니다!',
-                    'originalChicken': '오리지널 치킨: 바삭하고 고소함',
-                    'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
-                    'home': '홈',
-                    'menu': '치킨',
-                    'drinks': '음료',
-                    'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다. 우리의 비밀 레시피로 만들어진 바삭하고 육즙 가득한 치킨이 봉헤찌로의 열정을 전합니다.',
-                    'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
-                },
-                portuguese: { /* 포르투갈어 번역 */
-                    'welcome': 'Bem-vindo ao Seoul Chicken!',
-                    'originalChicken': 'Frango original: crocante e saboroso',
-                    'seasonedChicken': 'Frango temperado: doce e picante',
-                    'home': 'Home',
-                    'menu': 'Chicken',
-                    'K-food': 'K-food',
-                    'drinks': 'Bebidas',
-                    'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem. Nosso frango crocante e suculento, feito com nossa receita secreta, transmite a paixão de Bom retiro.',
-                    'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço. Convidamos você para o delicioso mundo do frango, onde cada momento está cheio de alegria.',
-                }
-                
-            };
+        }
 
-            function updateLanguage(language) { /* 선택된 언어로 텍스트를 업데이트하는 함수 */
-                var introductionHeading = document.querySelector('.introduction h1'); /* 소개 섹션의 제목 선택 */
-                if (introductionHeading) { /* 제목이 있으면 */
-                    introductionHeading.textContent = languagePack[language]['welcome']; /* 해당 언어로 제목 변경 */
-                }
+        modal.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
-                var navLinks = document.querySelectorAll('nav a'); /* 네비게이션 링크들 선택 */
-                if (navLinks) { /* 네비게이션 링크들이 있으면 */
-                    navLinks.forEach((link, index) => { /* 각 링크에 대해 반복 */
-                        var dataKey = link.getAttribute('data-key'); /* 데이터 키 속성 값 가져오기 */
-                        if (dataKey && languagePack[language][dataKey]) { /* 데이터 키가 있으면 해당 언어로 텍스트 변경 */
-                            link.textContent = languagePack[language][dataKey];
-                        }
-                    });
-                }
+        // ========== 언어 선택 드롭다운 ==========
+        const languagePack = {
+            korean: {
+                'welcome': '서울치킨에 오신걸 환영합니다!',
+                'originalChicken': '오리지널 치킨: 바삭하고 고소함',
+                'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
+                'home': '홈',
+                'menu': '치킨',
+                'drinks': '음료',
+                'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다.',
+                'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
+            },
+            portuguese: {
+                'welcome': 'Bem-vindo ao Seoul Chicken!',
+                'originalChicken': 'Frango original: crocante e saboroso',
+                'seasonedChicken': 'Frango temperado: doce e picante',
+                'home': 'Home',
+                'menu': 'Chicken',
+                'K-food': 'K-food',
+                'drinks': 'Bebidas',
+                'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem.',
+                'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço.',
+            }
+        };
 
-                var elementsWithDataKey = document.querySelectorAll('[data-key]'); /* data-key 속성을 가진 모든 요소 선택 */
-                if (elementsWithDataKey) { /* 요소들이 있으면 */
-                    elementsWithDataKey.forEach(element => { /* 각 요소에 대해 반복 */
-                        var key = element.getAttribute('data-key'); /* data-key 속성 값 가져오기 */
-                        if (key && languagePack[language][key]) { /* 데이터 키가 있으면 해당 언어로 텍스트 변경 */
-                            element.textContent = languagePack[language][key];
-                        }
-                    });
-                }
+        function updateLanguage(language) {
+            const introductionHeading = document.querySelector('.introduction h1');
+            if (introductionHeading) {
+                introductionHeading.textContent = languagePack[language]['welcome'];
             }
 
-            updateLanguage('portuguese'); /* 기본 언어를 한국어로 설정하여 초기화 */
-        });
-    </script>
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (key && languagePack[language][key]) {
+                    element.textContent = languagePack[language][key];
+                }
+            });
+        }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-            document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => { /* 메뉴 항목 및 음료 항목의 모든 버튼 선택 */
-                button.addEventListener('click', function() { /* 각 버튼 클릭 시 이벤트 추가 */
-                    const container = this.closest('.menu-item, .drink-item'); /* 버튼이 포함된 상위 요소 선택 */
-                    if (container) { /* 상위 요소가 있으면 */
-                        const inputField = container.querySelector('input[type=number]'); /* 상위 요소 내의 숫자 입력 필드 선택 */
-                        if (inputField) { /* 숫자 입력 필드가 있으면 */
-                            let currentValue = parseInt(inputField.value); /* 현재 입력된 값을 숫자로 변환 */
-                            const delta = this.textContent === '+' ? 1 : (currentValue > 0 ? -1 : 0); /* 버튼 텍스트에 따라 값 증가 또는 감소 설정 */
-                            let newValue = currentValue + delta; /* 새로 계산된 값 */
-                            inputField.value = newValue; /* 숫자 입력 필드에 새 값 설정 */
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            languageSelect.addEventListener('change', function () {
+                updateLanguage(this.value);
+            });
+        }
+        updateLanguage('portuguese'); // 기본 언어 설정
 
-                            const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent); /* 항목 가격 가져오기 */
-                            const totalPriceElement = container.querySelector('.total-price'); /* 총 가격 요소 선택 */
-                            if (totalPriceElement) { /* 총 가격 요소가 있으면 */
-                                totalPriceElement.textContent = newValue * pricePerItem; /* 새 값에 따라 총 가격 계산 후 설정 */
-                            }
+        // ========== 메뉴 및 음료 버튼 클릭 처리 ==========
+        document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+            button.addEventListener('click', function () {
+                const container = this.closest('.menu-item, .drink-item');
+                if (container) {
+                    const inputField = container.querySelector('input[type=number]');
+                    const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                    const totalPriceElement = container.querySelector('.total-price');
 
-                            updateTotalAmount(); /* 전체 금액 업데이트 함수 호출 */
-                        }
+                    let quantity = parseInt(inputField.value);
+                    quantity = this.textContent === '+' ? quantity + 1 : Math.max(0, quantity - 1);
+                    inputField.value = quantity;
+
+                    if (totalPriceElement) {
+                        totalPriceElement.textContent = quantity * pricePerItem;
                     }
-                });
+
+                    updateTotalAmount();
+                }
             });
-
-            function updateTotalAmount() { 
-                let totalAmount = 0; 
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
-                    const pricePerItemElement = item.querySelector('.price-per-item'); 
-                    if (pricePerItemElement) { 
-                        const pricePerItem = parseInt(pricePerItemElement.textContent); 
-                        totalAmount += quantity * pricePerItem; 
-                    }
-                });
-
-                const formattedTotalAmount = `Total: ${totalAmount} R$`; // 항상 R$로 통화 기호 고정
-                document.getElementById('total-amount').textContent = formattedTotalAmount; 
-                updateModalTotalAmount(formattedTotalAmount); 
-            }
         });
-    </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-            const sections = document.querySelectorAll('.content'); /* 모든 콘텐츠 섹션 선택 */
-            const navLinks = document.querySelectorAll('nav a'); /* 모든 네비게이션 링크 선택 */
-        
-            function hideAllSections() { /* 모든 섹션을 숨기는 함수 */
-                sections.forEach(section => { /* 각 섹션에 대해 반복 */
-                    section.style.display = 'none'; /* 섹션을 숨김 */
-                });
-            }
-        
-            function showSection(id) { /* 특정 섹션을 보여주는 함수 */
-                hideAllSections(); /* 먼저 모든 섹션을 숨김 */
-                const section = document.querySelector(id); /* 보여줄 섹션 선택 */
-                section.style.display = 'block'; /* 선택된 섹션을 표시 */
-            }
-        
-            navLinks.forEach(link => { /* 각 네비게이션 링크에 대해 반복 */
-                link.addEventListener('click', function(event) { /* 링크 클릭 시 이벤트 추가 */
-                    event.preventDefault(); /* 기본 링크 동작을 방지 */
-                    showSection(this.getAttribute('href')); /* 링크의 href 속성 값에 해당하는 섹션을 표시 */
-                });
-            });
-        
-            showSection('#menu'); /* 초기화 시 홈 섹션을 표시 */
 
-            document.getElementById('order-button').addEventListener('click', function() { /* 주문 버튼 클릭 시 이벤트 추가 */
-                const orderDetails = []; /* 주문 내역을 저장할 배열 선언 */
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { /* 모든 메뉴 항목 및 음료 항목에 대해 반복 */
-                    const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                    const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                    if (parseInt(quantity) > 0) { /* 수량이 0보다 크면 */
-                        orderDetails.push(`${name}: ${quantity}개`); /* 주문 내역에 추가 */
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+                totalAmount += quantity * pricePerItem;
+            });
+            const formattedTotalAmount = `Total: R$ ${totalAmount}`;
+            const totalAmountDisplay = document.getElementById('total-amount');
+            if (totalAmountDisplay) {
+                totalAmountDisplay.textContent = formattedTotalAmount;
+            }
+            updateModalTotalAmount(formattedTotalAmount);
+        }
+
+        function updateModalTotalAmount(totalAmountText) {
+            const modalTotal = document.getElementById('modal-total');
+            if (modalTotal) {
+                modalTotal.textContent = totalAmountText;
+            }
+        }
+
+        // ========== 섹션 네비게이션 ==========
+        const sections = document.querySelectorAll('.content');
+        const navLinks = document.querySelectorAll('nav a');
+
+        function hideAllSections() {
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+
+        function showSection(id) {
+            hideAllSections();
+            const section = document.querySelector(id);
+            if (section) {
+                section.style.display = 'block';
+            }
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                showSection(this.getAttribute('href'));
+            });
+        });
+
+        showSection('#menu');
+
+        // ========== 주문 버튼 ==========
+        const orderButton = document.getElementById('order-button');
+        if (orderButton) {
+            orderButton.addEventListener('click', function () {
+                const orderDetails = [];
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const name = item.querySelector('p').textContent;
+                    const quantity = item.querySelector('input[type=number]').value;
+                    if (parseInt(quantity) > 0) {
+                        orderDetails.push(`${name}: ${quantity}`);
                     }
                 });
 
-                if (orderDetails.length > 0) { /* 주문 내역이 있으면 */
-                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>'); /* 주문 내역을 모달 창에 표시 */
-                    document.getElementById('order-modal').style.display = 'block'; /* 모달 창을 표시 */
-                    updateTotalAmount(); /* 전체 금액 업데이트 */
-                    updateModalTotalAmount(); /* 모달 창 내 금액 업데이트 */
-                } else { /* 주문 내역이 없으면 */
-                    alert('주문할 메뉴를 선택해주세요.\nPor favor, selecione um menu para pedir.'); /* 경고 메시지 표시 */
+                if (orderDetails.length > 0) {
+                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
+                    document.getElementById('order-modal').style.display = 'block';
+                } else {
+                    alert('주문할 메뉴를 선택해 주세요.');
                 }
             });
-        });
-    </script>
+        }
 
-        <script>
-            // DOM이 완전히 로드된 후에 실행
-            document.addEventListener('DOMContentLoaded', function() {
-                // 주문 버튼을 선택하고 클릭 이벤트 리스너 추가
-                const orderButton = document.getElementById('order-button');
-                if (orderButton) {  // 요소가 존재하는지 확인
-                    orderButton.addEventListener('click', function() {
-                        const orderDetails = [];  // 주문 상세 정보를 저장할 배열
-                        // 모든 메뉴 및 음료 항목을 반복 처리
-                        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                            const name = item.querySelector('p').textContent;  // 항목 이름 가져오기
-                            const quantity = item.querySelector('input[type=number]').value;  // 항목 수량 가져오기
-                            if (parseInt(quantity) > 0) {  // 수량이 0보다 클 경우
-                                orderDetails.push(`${name}: ${quantity} items`);  // 주문 상세 정보에 추가
-                            }
-                        });
-
-                        if (orderDetails.length > 0) {  // 주문 상세 정보가 있으면
-                            document.getElementById('order-list').innerHTML = orderDetails.join('<br>');  // 모달 창에 주문 내역 표시
-                            document.getElementById('order-modal').style.display = 'block';  // 모달 창 표시
-                        } else {  // 주문 내역이 없으면
-                            alert('주문할 메뉴를 선택해 주세요.');  // 경고 메시지 표시
-                        }
-                    });
-                }
-
-                // 주문 확인 함수
-                function confirmOrder() {
-                    alert('주문이 완료되었습니다!');  // 주문 완료 메시지 표시
-                    closeModal();  // 모달 창 닫기 함수 호출
-                }
-
-                // 모달 창 닫기 함수
-                function closeModal() {
-                    document.getElementById('order-modal').style.display = 'none';  // 모달 창 숨기기
-                }
-
-                // 확인 버튼에도 이벤트 리스너를 추가해야 한다면, 여기서 추가
-                const confirmButton = document.getElementById('confirm-button');
-                if (confirmButton) {
-                    confirmButton.addEventListener('click', confirmOrder);  // 주문 확인 버튼에 클릭 이벤트 리스너 추가
-                }
-
-                const closeButton = document.getElementById('close-modal-button');
-                if (closeButton) {
-                    closeButton.addEventListener('click', closeModal);  // 모달 창 닫기 버튼에 클릭 이벤트 리스너 추가
-                }
+        const confirmButton = document.getElementById('confirm-button');
+        if (confirmButton) {
+            confirmButton.addEventListener('click', function () {
+                alert('주문이 완료되었습니다!');
+                closeModal();
             });
-        </script>
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // 주문 버튼을 선택하고 클릭 이벤트 리스너 추가
-                const orderButton = document.getElementById('order-button');
-                if (orderButton) {  // 요소가 존재하는지 확인
-                    orderButton.addEventListener('click', function() { /* 주문 버튼이 클릭되었을 때 이벤트 추가 */
-                        const orderDetails = []; /* 주문 상세 정보를 저장할 배열 */
-                        
-                        // 모든 메뉴 및 음료 항목을 반복 처리
-                        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                            const name = item.querySelector('p').textContent; /* 항목 이름 가져오기 */
-                            const quantity = item.querySelector('input[type=number]').value; /* 항목 수량 가져오기 */
-                            if (parseInt(quantity) > 0) { /* 수량이 0보다 클 경우 */
-                                orderDetails.push(`<li>${name}: ${quantity}</li>`); /* 주문 상세 정보를 목록 항목 형식으로 추가 */
-                            }
-                        });
-                
-                        if (orderDetails.length > 0) { /* 주문 상세 정보가 있으면 */
-                            document.getElementById('order-list').innerHTML = orderDetails.join(''); /* 모달 창에 주문 내역 표시 */
-                            document.getElementById('order-modal').style.display = 'block'; /* 모달 창 표시 */
-                        } else { /* 주문 내역이 없으면 */
-                            alert('주문할 메뉴를 선택해 주세요.'); /* 경고 메시지 표시 */
-                        }
-                    });
-                }
-        
-                // 총 금액 업데이트 함수
-                function updateTotalAmount() {
-                    let totalAmount = 0; /* 총 금액을 0으로 초기화 */
-                    document.querySelectorAll('.total-price').forEach(priceElement => { /* 모든 총 가격 요소를 반복 처리 */
-                        totalAmount += parseInt(priceElement.textContent); /* 각 요소의 금액을 총 금액에 더하기 */
-                    });
-                    const formattedTotalAmount = `총 금액: ${totalAmount} R$`; /* 총 금액 형식화 */
-                    document.getElementById('total-amount').textContent = formattedTotalAmount; /* 총 금액 표시 업데이트 */
-                    updateModalTotalAmount(formattedTotalAmount); /* 모달 창에서 금액 업데이트 */
-                }
-        
-                // 모달 창에서 총 금액 업데이트 함수
-                function updateModalTotalAmount(totalAmountText) { /* 모달 창 내 총 금액을 업데이트하는 함수 */
-                document.getElementById('modal-total').textContent = totalAmountText; /* 모달 창 내 총 금액 표시 업데이트 */
-                }
-        
-                // 모달 창 닫기 버튼 및 확인 버튼에 이벤트 리스너 추가
-                const confirmButton = document.getElementById('confirm-button');
-                if (confirmButton) {
-                    confirmButton.addEventListener('click', function() {
-                        alert('주문이 완료되었습니다!');  // 주문 완료 메시지 표시
-                        closeModal();  // 모달 창 닫기 함수 호출
-                    });
-                }
-        
-                const closeButton = document.getElementById('close-modal-button');
-                if (closeButton) {
-                    closeButton.addEventListener('click', closeModal);  // 모달 창 닫기 버튼에 클릭 이벤트 리스너 추가
-                }
-        
-                // 모달 창 닫기 함수
-                function closeModal() {
-                    document.getElementById('order-modal').style.display = 'none';  // 모달 창 숨기기
-                }
-            });
-        </script>    
+        }
+
+        const closeButton = document.getElementById('close-modal-button');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeModal);
+        }
+
+        function closeModal() {
+            document.getElementById('order-modal').style.display = 'none';
+        }
+    });
+</script>   
 
     <script>
     // 주문 데이터를 Firebase에 전송하는 함수
@@ -995,7 +882,7 @@
                 document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
                     total.textContent = '0R$'; /* 총 가격을 0원으로 초기화 */
                 });
-                document.getElementById('total-amount').textContent = '총금액: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
+                document.getElementById('total-amount').textContent = 'Total: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
             });
         });
     </script>
