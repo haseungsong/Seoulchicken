@@ -345,6 +345,7 @@
             image.addEventListener('click', function () {
                 modal.style.display = 'block';
                 modalImage.src = this.src;
+                history.pushState({ isModalOpen: true }, null, null);  //추가 문제시 삭제제
             });
         });
 
