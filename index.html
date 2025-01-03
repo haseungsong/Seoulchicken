@@ -484,7 +484,7 @@
             orderButton.addEventListener('click', function () {
                 const orderDetails = [];
                 document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const name = item.querySelector('p').textContent;
+                    const name = item.querySelector('h2').textContent;
                     const quantity = item.querySelector('input[type=number]').value;
                     if (parseInt(quantity) > 0) {
                         orderDetails.push(`${name}: ${quantity}`);
@@ -535,7 +535,7 @@
     
         // Collect order details
         document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-            const name = item.querySelector('p').textContent;
+            const name = item.querySelector('h2').textContent;
             const quantity = item.querySelector('input[type=number]').value;
             if (parseInt(quantity) > 0) {
                 orderDetails.push({ name: name, quantity: quantity });
@@ -929,7 +929,7 @@
                     const quantity = parseInt(item.querySelector('input[type=number]').value); 
                     if (quantity > 0) { 
                         hasItems = true; 
-                        const name = item.querySelector('p').textContent; 
+                        const name = item.querySelector('h2').textContent; 
                         const price = item.querySelector('.price-per-item').textContent; 
                         const itemTotal = quantity * parseInt(price); 
                         const listItem = document.createElement('li'); 
