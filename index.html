@@ -880,8 +880,9 @@
 
             wrapper.addEventListener('touchmove', (e) => {
                 if (!isDown) return;
+                e.preventDefault();
                 const x = e.touches[0].pageX - wrapper.offsetLeft;
-                const walk = (x - startX) * 2;
+                const walk = (x - startX) * 1.5; // 좌우 이동 거리 계산
                 wrapper.scrollLeft = scrollLeft - walk;
             });
         });
@@ -1022,8 +1023,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     wrapper.addEventListener('touchmove', (e) => {
         if (!isDown) return;
+        e.preventDefault();
         const x = e.touches[0].pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust speed
+        const walk = (x - startX) * 1.5; // 좌우 이동 거리 계산
         wrapper.scrollLeft = scrollLeft - walk;
     });
 });
