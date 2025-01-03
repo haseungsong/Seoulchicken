@@ -535,7 +535,7 @@
     
         // Collect order details
         document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-            const name = item.querySelector('h2').textContent;
+            const name = item.querySelector('h2').textContent; // h2의 텍스트를 가져옴
             const quantity = item.querySelector('input[type=number]').value;
             if (parseInt(quantity) > 0) {
                 orderDetails.push({ name: name, quantity: quantity });
@@ -779,6 +779,7 @@
         <div id="drinks" class="content"> <!-- 음료 섹션 -->
             <div class="drink-menu"> <!-- 음료 리스트 -->
                 <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
+                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
                     <p>음료 1: 설명</p> <!-- 음료 설명 -->
                     <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
                     <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
@@ -788,6 +789,7 @@
                     <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
                 </div>
                 <div class="menu-item"> <!-- 음료 항목 2 -->
+                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
                     <p>음료 2: 설명</p> <!-- 음료 설명 -->
                     <img src="https://i.imgur.com/Jbn9C7a.jpeg" alt="drink2"> <!-- 음료 이미지 -->
                     <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
@@ -797,6 +799,7 @@
                     <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
                 </div>
                 <div class="menu-item"> <!-- 음료 항목 3 -->
+                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
                     <p>음료 3: 설명</p> <!-- 음료 설명 -->
                     <img src="path_to_image10.jpg" alt="drink3"> <!-- 음료 이미지 -->
                     <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
@@ -806,6 +809,7 @@
                     <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
                 </div>
                 <div class="menu-item"> <!-- 음료 항목 4 -->
+                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
                     <p>음료 4: 설명</p> <!-- 음료 설명 -->
                     <img src="path_to_image11.jpg" alt="drink4"> <!-- 음료 이미지 -->
                     <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
@@ -815,6 +819,7 @@
                     <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
                 </div>
                 <div class="menu-item"> <!-- 음료 항목 5 -->
+                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
                     <p>음료 5: 설명</p> <!-- 음료 설명 -->
                     <img src="path_to_image12.jpg" alt="drink5"> <!-- 음료 이미지 -->
                     <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
