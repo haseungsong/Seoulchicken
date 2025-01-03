@@ -726,8 +726,6 @@
        const database = firebase.database();
        </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script> <!-- Hammer.js 추가 -->
-
 </head>
 <body> <!-- 본문 시작 -->
     <nav> <!-- 네비게이션 바 -->
@@ -737,7 +735,7 @@
 
         </select>
         <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
-        <a href="#K-food" data-key="K-food">k-Food</a> <!-- 음료 링크 그대로 유지 -->
+        <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
         <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
 
         
@@ -752,78 +750,86 @@
         </div>
     </nav>
 
+    <!-- content-wrapper로 모든 섹션을 감싸기 -->
+    <div class="content-wrapper">
 
-    <section id="menu" class="content"> <!-- 메뉴 섹션 -->
-        <div class="menu"> <!-- 메뉴 리스트 -->
-            <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
-                <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/KbqNb4d.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+        <section id="menu" class="content"> <!-- 메뉴 섹션 -->
+            <div class="menu"> <!-- 메뉴 리스트 -->
+                <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
+                    <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Crispy and crunchy</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/KbqNb4d.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
+                    <h2>"Yangnum" chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Molho de tempero</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/oukwjoa.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
+                    <h2>" Cebola " chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Molho de cebola</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/SNojYgS.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">65</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity3" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
+                    <h2>"Purinkle" chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Tempero de queijo</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/X9c7HGT.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">75</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity4" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
+                    <h2>"Shoyu" chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Molho de Shoyu</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity5" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
+                <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
+                    <h2>"Banban" chicken</h2> <!-- 메뉴 제목 설명 -->
+                    <p>Metade/Metade</p> <!-- 메뉴 설명 -->
+                    <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
+                    <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                
             </div>
-            
-            <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
-                <h2>"Yangnum" chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/oukwjoa.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            
-            <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
-                <h2>" Cebola " chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/SNojYgS.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">65</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity3" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            
-            <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
-                <h2>"Purinkle" chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/X9c7HGT.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">75</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity4" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            
-            <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
-                <h2>"Shoyu" chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity5" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            
-            <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
-                <h2>"Banban" chicken</h2> <!-- 메뉴 제목 설명 -->
-                <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
-                <span class="price-per-item">70</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            
-        </div>
-    </section>
+        </section>
 
         <section id="K-food" class="content"> <!-- K-food 섹션 -->
             <div class="menu"> <!-- K-food 리스트 -->
                 <div class="menu-item" id="k-food1"> <!-- K-food 항목 1 -->
                     <h2>"Teokpoki" </h2> <!-- 메뉴 제목 설명 -->
                     <p>Street food</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/h2X46bH.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
+                    <img src="https://i.imgur.com/0ebT7XU.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
                     <span class="price-per-item">25</span>R$ <!-- 가격 표시 -->
                     <button type="button">-</button> <!-- 수량 감소 버튼 -->
                     <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
@@ -832,9 +838,8 @@
                 </div>
         
                 <div class="menu-item" id="k-food2"> <!-- K-food 항목 2 -->
-                    <h2>"lapoki" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Mais lamen</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/AmGJsBL.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
                     <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
                     <button type="button">-</button> <!-- 수량 감소 버튼 -->
                     <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
@@ -843,9 +848,8 @@
                 </div>
                 
                 <div class="menu-item" id="k-food3"> <!-- K-food 항목 2 -->
-                    <h2>"Batata frita" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Batatas rústicas</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/WCNjQ1W.jpeg" alt="K-food 3 사진"> <!-- K-food 이미지 -->
+                    <p>Bibimbap: Mixed rice with vegetables</p> <!-- K-food 설명 -->
+                    <img src="https://i.imgur.com/sample2.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
                     <span class="price-per-item">35</span>R$ <!-- 가격 표시 -->
                     <button type="button">-</button> <!-- 수량 감소 버튼 -->
                     <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
@@ -875,55 +879,107 @@
             </div>
         </section>
 
-    <div id="drinks" class="content"> <!-- 음료 섹션 -->
-        <div class="drink-menu"> <!-- 음료 리스트 -->
-            <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
-                <p>음료 1: 설명</p> <!-- 음료 설명 -->
-                <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
-                <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            <div class="menu-item"> <!-- 음료 항목 2 -->
-                <p>음료 2: 설명</p> <!-- 음료 설명 -->
-                <img src="https://i.imgur.com/Jbn9C7a.jpeg" alt="drink2"> <!-- 음료 이미지 -->
-                <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            <div class="menu-item"> <!-- 음료 항목 3 -->
-                <p>음료 3: 설명</p> <!-- 음료 설명 -->
-                <img src="path_to_image10.jpg" alt="drink3"> <!-- 음료 이미지 -->
-                <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            <div class="menu-item"> <!-- 음료 항목 4 -->
-                <p>음료 4: 설명</p> <!-- 음료 설명 -->
-                <img src="path_to_image11.jpg" alt="drink4"> <!-- 음료 이미지 -->
-                <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-            </div>
-            <div class="menu-item"> <!-- 음료 항목 5 -->
-                <p>음료 5: 설명</p> <!-- 음료 설명 -->
-                <img src="path_to_image12.jpg" alt="drink5"> <!-- 음료 이미지 -->
-                <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
-                <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+        <div id="drinks" class="content"> <!-- 음료 섹션 -->
+            <div class="drink-menu"> <!-- 음료 리스트 -->
+                <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
+                    <p>음료 1: 설명</p> <!-- 음료 설명 -->
+                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
+                    <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                <div class="menu-item"> <!-- 음료 항목 2 -->
+                    <p>음료 2: 설명</p> <!-- 음료 설명 -->
+                    <img src="https://i.imgur.com/Jbn9C7a.jpeg" alt="drink2"> <!-- 음료 이미지 -->
+                    <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                <div class="menu-item"> <!-- 음료 항목 3 -->
+                    <p>음료 3: 설명</p> <!-- 음료 설명 -->
+                    <img src="path_to_image10.jpg" alt="drink3"> <!-- 음료 이미지 -->
+                    <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                <div class="menu-item"> <!-- 음료 항목 4 -->
+                    <p>음료 4: 설명</p> <!-- 음료 설명 -->
+                    <img src="path_to_image11.jpg" alt="drink4"> <!-- 음료 이미지 -->
+                    <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
+                <div class="menu-item"> <!-- 음료 항목 5 -->
+                    <p>음료 5: 설명</p> <!-- 음료 설명 -->
+                    <img src="path_to_image12.jpg" alt="drink5"> <!-- 음료 이미지 -->
+                    <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
+                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.querySelector('.content-wrapper');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            // 마우스 드래그 이벤트
+            wrapper.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - wrapper.offsetLeft;
+                scrollLeft = wrapper.scrollLeft;
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+
+            wrapper.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+
+            wrapper.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - wrapper.offsetLeft;
+                const walk = (x - startX) * 2; // 드래그 속도 설정
+                wrapper.scrollLeft = scrollLeft - walk;
+            });
+
+            // 터치 이벤트 (모바일)
+            wrapper.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - wrapper.offsetLeft;
+                scrollLeft = wrapper.scrollLeft;
+            });
+
+            wrapper.addEventListener('touchend', () => {
+                isDown = false;
+            });
+
+            wrapper.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX - wrapper.offsetLeft;
+                const walk = (x - startX) * 2;
+                wrapper.scrollLeft = scrollLeft - walk;
+            });
+        });
+    </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
@@ -1013,42 +1069,6 @@
         <a class="next">&#10095;</a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = ['#menu', '#K-food', '#drinks']; // 섹션 ID 배열
-            let currentSectionIndex = 0; // 현재 섹션 인덱스
-
-            const hammer = new Hammer(document.body); // Hammer.js로 스와이프 감지
-
-            // 섹션을 보여주는 함수
-            function showSection(index) {
-                const allSections = document.querySelectorAll('.content');
-                allSections.forEach(section => {
-                    section.style.display = 'none'; // 모든 섹션 숨기기
-                });
-                document.querySelector(sections[index]).style.display = 'block'; // 선택된 섹션만 표시
-            }
-
-            // 스와이프 왼쪽 -> 다음 섹션
-            hammer.on('swipeleft', function() {
-                if (currentSectionIndex < sections.length - 1) {
-                    currentSectionIndex++;
-                    showSection(currentSectionIndex);
-                }
-            });
-
-            // 스와이프 오른쪽 -> 이전 섹션
-            hammer.on('swiperight', function() {
-                if (currentSectionIndex > 0) {
-                    currentSectionIndex--;
-                    showSection(currentSectionIndex);
-                }
-            });
-
-            // 처음 로드 시 첫 번째 섹션 표시
-            showSection(currentSectionIndex);
-        });
-    </script>
 
 
 </body>
