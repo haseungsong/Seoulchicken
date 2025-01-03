@@ -495,7 +495,7 @@
                     document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
                     document.getElementById('order-modal').style.display = 'block';
                 } else {
-                    alert('주문할 메뉴를 선택해 주세요.');
+                    alert('Selecione um item do menu, por favor!.주문할 메뉴를 선택해 주세요.');
                 }
             });
         }
@@ -503,7 +503,7 @@
         const confirmButton = document.getElementById('confirm-button');
         if (confirmButton) {
             confirmButton.addEventListener('click', function () {
-                alert('주문이 완료되었습니다!');
+                alert('Pedido concluído!. 주문이 완료되었습니다!');
                 closeModal();
             });
         }
@@ -940,11 +940,6 @@
                     }
                 });
 
-                if (hasItems) { 
-                    modal.style.display = 'block'; 
-                } else { 
-                    alert('주문할 메뉴를 선택해주세요.'); 
-                }
                 updateTotalAmount(); 
             });
 
