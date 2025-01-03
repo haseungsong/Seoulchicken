@@ -978,5 +978,56 @@
 
 
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const wrapper = document.querySelector('.content-wrapper');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Mouse events for desktop
+    wrapper.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    wrapper.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    wrapper.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - wrapper.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust speed
+        wrapper.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events for mobile
+    wrapper.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
+    });
+
+    wrapper.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    wrapper.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - wrapper.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust speed
+        wrapper.scrollLeft = scrollLeft - walk;
+    });
+});
+</script>
+
 </body>
 </html>
