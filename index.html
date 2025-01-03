@@ -335,51 +335,31 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // 이미지 확대 모달 관련 변수 선언
+        // ========== 메뉴 이미지 클릭 시 모달 표시 ==========
         const menuImages = document.querySelectorAll('.menu-item img');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeBtn = document.querySelector('.close');
 
-        // 이미지 클릭 시 모달 표시
         menuImages.forEach(image => {
             image.addEventListener('click', function () {
                 modal.style.display = 'block';
                 modalImage.src = this.src;
-                history.pushState({ isModalOpen: true }, null, null); // 뒤로가기 상태 추가
+                history.pushState({ isModalOpen: true }, null, null);  //추가 문제시 삭제제
             });
         });
 
-        // X 버튼 클릭 시 모달 닫기
         if (closeBtn) {
             closeBtn.addEventListener('click', function () {
-                closeModal();
+                modal.style.display = 'none';
             });
         }
 
-        // 모달 외부 클릭 시 닫기
         modal.addEventListener('click', function (event) {
             if (event.target === modal) {
-                closeModal();
+                modal.style.display = 'none';
             }
         });
-
-        // 뒤로가기 버튼 동작 정의
-        window.addEventListener('popstate', function () {
-            if (modal.style.display === 'block') {
-                closeModal();
-            }
-        });
-
-        // 모달 닫기 함수
-        function closeModal() {
-            modal.style.display = 'none';
-            // 뒤로가기 상태가 남아 있을 경우 처리
-            if (history.state && history.state.isModalOpen) {
-                history.back();
-            }
-        }
-    });
 
         // ========== 언어 선택 드롭다운 ==========
         const languagePack = {
