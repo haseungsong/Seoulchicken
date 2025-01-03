@@ -85,7 +85,7 @@
         }
         .menu-item img, .drink-item img, .k-food-item img {
             width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
-            height: auto; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 */
+            height: 240px; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 * 필요시 조정/
             object-fit: cover; /* 이미지가 그리드 영역을 꽉 채우면서 비율을 유지 */
             max-width: 100%; /* 최대 너비를 100%로 설정 */
             border-radius: 10px; /* 이미지를 둥글게 설정 (선택 사항) */
@@ -529,7 +529,7 @@
 
         // Check if table number is provided
         if (!tableNumber || tableNumber.trim() === '') {
-            alert('테이블 번호를 입력해주세요. Por favor, insira o número da mesa.');
+            alert('Por favor, insira o número da mesa. 테이블 번호를 입력해주세요.');
             return; // Stop execution if table number is not provided
         }
     
@@ -706,7 +706,7 @@
                 <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
                     <h2>"Banban" chicken</h2> <!-- 메뉴 제목 설명 -->
                     <p>Metade/Metade</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/PP5DTVf.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
+                    <img src="https://i.imgur.com/nuyZ53i.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
                     <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
                     <button type="button">-</button> <!-- 수량 감소 버튼 -->
                     <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
@@ -714,11 +714,7 @@
                     R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
                 </div>
                            
-            </div>
-
-            <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: gray;">
-                As imagens acima podem ser diferentes do alimento real. Apenas para referência.
-            </footer>    
+            </div> 
 
         </section>
 
@@ -769,10 +765,6 @@
                 </div>
 
             </div>
-
-            <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: gray;">
-                As imagens acima podem ser diferentes do alimento real. Apenas para referência.
-            </footer>    
 
         </section>
 
@@ -977,57 +969,6 @@
     </div>
 
 
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const wrapper = document.querySelector('.content-wrapper');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    // Mouse events for desktop
-    wrapper.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - wrapper.offsetLeft;
-        scrollLeft = wrapper.scrollLeft;
-    });
-
-    wrapper.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
-
-    wrapper.addEventListener('mouseup', () => {
-        isDown = false;
-    });
-
-    wrapper.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust speed
-        wrapper.scrollLeft = scrollLeft - walk;
-    });
-
-    // Touch events for mobile
-    wrapper.addEventListener('touchstart', (e) => {
-        isDown = true;
-        startX = e.touches[0].pageX - wrapper.offsetLeft;
-        scrollLeft = wrapper.scrollLeft;
-    });
-
-    wrapper.addEventListener('touchend', () => {
-        isDown = false;
-    });
-
-    wrapper.addEventListener('touchmove', (e) => {
-        if (!isDown) return;
-        const x = e.touches[0].pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust speed
-        wrapper.scrollLeft = scrollLeft - walk;
-    });
-});
-</script>
 
 </body>
 </html>
