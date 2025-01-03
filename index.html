@@ -526,6 +526,12 @@
     
         // Get the table number from the input field
         var tableNumber = document.getElementById('table-number').value; // Ensure this matches your table number input field ID
+
+        // Check if table number is provided
+        if (!tableNumber || tableNumber.trim() === '') {
+            alert('테이블 번호를 입력해주세요. Por favor, insira o número da mesa.');
+            return; // Stop execution if table number is not provided
+        }
     
         // Collect order details
         document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
