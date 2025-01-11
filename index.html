@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+        .bone-menu-note {
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            font-size: 16px; /* 글자 크기 설정 */
+            color: #333; /* 글자색 설정 */
+            margin: 10px 0; /* 위아래 여백 추가 */
+            background-color: #f8f8f8; /* 배경색 설정 */
+            padding: 10px; /* 내부 여백 추가 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+            font-weight: bold; /* 글자 굵게 표시 */
+        }
+
+
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
         .menu, .drink-menu {
             padding: 20px;
@@ -648,6 +660,11 @@
     <div class="content-wrapper">
 
         <section id="menu" class="content"> <!-- 메뉴 섹션 -->
+
+            <div class="bone-menu-note">
+                O menu com osso tem um custo adicional de 10 reais!
+            </div>
+
             <div class="menu"> <!-- 메뉴 리스트 -->
                 <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
                     <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
