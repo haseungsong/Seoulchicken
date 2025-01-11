@@ -1,1078 +1,1079 @@
-<!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
-<html lang="pt"> <!-- 문서의 언어를 한국어로 설정 -->
-<head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
-    <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
-    <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
-    <style> 
-        body {
-            padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
+    <!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
+    <html lang="pt"> <!-- 문서의 언어를 한국어로 설정 -->
+    <head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
+        <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
+        <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
+        <style> 
+            body {
+                padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
+            }
+
+            .bone-menu-note {
+                text-align: center; /* 텍스트를 가운데 정렬 */
+                font-size: 16px; /* 글자 크기 설정 */
+                color: #007BFF; /* 글자색을 파란색으로 설정 */
+                margin: 10px 0; /* 위아래 여백 추가 */
+                background-color: #f8f8f8; /* 배경색 설정 */
+                padding: 10px; /* 내부 여백 추가 */
+                border-radius: 5px; /* 모서리를 둥글게 설정 */
+                font-weight: bold; /* 글자 굵게 표시 */
+            }
+
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
+            .menu, .drink-menu {
+                padding: 20px;
+                width: 100%;
+                max-width: 800px;
+                margin: auto;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
+                gap: 10px;
+                box-sizing: border-box;
+                justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
+                align-items: start; /* 그리드 항목을 상단 정렬 */
+                grid-auto-flow: row dense; 
+            }
+            .menu-item, .drink-item {
+                text-align: center;
+                width: 100%; /* 메뉴 및 음료 항목이 그리드 열 전체를 차지하도록 설정 */
+                grid-column: auto / span 1; /* 그리드 열을 한 칸만 차지 */
+                margin: 0; /* 불필요한 마진 제거 */
+                padding: 0; /* 불필요한 패딩 제거 */
+                border-bottom: 1px solid #ccc; /* 구분선을 회색으로 추가 */
+            }
+
+            body {
+                font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
+                margin: 0; /* 기본 여백 없앰 */
+                padding: 0; /* 기본 패딩 없앰 */
+                background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
+                color: #333; /* 본문 글자색을 어두운 회색으로 설정 */
+            }
+            /* h2와 p 사이의 간격 줄이기 */
+            h2 {
+                margin-bottom: 4px; /* h2 태그 아래쪽 간격을 5px로 설정 */
+            }
+
+            p {
+                margin-top: 2px; /* p 태그 위쪽 간격을 5px로 설정 */
+            }
+
+            nav {
+                background-color: #363434; /* 네비게이션 바 배경색을 연한 빨강으로 설정 */
+                color: white; /* 네비게이션 바 안의 글자색을 흰색으로 설정 */
+                text-align: left; /* 텍스트를 가운데 정렬 */
+                position: fixed; /* 네비게이션 바를 페이지 상단에 고정 */
+                width: 100%; /* 네비게이션 바의 너비를 전체 화면 크기로 설정 */
+                top: 0; /* 네비게이션 바를 화면의 가장 위로 위치시킴 */
+                z-index: 1000; /* 다른 요소들보다 네비게이션 바가 위에 위치하도록 설정 */
+                line-height: 40px; /* 줄 간격을 40px로 설정 */
+            }
+            nav a {
+                color: white; /* 네비게이션 바 안의 링크 텍스트 색상을 흰색으로 설정 */
+                padding: 10px 20px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
+                text-decoration: none; /* 링크에 밑줄 제거 */
+                font-size: 22px; /* 링크 텍스트 크기를 18px로 설정 */
+                font-weight: bold; /* 글씨를 굵게 설정 */
+            }
+            .content {
+                padding-top: 80px;
+                background-color: #F7F7F7;
+            }
+            .order-section button {
+                width: 40px; /* 버튼의 너비를 40px로 설정 */
+                height: 40px; /* 버튼의 높이를 40px로 설정 */
+                font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
+                display: flex; /* Flexbox 레이아웃 사용 */
+                align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
+                justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
+                background-color: #4c4c4c; /* 버튼의 배경색을 연한 빨강으로 설정 */
+                border: none; /* 버튼에 테두리 없음 */
+                color: white; /* 아이콘 색상을 흰색으로 설정 */
+                border-radius: 5px; /* 모서리를 둥글게 설정 */
+                cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
+                transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+            }
+            .menu-item img, .drink-item img, .k-food-item img {
+                width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
+                height: 240px; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 * 필요시 조정/
+                object-fit: cover; /* 이미지가 그리드 영역을 꽉 채우면서 비율을 유지 */
+                max-width: 100%; /* 최대 너비를 100%로 설정 */
+                border-radius: 10px; /* 이미지를 둥글게 설정 (선택 사항) */
+            }
+            .menu-item span.price-per-item, .drink-item span.price-per-item {
+                margin-right: 10px; /* 요소 오른쪽에 10px 여백 추가 */
+                font-weight: bold; /* 텍스트를 굵게 표시 */
+                color: #757474; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
+            }
+            button {
+                background-color: #515050; /* 버튼의 배경색을 연한 빨강으로 설정 */
+                border: none; /* 버튼에 테두리 없음 */
+                color: white; /* 버튼 텍스트를 흰색으로 설정 */
+                padding: 12px 15px; /* 버튼에 12px 위아래, 15px 좌우 패딩 추가 */
+                margin: 5px; /* 버튼 주위에 5px 여백 추가 */
+                border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+                font-size: 18px; /* 버튼 텍스트 크기를 18px로 설정 */
+                cursor: pointer; /* 버튼에 마우스 커서 포인터 모양 적용 */
+                transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+            }
+            button:hover {
+                background-color: #868585; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
+            }
+            input[type=number] {
+                width: 50px; /* 입력창 너비를 50px로 설정 */
+                padding: 8px; /* 입력창 내부 패딩을 8px로 설정 */
+                margin: 0 5px; /* 좌우에 5px 여백 추가 */
+                border-radius: 4px; /* 입력창 모서리를 4px 둥글게 설정 */
+                border: 1px solid #ccc; /* 회색 테두리 추가 */
+                font-size: 16px; /* 입력창 글자 크기를 16px로 설정 */
+                text-align: center; /* 입력된 숫자를 가운데 정렬 */
+            }
+            .introduction {
+                text-align: center; /* 텍스트를 가운데 정렬 */
+                padding: 20px; /* 패딩을 추가 */
+                margin-top: 20px; /* 상단에 여백 추가 */
+                background-image: url('https://i.imgur.com/JLLD580.jpeg'); /* 배경 이미지 설정 */
+                background-size: cover; /* 배경 이미지를 화면에 맞게 확장, 비율 유지 */
+                background-position: center; /* 배경 이미지 중앙 정렬 */
+                background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
+                height: 100vh; /* 화면의 높이를 100%로 설정 */
+                display: flex;
+                flex-direction: column; /* 텍스트를 세로 방향으로 정렬 */
+                justify-content: flex-start; /* 텍스트를 수직으로 가운데 정렬 */
+                align-items: center; /* 텍스트를 가로로 가운데 정렬 */
+            }
+
+            .introduction h1 {
+                font-size: 48px; /* 글자 크기를 크게 설정 */
+                font-weight: bold; /* 볼드체 설정 */
+                font-family: 'Arial', sans-serif; /* 다른 글씨체로 설정 (여기서는 Arial 사용) */
+                color: #FFD700; /* 텍스트 색상을 연한 빨강으로 설정 */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트에 그림자 추가 */
+                margin-top: 0; /* 상단 마진 제거 */
+                padding-top: 20px; /* 상단 패딩을 조금 추가하여 텍스트 위치 조정 */
+                text-align: center; /* 텍스트 가운데 정렬 */
+                top: 15%
+            }
+
+            .introduction-content {
+                position: absolute; /* 텍스트를 절대 위치로 설정 */
+                color: white; /* 텍스트 색상을 흰색으로 설정 */
+                background-color: rgba(0, 0, 0, 0.5); /* 텍스트 배경을 반투명 검정색으로 설정하여 가독성 향상 */
+                padding: 10px; /* 텍스트와 배경 사이에 여백 추가 */
+                border-radius: 5px; /* 모서리를 둥글게 처리 */
+                max-width: 90%; /* 텍스트 박스가 너무 넓어지지 않도록 제한 */
+                text-align: center; /* 텍스트를 가운데 정렬 */
+            }
+
+
+        @media (max-width: 600px) {
+            .introduction {
+                height: 300px; /* 모바일에서는 섹션 높이를 더 줄여서 텍스트와 이미지가 한 화면에 보이도록 설정 */
+                background-size: contain; /* 모바일에서는 배경 이미지가 잘리지 않도록 조정 */
+            }
+            .introduction-content {
+                font-size: 14px; /* 모바일에서 글씨 크기를 조금 더 작게 조정 */
+                padding: 5px; /* 모바일에서는 패딩을 줄여서 텍스트 박스 크기를 조정 */
+            }
+            nav a {
+                font-size: 18px; /* 네비게이션 텍스트 크기를 작게 조정 */
+                padding: 4px; /* 패딩을 줄여 모바일 화면에 맞추기 */
+            }
+            input[type="number"] {
+                width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
+                padding: 4px;
+            }
+            button {
+                padding: 6px; /* 버튼의 크기 줄이기 */
+                font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
+            }
+            .introduction {
+                background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
+                height: 100vh; /* 화면의 높이를 100%로 설정 */
+            }
+            .introduction h1 {
+                background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+                color: #eeee05; /* 텍스트 색상을 흰색으로 설정 */
+                padding: 10px; /* 텍스트 주변 여백 */
+                border-radius: 5px; /* 모서리를 둥글게 처리 */
+                max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
+                text-align: center; /* 텍스트를 가운데 정렬 */
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
+            }
+            .introduction p {
+                background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+                color: #f8f8f8; /* 텍스트 색상을 흰색으로 설정 */
+                padding: 10px; /* 텍스트 주변 여백 */
+                border-radius: 5px; /* 모서리를 둥글게 처리 */
+                max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
+                text-align: center; /* 텍스트를 가운데 정렬 */
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
+            }
+            #order-button, #cancel-button {
+                float: right; /* 버튼을 오른쪽으로 배치 */
+                background-color: #7a7a7a; /* 버튼 배경색을 연한 빨강으로 설정 */
+                padding: 5px 20px; /* 위아래로 5px, 좌우로 20px 패딩 추가 */
+                font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
+                margin-right: 10px; /* 오른쪽에 10px 여백 추가 */
+            }
+            #cancel-button {
+                margin-right: 5px; /* 취소 버튼 오른쪽에 5px 여백 추가 */
+            }
+            #total-amount {
+                color: rgb(255, 242, 0); /* 파란색으로 설정 */
+                float: right; /* 총 금액 표시를 오른쪽으로 배치 */
+                margin-right: 20px; /* 오른쪽에 20px 여백 추가 */
+                font-size: 20px; /* 텍스트 크기를 20px로 설정 */
+                font-weight: bold; /* 텍스트를 굵게 표시 */
+            }
+            #order-modal {
+                display: none; /* 기본적으로 모달 창을 숨김 */
+                position: fixed; /* 모달 창을 화면에 고정 */
+                left: 0; /* 왼쪽 끝에 배치 */
+                top: 0; /* 위쪽 끝에 배치 */
+                width: 100%; /* 모달 창 너비를 전체 화면으로 설정 */
+                height: 100%; /* 모달 창 높이를 전체 화면으로 설정 */
+                background: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 추가 */
+                z-index: 1050; /* 다른 요소들보다 모달 창이 위에 위치하도록 설정 */
+            }
+            #order-modal div {
+                background: white; /* 모달 창 안의 내용 배경을 흰색으로 설정 */
+                width: 60%; /* 너비를 화면의 60%로 설정 */
+                margin: 50px auto; /* 위아래로 50px 여백 추가, 좌우는 가운데 정렬 */
+                padding: 20px; /* 내부에 20px 패딩 추가 */
+                border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+            }
+            #order-modal h2, #order-modal li {
+                color: #333; /* 제목과 목록 글자색을 어두운 회색으로 설정 */
+                font-size: 24px; /* 제목과 목록의 글자 크기를 24px로 설정 */
+            }
+            #order-modal ul {
+                list-style-type: none; /* 목록 앞에 기본 목록 기호 없앰 */
+                padding: 0; /* 목록의 기본 패딩 없앰 */
+                margin-bottom: 20px; /* 목록 아래에 20px 여백 추가 */
+            }
+            #order-modal li {
+                padding: 8px; /* 목록 항목 내부에 8px 패딩 추가 */
+                margin-bottom: 4px; /* 목록 항목 아래에 4px 여백 추가 */
+                border-bottom: 1px solid #ccc; /* 목록 항목 아래에 회색 선 추가 */
+                background-color: #f9f9f9; /* 목록 항목의 배경색을 밝은 회색으로 설정 */
+                color: #333333; /* 목록 항목의 글자색을 어두운 회색으로 설정 */
+                font-size: 16px; /* 목록 항목의 글자 크기를 16px로 설정 */
+            }
+            #order-modal button {
+                background-color: #737373; /* 버튼 배경색을 연한 빨강으로 설정 */
+                border: none; /* 버튼 테두리 없음 */
+                color: white; /* 버튼 글자색을 흰색으로 설정 */
+                padding: 10px 20px; /* 버튼 내부에 10px 위아래, 20px 좌우 패딩 추가 */
+                margin-top: 5px; /* 위쪽에 5px 여백 추가 */
+                border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+                font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
+                cursor: pointer; /* 마우스 커서가 포인터 모양으로 변경 */
+                transition: background-color 0.3s ease; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+            }
+            #order-modal button:hover {
+                background-color: #636363; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
+            }
+            .nav-container {
+                display: flex; /* Flexbox 레이아웃 사용 */
+                justify-content: space-between; /* 요소들을 좌우로 배치 */
+                align-items: center; /* 요소들을 수직으로 가운데 정렬 */
+                padding: 0 40px; /* 좌우에 40px 패딩 추가 */
+            }
+            .order-section {
+                display: flex; /* 요소들을 Flexbox로 배치 */
+                align-items: center; /* 요소들을 수직으로 가운데 정렬 */
+                justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
+                flex-wrap: nowrap; /* 줄바꿈 방지 */
+            }
+
+            .modal {
+                display: none; /* 기본적으로 숨김 처리 */
+                position: fixed; /* 화면에 고정 */
+                z-index: 1000; /* 다른 요소보다 위에 표시 */
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9); /* 반투명 검정 배경 */
+            }
+            .modal-content {
+                display: block;
+                margin: auto;
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 25px;
+                background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 추가 */
+                padding: 5px; /* 버튼에 약간의 패딩 추가 */
+                color: white; /* 텍스트 색상을 흰색으로 설정 */
+                font-size: 35px;
+                font-weight: bold;
+                border-radius: 5px; /* 모서리를 둥글게 설정 */
+                cursor: pointer;
+                z-index: 1001; /* 모달보다 위에 표시되도록 설정 */
+            }
+            .close:hover {
+                background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 배경색을 더 어둡게 변경 */
+            }
+
+            .drink-menu {
+                padding: 20px;
+                width: 100%;
+                max-width: 800px;
+                margin: auto;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
+                gap: 10px;
+                box-sizing: border-box;
+                justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
+                align-items: start; /* 그리드 항목을 상단 정렬 */
+            }
+            .drink-item {
+                text-align: center;
+                width: 100%; /* 음료 항목이 그리드 열 전체를 차지하도록 설정 */
+            }
         }
 
-        .bone-menu-note {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            font-size: 16px; /* 글자 크기 설정 */
-            color: #007BFF; /* 글자색을 파란색으로 설정 */
-            margin: 10px 0; /* 위아래 여백 추가 */
-            background-color: #f8f8f8; /* 배경색 설정 */
-            padding: 10px; /* 내부 여백 추가 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            font-weight: bold; /* 글자 굵게 표시 */
-        }
+        </style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
-        .menu, .drink-menu {
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
-            gap: 10px;
-            box-sizing: border-box;
-            justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
-            align-items: start; /* 그리드 항목을 상단 정렬 */
-            grid-auto-flow: row dense; 
-        }
-        .menu-item, .drink-item {
-            text-align: center;
-            width: 100%; /* 메뉴 및 음료 항목이 그리드 열 전체를 차지하도록 설정 */
-            grid-column: auto / span 1; /* 그리드 열을 한 칸만 차지 */
-            margin: 0; /* 불필요한 마진 제거 */
-            padding: 0; /* 불필요한 패딩 제거 */
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ========== 메뉴 이미지 클릭 시 모달 표시 ==========
+            const menuImages = document.querySelectorAll('.menu-item img');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
-            margin: 0; /* 기본 여백 없앰 */
-            padding: 0; /* 기본 패딩 없앰 */
-            background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
-            color: #333; /* 본문 글자색을 어두운 회색으로 설정 */
-        }
-        /* h2와 p 사이의 간격 줄이기 */
-        h2 {
-            margin-bottom: 4px; /* h2 태그 아래쪽 간격을 5px로 설정 */
-        }
-
-        p {
-            margin-top: 2px; /* p 태그 위쪽 간격을 5px로 설정 */
-        }
-
-        nav {
-            background-color: #363434; /* 네비게이션 바 배경색을 연한 빨강으로 설정 */
-            color: white; /* 네비게이션 바 안의 글자색을 흰색으로 설정 */
-            text-align: left; /* 텍스트를 가운데 정렬 */
-            position: fixed; /* 네비게이션 바를 페이지 상단에 고정 */
-            width: 100%; /* 네비게이션 바의 너비를 전체 화면 크기로 설정 */
-            top: 0; /* 네비게이션 바를 화면의 가장 위로 위치시킴 */
-            z-index: 1000; /* 다른 요소들보다 네비게이션 바가 위에 위치하도록 설정 */
-            line-height: 40px; /* 줄 간격을 40px로 설정 */
-        }
-        nav a {
-            color: white; /* 네비게이션 바 안의 링크 텍스트 색상을 흰색으로 설정 */
-            padding: 10px 20px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
-            text-decoration: none; /* 링크에 밑줄 제거 */
-            font-size: 22px; /* 링크 텍스트 크기를 18px로 설정 */
-            font-weight: bold; /* 글씨를 굵게 설정 */
-        }
-        .content {
-            padding-top: 80px;
-            background-color: #F7F7F7;
-        }
-        .order-section button {
-            width: 40px; /* 버튼의 너비를 40px로 설정 */
-            height: 40px; /* 버튼의 높이를 40px로 설정 */
-            font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
-            display: flex; /* Flexbox 레이아웃 사용 */
-            align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
-            justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
-            background-color: #4c4c4c; /* 버튼의 배경색을 연한 빨강으로 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 아이콘 색상을 흰색으로 설정 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
-        .menu-item img, .drink-item img, .k-food-item img {
-            width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
-            height: 240px; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 * 필요시 조정/
-            object-fit: cover; /* 이미지가 그리드 영역을 꽉 채우면서 비율을 유지 */
-            max-width: 100%; /* 최대 너비를 100%로 설정 */
-            border-radius: 10px; /* 이미지를 둥글게 설정 (선택 사항) */
-        }
-        .menu-item span.price-per-item, .drink-item span.price-per-item {
-            margin-right: 10px; /* 요소 오른쪽에 10px 여백 추가 */
-            font-weight: bold; /* 텍스트를 굵게 표시 */
-            color: #757474; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
-        }
-        button {
-            background-color: #515050; /* 버튼의 배경색을 연한 빨강으로 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 버튼 텍스트를 흰색으로 설정 */
-            padding: 12px 15px; /* 버튼에 12px 위아래, 15px 좌우 패딩 추가 */
-            margin: 5px; /* 버튼 주위에 5px 여백 추가 */
-            border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
-            font-size: 18px; /* 버튼 텍스트 크기를 18px로 설정 */
-            cursor: pointer; /* 버튼에 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
-        button:hover {
-            background-color: #868585; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
-        }
-        input[type=number] {
-            width: 50px; /* 입력창 너비를 50px로 설정 */
-            padding: 8px; /* 입력창 내부 패딩을 8px로 설정 */
-            margin: 0 5px; /* 좌우에 5px 여백 추가 */
-            border-radius: 4px; /* 입력창 모서리를 4px 둥글게 설정 */
-            border: 1px solid #ccc; /* 회색 테두리 추가 */
-            font-size: 16px; /* 입력창 글자 크기를 16px로 설정 */
-            text-align: center; /* 입력된 숫자를 가운데 정렬 */
-        }
-        .introduction {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            padding: 20px; /* 패딩을 추가 */
-            margin-top: 20px; /* 상단에 여백 추가 */
-            background-image: url('https://i.imgur.com/JLLD580.jpeg'); /* 배경 이미지 설정 */
-            background-size: cover; /* 배경 이미지를 화면에 맞게 확장, 비율 유지 */
-            background-position: center; /* 배경 이미지 중앙 정렬 */
-            background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
-            height: 100vh; /* 화면의 높이를 100%로 설정 */
-            display: flex;
-            flex-direction: column; /* 텍스트를 세로 방향으로 정렬 */
-            justify-content: flex-start; /* 텍스트를 수직으로 가운데 정렬 */
-            align-items: center; /* 텍스트를 가로로 가운데 정렬 */
-        }
-
-        .introduction h1 {
-            font-size: 48px; /* 글자 크기를 크게 설정 */
-            font-weight: bold; /* 볼드체 설정 */
-            font-family: 'Arial', sans-serif; /* 다른 글씨체로 설정 (여기서는 Arial 사용) */
-            color: #FFD700; /* 텍스트 색상을 연한 빨강으로 설정 */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트에 그림자 추가 */
-            margin-top: 0; /* 상단 마진 제거 */
-            padding-top: 20px; /* 상단 패딩을 조금 추가하여 텍스트 위치 조정 */
-            text-align: center; /* 텍스트 가운데 정렬 */
-            top: 15%
-        }
-
-        .introduction-content {
-            position: absolute; /* 텍스트를 절대 위치로 설정 */
-            color: white; /* 텍스트 색상을 흰색으로 설정 */
-            background-color: rgba(0, 0, 0, 0.5); /* 텍스트 배경을 반투명 검정색으로 설정하여 가독성 향상 */
-            padding: 10px; /* 텍스트와 배경 사이에 여백 추가 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스가 너무 넓어지지 않도록 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-        }
-
-
-    @media (max-width: 600px) {
-        .introduction {
-            height: 300px; /* 모바일에서는 섹션 높이를 더 줄여서 텍스트와 이미지가 한 화면에 보이도록 설정 */
-            background-size: contain; /* 모바일에서는 배경 이미지가 잘리지 않도록 조정 */
-        }
-        .introduction-content {
-            font-size: 14px; /* 모바일에서 글씨 크기를 조금 더 작게 조정 */
-            padding: 5px; /* 모바일에서는 패딩을 줄여서 텍스트 박스 크기를 조정 */
-        }
-        nav a {
-            font-size: 18px; /* 네비게이션 텍스트 크기를 작게 조정 */
-            padding: 4px; /* 패딩을 줄여 모바일 화면에 맞추기 */
-        }
-        input[type="number"] {
-            width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
-            padding: 4px;
-        }
-        button {
-            padding: 6px; /* 버튼의 크기 줄이기 */
-            font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
-        }
-        .introduction {
-            background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
-            height: 100vh; /* 화면의 높이를 100%로 설정 */
-        }
-        .introduction h1 {
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-            color: #eeee05; /* 텍스트 색상을 흰색으로 설정 */
-            padding: 10px; /* 텍스트 주변 여백 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
-        }
-        .introduction p {
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-            color: #f8f8f8; /* 텍스트 색상을 흰색으로 설정 */
-            padding: 10px; /* 텍스트 주변 여백 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
-        }
-        #order-button, #cancel-button {
-            float: right; /* 버튼을 오른쪽으로 배치 */
-            background-color: #7a7a7a; /* 버튼 배경색을 연한 빨강으로 설정 */
-            padding: 5px 20px; /* 위아래로 5px, 좌우로 20px 패딩 추가 */
-            font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
-            margin-right: 10px; /* 오른쪽에 10px 여백 추가 */
-        }
-        #cancel-button {
-            margin-right: 5px; /* 취소 버튼 오른쪽에 5px 여백 추가 */
-        }
-        #total-amount {
-            color: rgb(255, 242, 0); /* 파란색으로 설정 */
-            float: right; /* 총 금액 표시를 오른쪽으로 배치 */
-            margin-right: 20px; /* 오른쪽에 20px 여백 추가 */
-            font-size: 20px; /* 텍스트 크기를 20px로 설정 */
-            font-weight: bold; /* 텍스트를 굵게 표시 */
-        }
-        #order-modal {
-            display: none; /* 기본적으로 모달 창을 숨김 */
-            position: fixed; /* 모달 창을 화면에 고정 */
-            left: 0; /* 왼쪽 끝에 배치 */
-            top: 0; /* 위쪽 끝에 배치 */
-            width: 100%; /* 모달 창 너비를 전체 화면으로 설정 */
-            height: 100%; /* 모달 창 높이를 전체 화면으로 설정 */
-            background: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 추가 */
-            z-index: 1050; /* 다른 요소들보다 모달 창이 위에 위치하도록 설정 */
-        }
-        #order-modal div {
-            background: white; /* 모달 창 안의 내용 배경을 흰색으로 설정 */
-            width: 60%; /* 너비를 화면의 60%로 설정 */
-            margin: 50px auto; /* 위아래로 50px 여백 추가, 좌우는 가운데 정렬 */
-            padding: 20px; /* 내부에 20px 패딩 추가 */
-            border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
-        }
-        #order-modal h2, #order-modal li {
-            color: #333; /* 제목과 목록 글자색을 어두운 회색으로 설정 */
-            font-size: 24px; /* 제목과 목록의 글자 크기를 24px로 설정 */
-        }
-        #order-modal ul {
-            list-style-type: none; /* 목록 앞에 기본 목록 기호 없앰 */
-            padding: 0; /* 목록의 기본 패딩 없앰 */
-            margin-bottom: 20px; /* 목록 아래에 20px 여백 추가 */
-        }
-        #order-modal li {
-            padding: 8px; /* 목록 항목 내부에 8px 패딩 추가 */
-            margin-bottom: 4px; /* 목록 항목 아래에 4px 여백 추가 */
-            border-bottom: 1px solid #ccc; /* 목록 항목 아래에 회색 선 추가 */
-            background-color: #f9f9f9; /* 목록 항목의 배경색을 밝은 회색으로 설정 */
-            color: #333333; /* 목록 항목의 글자색을 어두운 회색으로 설정 */
-            font-size: 16px; /* 목록 항목의 글자 크기를 16px로 설정 */
-        }
-        #order-modal button {
-            background-color: #737373; /* 버튼 배경색을 연한 빨강으로 설정 */
-            border: none; /* 버튼 테두리 없음 */
-            color: white; /* 버튼 글자색을 흰색으로 설정 */
-            padding: 10px 20px; /* 버튼 내부에 10px 위아래, 20px 좌우 패딩 추가 */
-            margin-top: 5px; /* 위쪽에 5px 여백 추가 */
-            border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
-            font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
-            cursor: pointer; /* 마우스 커서가 포인터 모양으로 변경 */
-            transition: background-color 0.3s ease; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
-        #order-modal button:hover {
-            background-color: #636363; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
-        }
-        .nav-container {
-            display: flex; /* Flexbox 레이아웃 사용 */
-            justify-content: space-between; /* 요소들을 좌우로 배치 */
-            align-items: center; /* 요소들을 수직으로 가운데 정렬 */
-            padding: 0 40px; /* 좌우에 40px 패딩 추가 */
-        }
-        .order-section {
-            display: flex; /* 요소들을 Flexbox로 배치 */
-            align-items: center; /* 요소들을 수직으로 가운데 정렬 */
-            justify-content: flex-end; /* 요소들을 오른쪽 끝으로 정렬 */
-            flex-wrap: nowrap; /* 줄바꿈 방지 */
-        }
-
-        .modal {
-            display: none; /* 기본적으로 숨김 처리 */
-            position: fixed; /* 화면에 고정 */
-            z-index: 1000; /* 다른 요소보다 위에 표시 */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* 반투명 검정 배경 */
-        }
-        .modal-content {
-            display: block;
-            margin: auto;
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 추가 */
-            padding: 5px; /* 버튼에 약간의 패딩 추가 */
-            color: white; /* 텍스트 색상을 흰색으로 설정 */
-            font-size: 35px;
-            font-weight: bold;
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            cursor: pointer;
-            z-index: 1001; /* 모달보다 위에 표시되도록 설정 */
-        }
-        .close:hover {
-            background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 배경색을 더 어둡게 변경 */
-        }
-
-        .drink-menu {
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
-            gap: 10px;
-            box-sizing: border-box;
-            justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
-            align-items: start; /* 그리드 항목을 상단 정렬 */
-        }
-        .drink-item {
-            text-align: center;
-            width: 100%; /* 음료 항목이 그리드 열 전체를 차지하도록 설정 */
-        }
-    }
-
-    </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // ========== 메뉴 이미지 클릭 시 모달 표시 ==========
-        const menuImages = document.querySelectorAll('.menu-item img');
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const closeBtn = document.querySelector('.close');
-
-        menuImages.forEach(image => {
-            image.addEventListener('click', function () {
-                modal.style.display = 'block';
-                modalImage.src = this.src;
-                history.pushState({ isModalOpen: true }, null, null);  //추가 문제시 삭제제
+            menuImages.forEach(image => {
+                image.addEventListener('click', function () {
+                    modal.style.display = 'block';
+                    modalImage.src = this.src;
+                    history.pushState({ isModalOpen: true }, null, null);  //추가 문제시 삭제제
+                });
             });
-        });
 
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-        }
-
-        modal.addEventListener('click', function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // ========== 언어 선택 드롭다운 ==========
-        const languagePack = {
-            korean: {
-                'welcome': '서울치킨에 오신걸 환영합니다!',
-                'originalChicken': '오리지널 치킨: 바삭하고 고소함',
-                'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
-                'home': '홈',
-                'menu': '치킨',
-                'drinks': '음료',
-                'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다.',
-                'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
-            },
-            portuguese: {
-                'welcome': 'Bem-vindo ao Seoul Chicken!',
-                'originalChicken': 'Frango original: crocante e saboroso',
-                'seasonedChicken': 'Frango temperado: doce e picante',
-                'home': 'Home',
-                'menu': 'Chicken',
-                'K-food': 'K-food',
-                'drinks': 'Bebidas',
-                'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem.',
-                'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço.',
-            }
-        };
-
-        function updateLanguage(language) {
-            const introductionHeading = document.querySelector('.introduction h1');
-            if (introductionHeading) {
-                introductionHeading.textContent = languagePack[language]['welcome'];
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function () {
+                    modal.style.display = 'none';
+                });
             }
 
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (key && languagePack[language][key]) {
-                    element.textContent = languagePack[language][key];
+            modal.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
                 }
             });
-        }
 
-        const languageSelect = document.getElementById('language-select');
-        if (languageSelect) {
-            languageSelect.addEventListener('change', function () {
-                updateLanguage(this.value);
-            });
-        }
-        updateLanguage('portuguese'); // 기본 언어 설정
-
-        // ========== 메뉴 및 음료 버튼 클릭 처리 ==========
-        document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
-            button.addEventListener('click', function () {
-                const container = this.closest('.menu-item, .drink-item');
-                if (container) {
-                    const inputField = container.querySelector('input[type=number]');
-                    const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
-                    const totalPriceElement = container.querySelector('.total-price');
-
-                    let quantity = parseInt(inputField.value);
-                    quantity = this.textContent === '+' ? quantity + 1 : Math.max(0, quantity - 1);
-                    inputField.value = quantity;
-
-                    if (totalPriceElement) {
-                        totalPriceElement.textContent = quantity * pricePerItem;
-                    }
-
-                    updateTotalAmount();
+            // ========== 언어 선택 드롭다운 ==========
+            const languagePack = {
+                korean: {
+                    'welcome': '서울치킨에 오신걸 환영합니다!',
+                    'originalChicken': '오리지널 치킨: 바삭하고 고소함',
+                    'seasonedChicken': '양념치킨: 달콤하고 매콤한 양념',
+                    'home': '홈',
+                    'menu': '치킨',
+                    'drinks': '음료',
+                    'intro1': '봉헤찌로의 새로운 치킨 전설에 오신 것을 환영합니다, 맛과 행복이 공존하는 곳입니다.',
+                    'intro2': '지역에서 시작해 전국적으로 사랑받는 우리 치킨집은 최고의 맛과 서비스를 제공합니다. 모든 순간이 즐거움으로 가득한 봉헤찌로의 맛있는 치킨 세계로 여러분을 초대합니다.',
+                },
+                portuguese: {
+                    'welcome': 'Bem-vindo ao Seoul Chicken!',
+                    'originalChicken': 'Frango original: crocante e saboroso',
+                    'seasonedChicken': 'Frango temperado: doce e picante',
+                    'home': 'Home',
+                    'menu': 'Chicken',
+                    'K-food': 'K-food',
+                    'drinks': 'Bebidas',
+                    'intro1': 'Bem-vindo à nova lenda de frango de Sao Paulo, um lugar onde o sabor e a felicidade coexistem.',
+                    'intro2': 'Nossa casa de frango, que começou localmente e agora é amada em todo o país, oferece o melhor sabor e serviço.',
                 }
-            });
-        });
+            };
 
-        function updateTotalAmount() {
-            let totalAmount = 0;
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const quantity = parseInt(item.querySelector('input[type=number]').value);
-                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
-                totalAmount += quantity * pricePerItem;
-            });
-            const formattedTotalAmount = `Total: R$ ${totalAmount}`;
-            const totalAmountDisplay = document.getElementById('total-amount');
-            if (totalAmountDisplay) {
-                totalAmountDisplay.textContent = formattedTotalAmount;
-            }
-            updateModalTotalAmount(formattedTotalAmount);
-        }
+            function updateLanguage(language) {
+                const introductionHeading = document.querySelector('.introduction h1');
+                if (introductionHeading) {
+                    introductionHeading.textContent = languagePack[language]['welcome'];
+                }
 
-        function updateModalTotalAmount(totalAmountText) {
-            const modalTotal = document.getElementById('modal-total');
-            if (modalTotal) {
-                modalTotal.textContent = totalAmountText;
-            }
-        }
-
-        // ========== 섹션 네비게이션 ==========
-        const sections = document.querySelectorAll('.content');
-        const navLinks = document.querySelectorAll('nav a');
-
-        function hideAllSections() {
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
-
-        function showSection(id) {
-            hideAllSections();
-            const section = document.querySelector(id);
-            if (section) {
-                section.style.display = 'block';
-            }
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                showSection(this.getAttribute('href'));
-            });
-        });
-
-        showSection('#menu');
-
-        // ========== 주문 버튼 ==========
-        const orderButton = document.getElementById('order-button');
-        if (orderButton) {
-            orderButton.addEventListener('click', function () {
-                const orderDetails = [];
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const name = item.querySelector('h2').textContent;
-                    const quantity = item.querySelector('input[type=number]').value;
-                    if (parseInt(quantity) > 0) {
-                        orderDetails.push(`${name}: ${quantity}`);
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    if (key && languagePack[language][key]) {
+                        element.textContent = languagePack[language][key];
                     }
                 });
+            }
 
-                if (orderDetails.length > 0) {
-                    document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
-                    document.getElementById('order-modal').style.display = 'block';
-                } else {
-                    alert('Selecione um item do menu, por favor!.주문할 메뉴를 선택해 주세요.');
+            const languageSelect = document.getElementById('language-select');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function () {
+                    updateLanguage(this.value);
+                });
+            }
+            updateLanguage('portuguese'); // 기본 언어 설정
+
+            // ========== 메뉴 및 음료 버튼 클릭 처리 ==========
+            document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const container = this.closest('.menu-item, .drink-item');
+                    if (container) {
+                        const inputField = container.querySelector('input[type=number]');
+                        const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                        const totalPriceElement = container.querySelector('.total-price');
+
+                        let quantity = parseInt(inputField.value);
+                        quantity = this.textContent === '+' ? quantity + 1 : Math.max(0, quantity - 1);
+                        inputField.value = quantity;
+
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = quantity * pricePerItem;
+                        }
+
+                        updateTotalAmount();
+                    }
+                });
+            });
+
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('input[type=number]').value);
+                    const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+                    totalAmount += quantity * pricePerItem;
+                });
+                const formattedTotalAmount = `Total: R$ ${totalAmount}`;
+                const totalAmountDisplay = document.getElementById('total-amount');
+                if (totalAmountDisplay) {
+                    totalAmountDisplay.textContent = formattedTotalAmount;
+                }
+                updateModalTotalAmount(formattedTotalAmount);
+            }
+
+            function updateModalTotalAmount(totalAmountText) {
+                const modalTotal = document.getElementById('modal-total');
+                if (modalTotal) {
+                    modalTotal.textContent = totalAmountText;
+                }
+            }
+
+            // ========== 섹션 네비게이션 ==========
+            const sections = document.querySelectorAll('.content');
+            const navLinks = document.querySelectorAll('nav a');
+
+            function hideAllSections() {
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+            }
+
+            function showSection(id) {
+                hideAllSections();
+                const section = document.querySelector(id);
+                if (section) {
+                    section.style.display = 'block';
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    showSection(this.getAttribute('href'));
+                });
+            });
+
+            showSection('#menu');
+
+            // ========== 주문 버튼 ==========
+            const orderButton = document.getElementById('order-button');
+            if (orderButton) {
+                orderButton.addEventListener('click', function () {
+                    const orderDetails = [];
+                    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                        const name = item.querySelector('h2').textContent;
+                        const quantity = item.querySelector('input[type=number]').value;
+                        if (parseInt(quantity) > 0) {
+                            orderDetails.push(`${name}: ${quantity}`);
+                        }
+                    });
+
+                    if (orderDetails.length > 0) {
+                        document.getElementById('order-list').innerHTML = orderDetails.join('<br>');
+                        document.getElementById('order-modal').style.display = 'block';
+                    } else {
+                        alert('Selecione um item do menu, por favor!.주문할 메뉴를 선택해 주세요.');
+                    }
+                });
+            }
+
+            const confirmButton = document.getElementById('confirm-button');
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function () {
+                    alert('Pedido concluído!. 주문이 완료되었습니다!');
+                    closeModal();
+                });
+            }
+
+            const closeButton = document.getElementById('close-modal-button');
+            if (closeButton) {
+                closeButton.addEventListener('click', closeModal);
+            }
+
+            function closeModal() {
+                document.getElementById('order-modal').style.display = 'none';
+            }
+        });
+    </script>   
+
+        <script>
+        // 주문 데이터를 Firebase에 전송하는 함수
+        function sendOrderData() {
+            var orderDetails = [];
+        
+            // Get the table number from the input field
+            var tableNumber = document.getElementById('table-number').value; // Ensure this matches your table number input field ID
+
+            // Check if table number is provided
+            if (!tableNumber || tableNumber.trim() === '') {
+                alert('Por favor, insira o número da mesa. 테이블 번호를 입력해주세요.');
+                return; // Stop execution if table number is not provided
+            }
+        
+            // Collect order details
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const name = item.querySelector('h2').textContent; // h2의 텍스트를 가져옴
+                const quantity = item.querySelector('input[type=number]').value;
+                if (parseInt(quantity) > 0) {
+                    orderDetails.push({ name: name, quantity: quantity });
                 }
             });
-        }
-
-        const confirmButton = document.getElementById('confirm-button');
-        if (confirmButton) {
-            confirmButton.addEventListener('click', function () {
-                alert('Pedido concluído!. 주문이 완료되었습니다!');
+        
+            // Get the total amount from the modal
+            var totalAmount = document.getElementById('modal-total').textContent;
+        
+            // Send the data to Firebase with the new order
+            firebase.database().ref('orders').push({
+                timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // Send timestamp first
+                tableNumber: tableNumber, // Send table number second
+                orderList: orderDetails, // Send order details third
+                totalAmount: totalAmount // Send total amount last
+            }).then(() => {
+                alert('Pedido concluído!.주문이 성공적으로 처리되었습니다.');
                 closeModal();
+            }).catch(error => {
+                console.error("Error sending order data:", error);
+                alert('Ocorreu um erro ao processar o pedido!.주문 처리 중 오류가 발생했습니다: ' + error.message);
             });
         }
-
-        const closeButton = document.getElementById('close-modal-button');
-        if (closeButton) {
-            closeButton.addEventListener('click', closeModal);
-        }
-
+        
+        // 모달 창을 닫는 함수
         function closeModal() {
             document.getElementById('order-modal').style.display = 'none';
         }
-    });
-</script>   
-
-    <script>
-    // 주문 데이터를 Firebase에 전송하는 함수
-    function sendOrderData() {
-        var orderDetails = [];
-    
-        // Get the table number from the input field
-        var tableNumber = document.getElementById('table-number').value; // Ensure this matches your table number input field ID
-
-        // Check if table number is provided
-        if (!tableNumber || tableNumber.trim() === '') {
-            alert('Por favor, insira o número da mesa. 테이블 번호를 입력해주세요.');
-            return; // Stop execution if table number is not provided
-        }
-    
-        // Collect order details
-        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-            const name = item.querySelector('h2').textContent; // h2의 텍스트를 가져옴
-            const quantity = item.querySelector('input[type=number]').value;
-            if (parseInt(quantity) > 0) {
-                orderDetails.push({ name: name, quantity: quantity });
-            }
-        });
-    
-        // Get the total amount from the modal
-        var totalAmount = document.getElementById('modal-total').textContent;
-    
-        // Send the data to Firebase with the new order
-        firebase.database().ref('orders').push({
-            timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // Send timestamp first
-            tableNumber: tableNumber, // Send table number second
-            orderList: orderDetails, // Send order details third
-            totalAmount: totalAmount // Send total amount last
-        }).then(() => {
-            alert('Pedido concluído!.주문이 성공적으로 처리되었습니다.');
-            closeModal();
-        }).catch(error => {
-            console.error("Error sending order data:", error);
-            alert('Ocorreu um erro ao processar o pedido!.주문 처리 중 오류가 발생했습니다: ' + error.message);
-        });
-    }
-    
-    // 모달 창을 닫는 함수
-    function closeModal() {
-        document.getElementById('order-modal').style.display = 'none';
-    }
-    </script>
-    
-
-    <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;"> <!-- 주문 확인 모달 창 -->
-        <div style="background:#FFF; width:60%; margin:50px auto; padding:20px; border-radius:10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> <!-- 모달 창 안의 내용 -->
-            <h2>Order Confirmation</h2> <!-- 주문 확인 제목 -->
-            
-            <!-- 주문 내역을 표시할 리스트 -->
-            <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
-            </ul>
-            
-            <!-- Table Number Input Field (Moved above the total amount) -->
-            <div style="margin-bottom: 20px;">
-                <label for="table-number">Table Number:</label>
-                <input type="number" id="table-number" name="table-number" min="1" required>
-            </div>
-
-            <!-- 모달 창 내 총 금액 표시 -->
-            <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
-
-            <!-- 주문 데이터를 전송하는 폼 -->
-            <form id="orderForm" onsubmit="sendOrderData(); return false;">
-                <button type="submit">Order completed</button> <!-- 주문 완료 버튼 -->
-            </form>
-                            
-            <button onclick="closeModal()">Close</button> <!-- 모달 창 닫기 버튼 -->
-        </div>
-    
-    </div>
-
-
-       <!-- Firebase SDK 추가 (8.x 버전) -->
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-   
-       <script>
-       // Firebase 프로젝트 설정 정보
-       const firebaseConfig = {
-           apiKey: "AIzaSyBltwkIkocgAMya7_lKglLVikl9dIzegoI",
-           authDomain: "seoulchicken-fa390.firebaseapp.com",
-           databaseURL: "https://seoulchicken-fa390-default-rtdb.firebaseio.com",
-           projectId: "seoulchicken-fa390",
-           storageBucket: "seoulchicken-fa390.appspot.com",
-           messagingSenderId: "159382576680",
-           appId: "1:159382576680:web:8d5440ea41ba4cb89d9f1d",
-           measurementId: "G-FRCNM1T9JB"
-       };
-   
-       // Firebase 초기화
-       firebase.initializeApp(firebaseConfig);
-   
-       // Firebase Realtime Database 참조 설정
-       const database = firebase.database();
-       </script>
-
-</head>
-<body> <!-- 본문 시작 -->
-    <nav> <!-- 네비게이션 바 -->
-        <select id="language-select"> <!-- 언어 선택 드롭다운 -->
-            <option value="portuguese">Português</option> <!-- 포르투갈어 옵션 -->
-            <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
-
-        </select>
-        <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
-        <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
-        <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
-
+        </script>
         
-        <div class="order-section"> <!-- 주문 섹션 -->
-            <span id="total-amount" data-key="totalAmount">Total: 0R$</span> <!-- 총 금액 표시 -->
-            <button id="order-button">
-                <i class="fas fa-shopping-cart"></i> <!-- Shopping cart icon for "Pedido" -->
-            </button>
-            <button id="cancel-button">
-                <i class="fas fa-times"></i> <!-- Close icon for "Cancela" -->
-            </button></div>
-        </div>
-    </nav>
 
-    <!-- content-wrapper로 모든 섹션을 감싸기 -->
-    <div class="content-wrapper">
-
-        <section id="menu" class="content"> <!-- 메뉴 섹션 -->
-
-            <div class="bone-menu-note">
-                O menu com osso tem um custo adicional de 10 reais!
-            </div>
-
-            <div class="menu"> <!-- 메뉴 리스트 -->
-                <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
-                    <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Crispy and crunchy</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/0wbQzWC.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">79</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
+        <div id="order-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1050; overflow-y: auto;"> <!-- 주문 확인 모달 창 -->
+            <div style="background:#FFF; width:60%; margin:50px auto; padding:20px; border-radius:10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> <!-- 모달 창 안의 내용 -->
+                <h2>Order Confirmation</h2> <!-- 주문 확인 제목 -->
                 
-                <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
-                    <h2>"Yangnum" chicken</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Molho de tempero</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/ktSrSoA.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
+                <!-- 주문 내역을 표시할 리스트 -->
+                <ul id="order-list" style="list-style-type: none; padding: 0; margin-bottom: 20px; font-size: 16px;">
+                </ul>
                 
-                <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
-                    <h2>" Cebola " chicken</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Molho de cebola</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/o5VIFjP.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity3" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-                
-                <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
-                    <h2>"Purinkle" chicken</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Tempero de queijo</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/iiNvbGk.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity4" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-                
-                <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
-                    <h2>"Shoyu" chicken</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Molho de Shoyu</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/GKteJsD.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity5" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-                
-                <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
-                    <h2>"Banban" Org&Yang</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Original/Yangnum</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/VtTPn0P.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                <!-- Table Number Input Field (Moved above the total amount) -->
+                <div style="margin-bottom: 20px;">
+                    <label for="table-number">Table Number:</label>
+                    <input type="number" id="table-number" name="table-number" min="1" required>
                 </div>
 
-                <div class="menu-item" id="menu7"> <!-- 메뉴 항목 7 -->
-                    <h2>"Banban" Org&Ceb</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Original/Cebola</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/QpSNK3l.jpeg" alt="메뉴 7 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
+                <!-- 모달 창 내 총 금액 표시 -->
+                <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
 
-                <div class="menu-item" id="menu8"> <!-- 메뉴 항목 8 -->
-                    <h2>"Banban" Org&Pur</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Original/Purinkle</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/186KWBu.jpeg" alt="메뉴 8 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu9"> <!-- 메뉴 항목 9 -->
-                    <h2>"Banban" Yang&Ceb</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Yangnum/Cebola</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/jqQlmk6.jpeg" alt="메뉴 9 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu10"> <!-- 메뉴 항목 10 -->
-                    <h2>"Banban" Yang&Pur</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Yangnum/Purinkle</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/WSu62xR.jpeg" alt="메뉴 10 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu11"> <!-- 메뉴 항목 11 -->
-                    <h2>"Banban" Yang&Sho</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Yangnum/Shoyu</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/1Lemp4n.jpeg" alt="메뉴 11 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu12"> <!-- 메뉴 항목 12 -->
-                    <h2>"Banban" Ceb&Pur</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Cebola/Purinkle</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/7t3rfeG.jpeg" alt="메뉴 12 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu13"> <!-- 메뉴 항목 13 -->
-                    <h2>"Banban" Ceb&Sho</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Cebola/Shoyu</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/3XTN1wb.jpeg" alt="메뉴 13 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
-                <div class="menu-item" id="menu14"> <!-- 메뉴 항목 14 -->
-                    <h2>"Banban" Pur&Sho</h2> <!-- 메뉴 제목 설명 -->
-                    <p>Purinkle/Shoyu</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/e6p9N38.jpeg" alt="메뉴 14 사진"> <!-- 메뉴 이미지 -->
-                    <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-                           
-            </div> 
-
-        </section>
-
-        <section id="K-food" class="content"> <!-- K-food 섹션 -->
-            <div class="menu"> <!-- K-food 리스트 -->
-                <div class="menu-item" id="k-food1"> <!-- K-food 항목 1 -->
-                    <h2>"Teokpoki" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Street food</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/h2X46bH.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
-                    <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">42</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-        
-                <div class="menu-item" id="k-food2"> <!-- K-food 항목 2 -->
-                    <h2>"Lapokki" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Teokpoki com lamen</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/AmGJsBL.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
-                    <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">50</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-                
-                <div class="menu-item" id="k-food3"> <!-- K-food 항목 3 -->
-                    <h2>"Batata frita" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Batatas rústicas</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/WCNjQ1W.jpeg" alt="K-food 3 사진"> <!-- K-food 이미지 -->
-                    <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">30</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
+                <!-- 주문 데이터를 전송하는 폼 -->
+                <form id="orderForm" onsubmit="sendOrderData(); return false;">
+                    <button type="submit">Order completed</button> <!-- 주문 완료 버튼 -->
+                </form>
                                 
-                <div class="menu-item" id="k-food4"> <!-- K-food 항목 2 -->
-                    <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Batatas rústicas</p> <!-- 메뉴 설명 -->
-                    <img src="https://i.imgur.com/cS1xtIM.jpeg" alt="K-food 4 사진"> <!-- K-food 이미지 -->
-                    <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">45</span>
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
-                </div>
-
+                <button onclick="closeModal()">Close</button> <!-- 모달 창 닫기 버튼 -->
             </div>
+        
+        </div>
 
-        </section>
 
-        <div id="drinks" class="content"> <!-- 음료 섹션 -->
-            <div class="drink-menu"> <!-- 음료 리스트 -->
-                <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
-                    <h2>"Coca" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Lata 250ml</p> <!-- 음료 설명 -->
-                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
-                    <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+        <!-- Firebase SDK 추가 (8.x 버전) -->
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+        <script>
+        // Firebase 프로젝트 설정 정보
+        const firebaseConfig = {
+            apiKey: "AIzaSyBltwkIkocgAMya7_lKglLVikl9dIzegoI",
+            authDomain: "seoulchicken-fa390.firebaseapp.com",
+            databaseURL: "https://seoulchicken-fa390-default-rtdb.firebaseio.com",
+            projectId: "seoulchicken-fa390",
+            storageBucket: "seoulchicken-fa390.appspot.com",
+            messagingSenderId: "159382576680",
+            appId: "1:159382576680:web:8d5440ea41ba4cb89d9f1d",
+            measurementId: "G-FRCNM1T9JB"
+        };
+    
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+    
+        // Firebase Realtime Database 참조 설정
+        const database = firebase.database();
+        </script>
+
+    </head>
+    <body> <!-- 본문 시작 -->
+        <nav> <!-- 네비게이션 바 -->
+            <select id="language-select"> <!-- 언어 선택 드롭다운 -->
+                <option value="portuguese">Português</option> <!-- 포르투갈어 옵션 -->
+                <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
+
+            </select>
+            <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
+            <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
+            <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
+
+            
+            <div class="order-section"> <!-- 주문 섹션 -->
+                <span id="total-amount" data-key="totalAmount">Total: 0R$</span> <!-- 총 금액 표시 -->
+                <button id="order-button">
+                    <i class="fas fa-shopping-cart"></i> <!-- Shopping cart icon for "Pedido" -->
+                </button>
+                <button id="cancel-button">
+                    <i class="fas fa-times"></i> <!-- Close icon for "Cancela" -->
+                </button></div>
+            </div>
+        </nav>
+
+        <!-- content-wrapper로 모든 섹션을 감싸기 -->
+        <div class="content-wrapper">
+
+            <section id="menu" class="content"> <!-- 메뉴 섹션 -->
+
+                <div class="bone-menu-note">
+                    O menu com osso tem um custo adicional de 10 reais!
                 </div>
-                <div class="menu-item"> <!-- 음료 항목 2 -->
-                    <h2>"Coca zero" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Lata 250ml</p> <!-- 음료 설명 -->
-                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink2"> <!-- 음료 이미지 -->
-                    <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+
+                <div class="menu"> <!-- 메뉴 리스트 -->
+                    <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
+                        <h2>"Original" chicken</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Crispy and crunchy</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/0wbQzWC.jpeg" alt="메뉴 1 사진" class="menu-image"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">79</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="menu2"> <!-- 메뉴 항목 2 -->
+                        <h2>"Yangnum" chicken</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Molho de tempero</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/ktSrSoA.jpeg" alt="메뉴 2 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="menu3"> <!-- 메뉴 항목 3 -->
+                        <h2>" Cebola " chicken</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Molho de cebola</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/o5VIFjP.jpeg" alt="메뉴 3 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity3" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="menu4"> <!-- 메뉴 항목 4 -->
+                        <h2>"Purinkle" chicken</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Tempero de queijo</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/iiNvbGk.jpeg" alt="메뉴 4 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity4" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="menu5"> <!-- 메뉴 항목 5 -->
+                        <h2>"Shoyu" chicken</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Molho de Shoyu</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/GKteJsD.jpeg" alt="메뉴 5 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity5" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
+                        <h2>"Banban" Org&Yang</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Original/Yangnum</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/VtTPn0P.jpeg" alt="메뉴 6 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu7"> <!-- 메뉴 항목 7 -->
+                        <h2>"Banban" Org&Ceb</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Original/Cebola</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/QpSNK3l.jpeg" alt="메뉴 7 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu8"> <!-- 메뉴 항목 8 -->
+                        <h2>"Banban" Org&Pur</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Original/Purinkle</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/186KWBu.jpeg" alt="메뉴 8 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu9"> <!-- 메뉴 항목 9 -->
+                        <h2>"Banban" Yang&Ceb</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Yangnum/Cebola</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/jqQlmk6.jpeg" alt="메뉴 9 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu10"> <!-- 메뉴 항목 10 -->
+                        <h2>"Banban" Yang&Pur</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Yangnum/Purinkle</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/WSu62xR.jpeg" alt="메뉴 10 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu11"> <!-- 메뉴 항목 11 -->
+                        <h2>"Banban" Yang&Sho</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Yangnum/Shoyu</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/1Lemp4n.jpeg" alt="메뉴 11 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu12"> <!-- 메뉴 항목 12 -->
+                        <h2>"Banban" Ceb&Pur</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Cebola/Purinkle</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/7t3rfeG.jpeg" alt="메뉴 12 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu13"> <!-- 메뉴 항목 13 -->
+                        <h2>"Banban" Ceb&Sho</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Cebola/Shoyu</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/3XTN1wb.jpeg" alt="메뉴 13 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
+                    <div class="menu-item" id="menu14"> <!-- 메뉴 항목 14 -->
+                        <h2>"Banban" Pur&Sho</h2> <!-- 메뉴 제목 설명 -->
+                        <p>Purinkle/Shoyu</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/e6p9N38.jpeg" alt="메뉴 14 사진"> <!-- 메뉴 이미지 -->
+                        <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">85</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity6" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                            
+                </div> 
+
+            </section>
+
+            <section id="K-food" class="content"> <!-- K-food 섹션 -->
+                <div class="menu"> <!-- K-food 리스트 -->
+                    <div class="menu-item" id="k-food1"> <!-- K-food 항목 1 -->
+                        <h2>"Teokpoki" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Street food</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/h2X46bH.jpeg" alt="K-food 1 사진" class="menu-image"> <!-- K-food 이미지 -->
+                        <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">42</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+            
+                    <div class="menu-item" id="k-food2"> <!-- K-food 항목 2 -->
+                        <h2>"Lapokki" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Teokpoki com lamen</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/AmGJsBL.jpeg" alt="K-food 2 사진"> <!-- K-food 이미지 -->
+                        <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">50</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                    
+                    <div class="menu-item" id="k-food3"> <!-- K-food 항목 3 -->
+                        <h2>"Batata frita" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Batatas rústicas</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/WCNjQ1W.jpeg" alt="K-food 3 사진"> <!-- K-food 이미지 -->
+                        <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">30</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+                                    
+                    <div class="menu-item" id="k-food4"> <!-- K-food 항목 2 -->
+                        <h2>"B.F com mel" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Batatas rústicas</p> <!-- 메뉴 설명 -->
+                        <img src="https://i.imgur.com/cS1xtIM.jpeg" alt="K-food 4 사진"> <!-- K-food 이미지 -->
+                        <span class="price-per-item" style="color: rgba(0, 132, 255, 0.829); font-weight: bold; cursor: pointer;">45</span>
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity2" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+                    </div>
+
                 </div>
-                <div class="menu-item"> <!-- 음료 항목 3 -->
-                    <h2>"Guarana" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Lata 250ml</p> <!-- 음료 설명 -->
-                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink3"> <!-- 음료 이미지 -->
-                    <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-                </div>
-                <div class="menu-item"> <!-- 음료 항목 4 -->
-                    <h2>"Hwanta" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Lata 250ml</p> <!-- 음료 설명 -->
-                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink4"> <!-- 음료 이미지 -->
-                    <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
-                </div>
-                <div class="menu-item"> <!-- 음료 항목 5 -->
-                    <h2>"Sprite" </h2> <!-- 메뉴 제목 설명 -->
-                    <p>Lata 250ml</p> <!-- 음료 설명 -->
-                    <img src="https://i.imgur.com/Om4DrK9.png" alt="drink5"> <!-- 음료 이미지 -->
-                    <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
-                    <button type="button">-</button> <!-- 수량 감소 버튼 -->
-                    <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
-                    <button type="button">+</button> <!-- 수량 증가 버튼 -->
-                    <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+
+            </section>
+
+            <div id="drinks" class="content"> <!-- 음료 섹션 -->
+                <div class="drink-menu"> <!-- 음료 리스트 -->
+                    <div class="menu-item drink-item"> <!-- 음료 항목 1 -->
+                        <h2>"Coca" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Lata 250ml</p> <!-- 음료 설명 -->
+                        <img src="https://i.imgur.com/Om4DrK9.png" alt="drink1"> <!-- 음료 이미지 -->
+                        <span class="price-per-item">40</span>R$ <!-- 가격 표시 -->
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                    </div>
+                    <div class="menu-item"> <!-- 음료 항목 2 -->
+                        <h2>"Coca zero" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Lata 250ml</p> <!-- 음료 설명 -->
+                        <img src="https://i.imgur.com/Om4DrK9.png" alt="drink2"> <!-- 음료 이미지 -->
+                        <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                    </div>
+                    <div class="menu-item"> <!-- 음료 항목 3 -->
+                        <h2>"Guarana" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Lata 250ml</p> <!-- 음료 설명 -->
+                        <img src="https://i.imgur.com/Om4DrK9.png" alt="drink3"> <!-- 음료 이미지 -->
+                        <span class="price-per-item">50</span>R$ <!-- 가격 표시 -->
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                    </div>
+                    <div class="menu-item"> <!-- 음료 항목 4 -->
+                        <h2>"Hwanta" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Lata 250ml</p> <!-- 음료 설명 -->
+                        <img src="https://i.imgur.com/Om4DrK9.png" alt="drink4"> <!-- 음료 이미지 -->
+                        <span class="price-per-item">30</span>R$ <!-- 가격 표시 -->
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                    </div>
+                    <div class="menu-item"> <!-- 음료 항목 5 -->
+                        <h2>"Sprite" </h2> <!-- 메뉴 제목 설명 -->
+                        <p>Lata 250ml</p> <!-- 음료 설명 -->
+                        <img src="https://i.imgur.com/Om4DrK9.png" alt="drink5"> <!-- 음료 이미지 -->
+                        <span class="price-per-item">20</span>R$ <!-- 가격 표시 -->
+                        <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                        <input type="number" id="quantity1" value="0" min="0"> <!-- 수량 입력 필드 -->
+                        <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                        <span class="total-price">0</span>R$ <!-- 총 가격 표시 -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: gray;">
-        As imagens acima podem ser diferentes do alimento real. Apenas para referência.
-    </footer>    
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const wrapper = document.querySelector('.content-wrapper');
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            // 마우스 드래그 이벤트
-            wrapper.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - wrapper.offsetLeft;
-                scrollLeft = wrapper.scrollLeft;
-            });
-
-            wrapper.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - wrapper.offsetLeft;
-                const walk = (x - startX) * 2; // 드래그 속도 설정
-                wrapper.scrollLeft = scrollLeft - walk;
-            });
-
-            // 터치 이벤트 (모바일)
-            wrapper.addEventListener('touchstart', (e) => {
-                isDown = true;
-                startX = e.touches[0].pageX - wrapper.offsetLeft;
-                scrollLeft = wrapper.scrollLeft;
-            });
-
-            wrapper.addEventListener('touchend', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('touchmove', (e) => {
-                if (!isDown) return;
-                const x = e.touches[0].pageX - wrapper.offsetLeft;
-                const walk = (x - startX) * 2;
-                wrapper.scrollLeft = scrollLeft - walk;
-            });
-        });
-    </script>
+        <footer style="text-align: center; margin-top: 20px; font-size: 0.9em; color: gray;">
+            As imagens acima podem ser diferentes do alimento real. Apenas para referência.
+        </footer>    
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-            document.getElementById('cancel-button').addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
-                document.querySelectorAll('input[type=number]').forEach(input => { /* 모든 숫자 입력 필드 선택 */
-                    input.value = 0; /* 입력값을 0으로 초기화 */
-                });
-                document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
-                    total.textContent = '0R$'; /* 총 가격을 0원으로 초기화 */
-                });
-                document.getElementById('total-amount').textContent = 'Total: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
-            });
-        });
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const wrapper = document.querySelector('.content-wrapper');
+                let isDown = false;
+                let startX;
+                let scrollLeft;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() { 
-            const orderButton = document.getElementById('order-button');
-            const cancelButton = document.getElementById('cancel-button');
-            const modal = document.getElementById('order-modal');
-            const orderList = document.getElementById('order-list');
-            const totalAmountDisplay = document.getElementById('total-amount');
-
-            // Define updateModalTotalAmount before it is called
-            function updateModalTotalAmount(totalAmountText) {
-                document.getElementById('modal-total').textContent = totalAmountText;
-            }
-
-            function updateTotalAmount() { 
-                let totalAmount = 0; 
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
-                    const pricePerItemElement = item.querySelector('.price-per-item'); 
-                    if (pricePerItemElement) { 
-                        const pricePerItem = parseInt(pricePerItemElement.textContent); 
-                        totalAmount += quantity * pricePerItem; 
-                    } else { 
-                        console.error("Failed to find element with class '.price-per-item'");
-                    }
-                });
-                const formattedTotalAmount = `Total: R$ ${totalAmount}`;
-                totalAmountDisplay.textContent = formattedTotalAmount; 
-                updateModalTotalAmount(formattedTotalAmount); 
-            }
-
-            orderButton.addEventListener('click', function() { 
-                orderList.innerHTML = ''; 
-                let hasItems = false; 
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
-                    if (quantity > 0) { 
-                        hasItems = true; 
-                        const name = item.querySelector('h2').textContent; 
-                        const price = item.querySelector('.price-per-item').textContent; 
-                        const itemTotal = quantity * parseInt(price); 
-                        const listItem = document.createElement('li'); 
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`; 
-                        orderList.appendChild(listItem); 
-                    }
+                // 마우스 드래그 이벤트
+                wrapper.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    startX = e.pageX - wrapper.offsetLeft;
+                    scrollLeft = wrapper.scrollLeft;
                 });
 
-                updateTotalAmount(); 
-            });
+                wrapper.addEventListener('mouseleave', () => {
+                    isDown = false;
+                });
 
-            cancelButton.addEventListener('click', function() { 
-                modal.style.display = 'none'; 
-                updateTotalAmount(); 
-            });
+                wrapper.addEventListener('mouseup', () => {
+                    isDown = false;
+                });
 
-        });
-    </script>
+                wrapper.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - wrapper.offsetLeft;
+                    const walk = (x - startX) * 2; // 드래그 속도 설정
+                    wrapper.scrollLeft = scrollLeft - walk;
+                });
+
+                // 터치 이벤트 (모바일)
+                wrapper.addEventListener('touchstart', (e) => {
+                    isDown = true;
+                    startX = e.touches[0].pageX - wrapper.offsetLeft;
+                    scrollLeft = wrapper.scrollLeft;
+                });
+
+                wrapper.addEventListener('touchend', () => {
+                    isDown = false;
+                });
+
+                wrapper.addEventListener('touchmove', (e) => {
+                    if (!isDown) return;
+                    const x = e.touches[0].pageX - wrapper.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    wrapper.scrollLeft = scrollLeft - walk;
+                });
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
+                document.getElementById('cancel-button').addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
+                    document.querySelectorAll('input[type=number]').forEach(input => { /* 모든 숫자 입력 필드 선택 */
+                        input.value = 0; /* 입력값을 0으로 초기화 */
+                    });
+                    document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
+                        total.textContent = '0R$'; /* 총 가격을 0원으로 초기화 */
+                    });
+                    document.getElementById('total-amount').textContent = 'Total: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() { 
+                const orderButton = document.getElementById('order-button');
+                const cancelButton = document.getElementById('cancel-button');
+                const modal = document.getElementById('order-modal');
+                const orderList = document.getElementById('order-list');
+                const totalAmountDisplay = document.getElementById('total-amount');
+
+                // Define updateModalTotalAmount before it is called
+                function updateModalTotalAmount(totalAmountText) {
+                    document.getElementById('modal-total').textContent = totalAmountText;
+                }
+
+                function updateTotalAmount() { 
+                    let totalAmount = 0; 
+                    document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
+                        const quantity = parseInt(item.querySelector('input[type=number]').value); 
+                        const pricePerItemElement = item.querySelector('.price-per-item'); 
+                        if (pricePerItemElement) { 
+                            const pricePerItem = parseInt(pricePerItemElement.textContent); 
+                            totalAmount += quantity * pricePerItem; 
+                        } else { 
+                            console.error("Failed to find element with class '.price-per-item'");
+                        }
+                    });
+                    const formattedTotalAmount = `Total: R$ ${totalAmount}`;
+                    totalAmountDisplay.textContent = formattedTotalAmount; 
+                    updateModalTotalAmount(formattedTotalAmount); 
+                }
+
+                orderButton.addEventListener('click', function() { 
+                    orderList.innerHTML = ''; 
+                    let hasItems = false; 
+                    document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
+                        const quantity = parseInt(item.querySelector('input[type=number]').value); 
+                        if (quantity > 0) { 
+                            hasItems = true; 
+                            const name = item.querySelector('h2').textContent; 
+                            const price = item.querySelector('.price-per-item').textContent; 
+                            const itemTotal = quantity * parseInt(price); 
+                            const listItem = document.createElement('li'); 
+                            listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`; 
+                            orderList.appendChild(listItem); 
+                        }
+                    });
+
+                    updateTotalAmount(); 
+                });
+
+                cancelButton.addEventListener('click', function() { 
+                    modal.style.display = 'none'; 
+                    updateTotalAmount(); 
+                });
+
+            });
+        </script>
+
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span> <!-- 닫기 버튼 -->
+                <img class="modal-content" id="modalImage"> <!-- 모달 내부 이미지 -->
+            </div>
 
         <div id="imageModal" class="modal">
-            <span class="close">&times;</span> <!-- 닫기 버튼 -->
-            <img class="modal-content" id="modalImage"> <!-- 모달 내부 이미지 -->
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
         </div>
 
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <a class="prev">&#10094;</a>
-        <a class="next">&#10095;</a>
-    </div>
 
 
-
-</body>
-</html>
+    </body>
+    </html>
