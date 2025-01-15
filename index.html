@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+        #service-fee {
+            color: #757474;
+            font-size: 12px;
+            text-align: right;
+            margin: 0; /* 여백 제거 */
+            padding: 0; /* 패딩 제거 */
+            width: 100%; /* 부모 요소 너비에 맞춤 */
+            box-sizing: border-box; /* 여백 및 패딩 포함 */
+        }
+
         body {
             padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
         }
@@ -241,9 +251,9 @@
         }
         #order-modal div {
             background: white; /* 모달 창 안의 내용 배경을 흰색으로 설정 */
-            width: 60%; /* 너비를 화면의 60%로 설정 */
-            margin: 50px auto; /* 위아래로 50px 여백 추가, 좌우는 가운데 정렬 */
-            padding: 20px; /* 내부에 20px 패딩 추가 */
+            width: 90%; /* 너비를 화면의 60%로 설정 */
+            margin: 40px auto; /* 위아래로 50px 여백 추가, 좌우는 가운데 정렬 */
+            padding: 10px; /* 내부에 20px 패딩 추가 */
             border-radius: 10px; /* 모서리를 10px 둥글게 설정 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
         }
@@ -630,8 +640,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="table-number">Table Number:</label>
                 <input type="number" id="table-number" name="table-number" min="1" required>
             </div>
-            <div id="service-fee" style="margin-bottom: 20px; color: #757474; font-size: 12px;">
-                Serviço: 10% será adicionado ao total.
+            <div id="service-fee" style="color: #757474; font-size: 12px; text-align: left;">
+                10% será adicionado ao total.
             </div>
             <!-- 모달 창 내 총 금액 표시 -->
             <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
