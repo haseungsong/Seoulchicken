@@ -630,7 +630,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="table-number">Table Number:</label>
                 <input type="number" id="table-number" name="table-number" min="1" required>
             </div>
-
+            <div id="service-fee" style="margin-bottom: 20px; color: #757474; font-size: 12px;">
+                Serviço: 10% será adicionado ao total.
+            </div>
             <!-- 모달 창 내 총 금액 표시 -->
             <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
 
@@ -1255,9 +1257,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                const formattedTotalAmount = `Total: R$ ${totalAmount}`;
-                totalAmountDisplay.textContent = formattedTotalAmount; 
-                updateModalTotalAmount(formattedTotalAmount); 
+                const serviceFee = totalAmount * 0.1; // 서비스 비용 10%
+                const totalWithServiceFee = totalAmount + serviceFee; // 총 금액에 서비스 비용 추가
+                const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+                totalAmountDisplay.textContent = formattedTotalAmount;
+                updateModalTotalAmount(formattedTotalAmount);
             }
 
             orderButton.addEventListener('click', function() { 
