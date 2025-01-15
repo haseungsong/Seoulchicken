@@ -1216,15 +1216,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() { /* 문서가 로드되면 실행 */
-            document.getElementById('cancel-button').addEventListener('click', function() { /* 취소 버튼 클릭 시 이벤트 추가 */
-                document.querySelectorAll('input[type=number]').forEach(input => { /* 모든 숫자 입력 필드 선택 */
-                    input.value = 0; /* 입력값을 0으로 초기화 */
-                });
-                document.querySelectorAll('.total-price').forEach(total => { /* 모든 총 가격 요소 선택 */
-                    total.textContent = '0R$'; /* 총 가격을 0원으로 초기화 */
-                });
-                document.getElementById('total-amount').textContent = 'Total: 0R$'; /* 총 금액 표시를 0원으로 초기화 */
+            document.getElementById('cancel-button').addEventListener('click', function() {
+            document.querySelectorAll('input[type=number]').forEach(input => {
+                // 'table-number' 필드는 초기화하지 않음
+                if (input.id !== 'table-number') {
+                    input.value = 0; // 다른 숫자 입력 필드 초기화
+                }
             });
+            document.querySelectorAll('.total-price').forEach(total => {
+                total.textContent = '0R$'; // 총 가격 초기화
+            });
+            document.getElementById('total-amount').textContent = 'Total: 0R$'; // 총 금액 초기화
         });
     </script>
 
