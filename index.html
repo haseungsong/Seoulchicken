@@ -6,16 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
-        #service-fee {
-            color: #757474;
-            font-size: 12px;
-            text-align: right;
-            margin: 0; /* 여백 제거 */
-            padding: 0; /* 패딩 제거 */
-            width: 100%; /* 부모 요소 너비에 맞춤 */
-            box-sizing: border-box; /* 여백 및 패딩 포함 */
-        }
-
         body {
             padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
         }
@@ -640,9 +630,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="table-number">Table Number:</label>
                 <input type="number" id="table-number" name="table-number" min="1" required>
             </div>
-            <div id="service-fee" style="color: #757474; font-size: 12px; text-align: left;">
+
+            <div id="service-fee" style="color: #757474; font-size: 10px; text-align: left;">
                 10% será adicionado ao total.
             </div>
+            
             <!-- 모달 창 내 총 금액 표시 -->
             <div id="modal-total" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">Total Amount: 0 KRW</div>
 
@@ -1243,7 +1235,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() { 
+        document.addEventListener('DOMContentLoaded', function () {
             const orderButton = document.getElementById('order-button');
             const cancelButton = document.getElementById('cancel-button');
             const modal = document.getElementById('order-modal');
@@ -1255,15 +1247,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('modal-total').textContent = totalAmountText;
             }
 
-            function updateTotalAmount() { 
-                let totalAmount = 0; 
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
-                    const pricePerItemElement = item.querySelector('.price-per-item'); 
-                    if (pricePerItemElement) { 
-                        const pricePerItem = parseInt(pricePerItemElement.textContent); 
-                        totalAmount += quantity * pricePerItem; 
-                    } else { 
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('input[type=number]').value);
+                    const pricePerItemElement = item.querySelector('.price-per-item');
+                    if (pricePerItemElement) {
+                        const pricePerItem = parseInt(pricePerItemElement.textContent);
+                        totalAmount += quantity * pricePerItem;
+                    } else {
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
@@ -1274,24 +1266,68 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateModalTotalAmount(formattedTotalAmount);
             }
 
-            orderButton.addEventListener('click', function() { 
-                orderList.innerHTML = ''; 
-                let hasItems = false; 
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => { 
-                    const quantity = parseInt(item.querySelector('input[type=number]').value); 
-                    if (quantity > 0) { 
-                        hasItems = true; 
-                        const name = item.querySelector('h2').textContent; 
-                        const price = item.querySelector('.price-per-item').textContent; 
-                        const itemTotal = quantity * parseInt(price); 
-                        const listItem = document.createElement('li'); 
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`; 
-                        orderList.appendChild(listItem); 
+            // Reset Order (초기화 함수)
+            function resetOrder() {
+                // 모든 수량 입력 필드를 초기화
+                document.querySelectorAll('input[type=number]').forEach(input => {
+                    if (input.id !== 'table-number') { // Table 번호는 초기화하지 않음
+                        input.value = 0;
                     }
                 });
 
-                updateTotalAmount(); 
+                // 모든 항목의 총 가격 초기화
+                document.querySelectorAll('.total-price').forEach(total => {
+                    total.textContent = '0R$';
+                });
+
+                // 전체 총 금액 초기화
+                const totalAmountDisplay = document.getElementById('total-amount');
+                if (totalAmountDisplay) {
+                    totalAmountDisplay.textContent = 'Total: 0R$';
+                }
+
+                // 모달 창 안의 주문 내역 초기화
+                if (orderList) {
+                    orderList.innerHTML = '';
+                }
+            }
+
+            // Cancel 버튼 클릭 시 초기화
+            cancelButton.addEventListener('click', function () {
+                resetOrder(); // 초기화 함수 호출
+                modal.style.display = 'none'; // 모달 닫기
             });
+
+            // Modal의 Close 버튼 클릭 시 초기화
+            const closeButton = document.getElementById('close-modal-button');
+            if (closeButton) {
+                closeButton.addEventListener('click', function () {
+                    resetOrder(); // 초기화 함수 호출
+                    modal.style.display = 'none'; // 모달 닫기
+                });
+            }
+
+            orderButton.addEventListener('click', function () {
+                orderList.innerHTML = '';
+                let hasItems = false;
+                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                    const quantity = parseInt(item.querySelector('input[type=number]').value);
+                    if (quantity > 0) {
+                        hasItems = true;
+                        const name = item.querySelector('h2').textContent;
+                        const price = item.querySelector('.price-per-item').textContent;
+                        const itemTotal = quantity * parseInt(price);
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`;
+                        orderList.appendChild(listItem);
+                    }
+                });
+
+                updateTotalAmount();
+            });
+        });
+    </script>
+
 
             cancelButton.addEventListener('click', function() { 
                 modal.style.display = 'none'; 
