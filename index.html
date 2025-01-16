@@ -544,10 +544,20 @@
         // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
         const tableNumberField = document.getElementById('table-number');
         const tableNumber = getTableNumberFromURL();
-        if (tableNumber && tableNumberField) {
-            tableNumberField.value = tableNumber; // table 파라미터 값을 입력 필드에 설정
-            tableNumberField.disabled = true; // 직접 수정하지 못하도록 비활성화
+        if (tableNumberField) {
+        if (tableNumber === '0') {
+            // 관리자 모드 활성화: 테이블 번호 입력 필드 활성화
+            tableNumberField.disabled = false; // 비활성화 해제
+            tableNumberField.placeholder = '관리자 모드: 테이블 번호 입력'; // 안내 텍스트 추가
+        } else if (tableNumber) {
+            // 일반 모드: 테이블 번호 자동 입력
+            tableNumberField.value = tableNumber; 
+            tableNumberField.disabled = true; // 비활성화
+        } else {
+            // Table 번호가 URL에 없는 경우
+            alert('URL에 Table 번호가 누락되었습니다. 관리자에게 문의하세요.');
         }
+    }
     });
 
 </script>   
@@ -628,7 +638,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <!-- Table Number Input Field (Moved above the total amount) -->
             <div style="margin-bottom: 20px;">
                 <label for="table-number">Table Number:</label>
-                <input type="number" id="table-number" name="table-number" min="1" required>
+                <input type="number" 
+                       id="table-number" 
+                       name="table-number" 
+                       min="0" 
+                       placeholder="관리자 모드: 0 입력 시 직접 변경 가능" 
+                       disabled required>
             </div>
 
             <div id="service-fee" style="color: #757474; font-size: 10px; text-align: left;">
