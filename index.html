@@ -1280,27 +1280,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             function updateTotalAmount() {
-                let totalAmount = 0;
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const quantity = parseInt(item.querySelector('input[type=number]').value);
-                    const pricePerItemElement = item.querySelector('.price-per-item');
-                    if (pricePerItemElement) {
-                        const pricePerItem = parseInt(pricePerItemElement.textContent);
-                        totalAmount += quantity * pricePerItem;
-                    } else {
-                        console.error("Failed to find element with class '.price-per-item'");
-                    }
-                });
-            // URL에서 table 번호 가져오기
-        const tableNumber = getTableNumberFromURL();
+    let totalAmount = 0;
 
-        // table=0이 아닐 경우에만 10% 서비스 요금 추가
-        let serviceFee = 0;
-        if (tableNumber !== '0') {
-            serviceFee = totalAmount * 0.1;
+    // 각 메뉴 아이템의 수량과 가격을 기반으로 총 금액 계산
+    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+        const quantity = parseInt(item.querySelector('input[type=number]').value);
+        const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+        totalAmount += quantity * pricePerItem;
+    });
+
+    // table 번호 가져오기
+    const tableNumber = getTableNumberFromURL();
+
+    // table=0일 경우 서비스 요금 제외, 그 외에는 10% 추가
+    let serviceFee = 0;
+    if (tableNumber !== '0') {
+        serviceFee = totalAmount * 0.1;
+        document.getElementById('service-fee').style.display = 'block'; // 메시지 표시
+        } else {
+            document.getElementById('service-fee').style.display = 'none'; // 메시지 숨기기
         }
 
         const totalWithServiceFee = totalAmount + serviceFee; // 서비스 요금 포함 총 금액 계산
+
         const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
 
         // 총 금액을 업데이트
@@ -1311,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 모달의 총 금액 업데이트
         updateModalTotalAmount(formattedTotalAmount);
-        }
+    }
 
             // Reset Order (초기화 함수)
             function resetOrder() {
@@ -1357,7 +1359,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // 모달 열릴 때 테이블 번호 업데이트
             function openModal() {
                 const tableNumber = getTableNumberFromURL(); // URL에서 table 파라미터 가져오기
+                const serviceFeeMessage = document.getElementById('service-fee'); // 서비스 요금 메시지 요소
 
+                if (tableNumber === '0') {
+                    serviceFeeMessage.style.display = 'none'; // table=0일 경우 메시지 숨기기
+                } else {
+                    serviceFeeMessage.style.display = 'block'; // 그 외의 경우 메시지 표시
+                }
+                
                 if (tableNumberField) {
                     if (tableNumber === '0') {
                         tableNumberField.disabled = false; // 활성화
