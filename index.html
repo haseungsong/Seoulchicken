@@ -1271,12 +1271,27 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                const serviceFee = totalAmount * 0.1; // 서비스 비용 10%
-                const totalWithServiceFee = totalAmount + serviceFee; // 총 금액에 서비스 비용 추가
-                const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
-                totalAmountDisplay.textContent = formattedTotalAmount;
-                updateModalTotalAmount(formattedTotalAmount);
-            }
+            // URL에서 table 번호 가져오기
+        const tableNumber = getTableNumberFromURL();
+
+        // table=0이 아닐 경우에만 10% 서비스 요금 추가
+        let serviceFee = 0;
+        if (tableNumber !== '0') {
+            serviceFee = totalAmount * 0.1;
+        }
+
+        const totalWithServiceFee = totalAmount + serviceFee; // 서비스 요금 포함 총 금액 계산
+        const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+
+        // 총 금액을 업데이트
+        const totalAmountDisplay = document.getElementById('total-amount');
+        if (totalAmountDisplay) {
+            totalAmountDisplay.textContent = formattedTotalAmount;
+        }
+
+        // 모달의 총 금액 업데이트
+        updateModalTotalAmount(formattedTotalAmount);
+        }
 
             // Reset Order (초기화 함수)
             function resetOrder() {
