@@ -447,19 +447,39 @@
         });
 
         function updateTotalAmount() {
-            let totalAmount = 0;
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const quantity = parseInt(item.querySelector('input[type=number]').value);
-                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
-                totalAmount += quantity * pricePerItem;
-            });
-            const formattedTotalAmount = `Total: R$ ${totalAmount}`;
-            const totalAmountDisplay = document.getElementById('total-amount');
-            if (totalAmountDisplay) {
-                totalAmountDisplay.textContent = formattedTotalAmount;
-            }
-            updateModalTotalAmount(formattedTotalAmount);
-        }
+    let totalAmount = 0;
+
+    // 각 메뉴 아이템의 수량과 가격을 기반으로 총 금액 계산
+    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+        const quantity = parseInt(item.querySelector('input[type=number]').value);
+        const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
+        totalAmount += quantity * pricePerItem;
+    });
+
+    // URL에서 table 번호 가져오기
+    const tableNumber = getTableNumberFromURL();
+
+    // table=0일 경우에는 서비스 요금 제외, 그 외에는 10% 서비스 요금 추가
+    let serviceFee = 0;
+    if (tableNumber !== '0' && tableNumber !== null) {
+        serviceFee = totalAmount * 0.1;
+    }
+
+    // 서비스 요금을 포함한 총 금액 계산
+    const totalWithServiceFee = totalAmount + serviceFee;
+
+    // 형식화된 총 금액 문자열
+    const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+
+    // 화면에 총 금액 업데이트
+    const totalAmountDisplay = document.getElementById('total-amount');
+    if (totalAmountDisplay) {
+        totalAmountDisplay.textContent = formattedTotalAmount;
+    }
+
+    // 모달 창에서도 총 금액 업데이트
+    updateModalTotalAmount(formattedTotalAmount);
+}
 
         function updateModalTotalAmount(totalAmountText) {
             const modalTotal = document.getElementById('modal-total');
