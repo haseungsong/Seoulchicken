@@ -452,19 +452,41 @@
         });
 
         function updateTotalAmount() {
-            let totalAmount = 0;
-            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                const quantity = parseInt(item.querySelector('input[type=number]').value);
-                const pricePerItem = parseInt(item.querySelector('.price-per-item').textContent);
-                totalAmount += quantity * pricePerItem;
-            });
-            const formattedTotalAmount = `Total: R$ ${totalAmount}`;
-            const totalAmountDisplay = document.getElementById('total-amount');
-            if (totalAmountDisplay) {
-                totalAmountDisplay.textContent = formattedTotalAmount;
-            }
-            updateModalTotalAmount(formattedTotalAmount);
+    let totalAmount = 0;
+
+    // URL에서 table 번호 가져오기
+    const tableNumber = getTableNumberFromURL();
+
+    // 모든 메뉴와 음료 항목의 수량 및 가격 계산
+    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+        const quantity = parseInt(item.querySelector('input[type=number]').value);
+        const pricePerItemElement = item.querySelector('.price-per-item');
+        if (pricePerItemElement) {
+            const pricePerItem = parseInt(pricePerItemElement.textContent);
+            totalAmount += quantity * pricePerItem;
         }
+    });
+
+    // 테이블 번호가 0이 아니면 10% 서비스 비용 추가
+    let serviceFee = 0;
+    if (tableNumber !== '0') {
+        serviceFee = totalAmount * 0.1; // 10% 서비스 비용
+    }
+
+    // 총 금액 계산 (서비스 비용 포함)
+    const totalWithServiceFee = totalAmount + serviceFee;
+
+    // 총 금액을 형식에 맞게 문자열로 변환
+    const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+
+    // 총 금액을 화면에 표시
+    const totalAmountDisplay = document.getElementById('total-amount');
+    if (totalAmountDisplay) {
+        totalAmountDisplay.textContent = formattedTotalAmount;
+    }
+
+    // 모달 창에 총 금액 업데이트
+    updateModalTotalAmount(formattedTotalAmount)
 
         function updateModalTotalAmount(totalAmountText) {
             const modalTotal = document.getElementById('modal-total');
