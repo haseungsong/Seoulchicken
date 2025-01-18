@@ -1265,11 +1265,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
+                
+            // URL에서 table 번호 가져오기
+            const tableNumber = getTableNumberFromURL();
+
+            // table이 0인 경우 서비스 비용 추가 안 함
+            let formattedTotalAmount;
+            if (tableNumber === '0') {
+                formattedTotalAmount = `Total: R$ ${totalAmount.toFixed(2)}`;
+            } else {
                 const serviceFee = totalAmount * 0.1; // 서비스 비용 10%
                 const totalWithServiceFee = totalAmount + serviceFee; // 총 금액에 서비스 비용 추가
-                const formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+                formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+            }
+
+            // 총 금액 업데이트
+            const totalAmountDisplay = document.getElementById('total-amount');
+            if (totalAmountDisplay) {
                 totalAmountDisplay.textContent = formattedTotalAmount;
-                updateModalTotalAmount(formattedTotalAmount);
+            }
+            updateModalTotalAmount(formattedTotalAmount);
             }
 
             // Reset Order (초기화 함수)
