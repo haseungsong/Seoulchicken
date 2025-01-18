@@ -550,9 +550,18 @@
         // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
         const tableNumberField = document.getElementById('table-number');
         const tableNumber = getTableNumberFromURL();
+       // "10% será adicionado ao total." 메시지 처리
+
+       const serviceFeeMessage = document.getElementById('service-fee');
+        if (tableNumber === '0' && serviceFeeMessage) {
+            serviceFeeMessage.style.opacity = '0'; // 투명하게 설정
+        } else if (serviceFeeMessage) {
+            serviceFeeMessage.style.opacity = '1'; // 정상적으로 표시
+        }
+
         if (tableNumber && tableNumberField) {
-            tableNumberField.value = tableNumber; // table 파라미터 값을 입력 필드에 설정
-            tableNumberField.disabled = true; // 직접 수정하지 못하도록 비활성화
+            tableNumberField.value = tableNumber;
+            tableNumberField.disabled = true;
         }
     });
 
@@ -1265,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error("Failed to find element with class '.price-per-item'");
                     }
                 });
-                
+
             // URL에서 table 번호 가져오기
             const tableNumber = getTableNumberFromURL();
 
