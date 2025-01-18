@@ -6,20 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+        /* Order 버튼 스타일 (기본값: 노란색) */
+        #order-button {
+            background-color: rgb(255, 242, 0); /* 노란색 */
+            color: black; /* 검정 텍스트 */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 12px 15px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-        .order-section button {
-            width: 40px; /* 버튼의 너비를 40px로 설정 */
-            height: 40px; /* 버튼의 높이를 40px로 설정 */
-            font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
-            display: flex; /* Flexbox 레이아웃 사용 */
-            align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
-            justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
-            background-color: rgb(255, 242, 0); /* Total 금액의 색상과 동일하게 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 아이콘 색상을 흰색으로 설정 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+        /* Order 버튼 Hover 효과 */
+        #order-button:hover {
+            background-color: #e5d800; /* 약간 어두운 노란색 */
+        }
+
+        /* Cancel 버튼 스타일 (기본값: 회색) */
+        #cancel-button {
+            background-color: #515050; /* 회색 */
+            color: white; /* 흰색 텍스트 */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 12px 15px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Cancel 버튼 Hover 효과 */
+        #cancel-button:hover {
+            background-color: #737373; /* 약간 밝은 회색 */
         }
         body {
             padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
@@ -111,7 +131,6 @@
             color: #757474; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
         }
         button {
-            background-color: #515050; /* 버튼의 배경색을 연한 빨강으로 설정 */
             border: none; /* 버튼에 테두리 없음 */
             color: white; /* 버튼 텍스트를 흰색으로 설정 */
             padding: 12px 15px; /* 버튼에 12px 위아래, 15px 좌우 패딩 추가 */
@@ -188,10 +207,6 @@
             width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
             padding: 4px;
         }
-        button {
-            padding: 6px; /* 버튼의 크기 줄이기 */
-            font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
-        }
         .introduction {
             background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
             height: 100vh; /* 화면의 높이를 100%로 설정 */
@@ -213,16 +228,6 @@
             max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
             text-align: center; /* 텍스트를 가운데 정렬 */
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
-        }
-        #order-button, #cancel-button {
-            float: right; /* 버튼을 오른쪽으로 배치 */
-            background-color: #7a7a7a; /* 버튼 배경색을 연한 빨강으로 설정 */
-            padding: 5px 20px; /* 위아래로 5px, 좌우로 20px 패딩 추가 */
-            font-size: 16px; /* 버튼 글자 크기를 16px로 설정 */
-            margin-right: 10px; /* 오른쪽에 10px 여백 추가 */
-        }
-        #cancel-button {
-            margin-right: 5px; /* 취소 버튼 오른쪽에 5px 여백 추가 */
         }
         #total-amount {
             color: rgb(255, 242, 0); /* 파란색으로 설정 */
