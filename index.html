@@ -6,25 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
-
-        .order-section button {
-            width: 40px; /* 버튼의 너비를 40px로 설정 */
-            height: 40px; /* 버튼의 높이를 40px로 설정 */
-            font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
-            display: flex; /* Flexbox 레이아웃 사용 */
-            align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
-            justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
-            background-color: rgb(255, 242, 0); /* Total 금액의 색상과 동일하게 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 아이콘 색상을 흰색으로 설정 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+        #order-button {
+            background-color: rgba(255, 242, 0, 0.893); /* 노란색 */
+            color: rgb(246, 255, 0); /* 검정 텍스트 */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 12px 15px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
         }
-        body {
-            padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
+        /* Cancel 버튼 스타일 (기본값: 회색) */
+        #cancel-button {
+            background-color: #515050; /* 회색 */
+            color: white; /* 흰색 텍스트 */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 12px 15px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
         }
-
         .bone-menu-note {
             text-align: center; /* 텍스트를 가운데 정렬 */
             font-size: 16px; /* 글자 크기 설정 */
