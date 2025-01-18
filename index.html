@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+
+        .order-section button {
+            width: 40px; /* 버튼의 너비를 40px로 설정 */
+            height: 40px; /* 버튼의 높이를 40px로 설정 */
+            font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
+            display: flex; /* Flexbox 레이아웃 사용 */
+            align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
+            justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
+            background-color: rgb(255, 242, 0); /* Total 금액의 색상과 동일하게 설정 */
+            border: none; /* 버튼에 테두리 없음 */
+            color: white; /* 아이콘 색상을 흰색으로 설정 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+            cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
+            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
+        }
         body {
             padding-top: 60px; /* 네비게이션 바 높이만큼 여백 추가 */
         }
@@ -82,20 +97,7 @@
             padding-top: 80px;
             background-color: #F7F7F7;
         }
-        .order-section button {
-            width: 40px; /* 버튼의 너비를 40px로 설정 */
-            height: 40px; /* 버튼의 높이를 40px로 설정 */
-            font-size: 18px; /* 아이콘의 크기를 18px로 설정 */
-            display: flex; /* Flexbox 레이아웃 사용 */
-            align-items: center; /* 아이콘을 수직으로 가운데 정렬 */
-            justify-content: center; /* 아이콘을 수평으로 가운데 정렬 */
-            background-color: rgb(255, 242, 0); /* Total 금액의 색상과 동일하게 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 아이콘 색상을 흰색으로 설정 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            cursor: pointer; /* 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
+
         .menu-item img, .drink-item img, .k-food-item img {
             width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
             height: 240px; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 * 필요시 조정/
