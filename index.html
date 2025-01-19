@@ -646,19 +646,70 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="number" id="table-number" name="table-number" min="1" required>
             </div>
 
-            <!-- 추가 입력 필드 (이름, 연락처, 주소) -->
+            <!-- 추가 입력 필드 (이름, 연락처, CEP, 주소, 비고) -->
             <div id="additional-fields" style="display:none; margin-bottom: 20px;"> <!-- 기본적으로 숨김 처리 -->
+                <!-- Name -->
                 <div style="margin-bottom: 10px;">
-                    <label for="customer-name">Name:</label>
-                    <input type="text" id="customer-name" name="customer-name" placeholder="Your Name">
+                    <label for="customer-name">Nome:</label>
+                    <input type="text" id="customer-name" name="customer-name" placeholder="Nome Completo">
                 </div>
+            
+            <!-- Contact -->
+            <div style="margin-bottom: 10px;">
+                <label for="customer-contact">Número de celular:</label>
+                <input type="tel" id="customer-contact" name="customer-contact" placeholder="Seu telefone"
+                    maxlength="11" oninput="validatePhoneNumber(this)" required>
+            </div>
+
+            <script>
+                // 숫자만 입력하고 정확히 11자리만 허용하는 함수
+                function validatePhoneNumber(input) {
+                    input.value = input.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 문자는 제거
+                }
+
+                // 폼 제출 시 정확히 11자리인지 확인
+                document.addEventListener('submit', function (event) {
+                    const phoneInput = document.getElementById('customer-contact');
+                    if (phoneInput.value.length !== 11) {
+                        event.preventDefault(); // 제출 막기
+                        alert('11자리 입력해주세요.\nExemplo : 11981451081'); // 팝업창 메시지
+                    }
+                });
+            </script>
+            
+            <!-- CEP -->
+            <div style="margin-bottom: 10px;">
+                <label for="customer-cep">CEP:</label>
+                <input type="text" id="customer-cep" name="customer-cep" placeholder="Seu CEP"
+                    maxlength="8" oninput="validateCEP(this)" required>
+            </div>
+
+            <script>
+                // 숫자만 입력하고 최대 8자리로 제한하는 함수
+                function validateCEP(input) {
+                    input.value = input.value.replace(/[^0-9]/g, ''); // 숫자가 아닌 문자는 제거
+                }
+
+                // 폼 제출 시 정확히 8자리인지 확인
+                document.addEventListener('submit', function (event) {
+                    const cepInput = document.getElementById('customer-cep');
+                    if (cepInput.value.length !== 8) {
+                        event.preventDefault(); // 제출 막기
+                        alert('CEP는 8자리 숫자로 입력해야 합니다.\nExemplo: 12345678'); // 경고 메시지
+                    }
+                });
+            </script>
+            
+                <!-- Address -->
                 <div style="margin-bottom: 10px;">
-                    <label for="customer-contact">Contact:</label>
-                    <input type="tel" id="customer-contact" name="customer-contact" placeholder="Your Phone">
-                </div>
-                <div>
-                    <label for="customer-address">Address:</label>
+                    <label for="customer-address">Endereço:</label>
                     <textarea id="customer-address" name="customer-address" placeholder="Your Address" rows="3"></textarea>
+                </div>
+            
+                <!-- Remark -->
+                <div style="margin-bottom: 10px;">
+                    <label for="customer-remark">Remark:</label>
+                    <textarea id="customer-remark" name="customer-remark" placeholder="Additional Remarks" rows="3"></textarea>
                 </div>
             </div>
 
