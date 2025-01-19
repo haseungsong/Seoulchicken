@@ -546,74 +546,82 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
-        const tableNumberField = document.getElementById('table-number');
-        const tableNumber = getTableNumberFromURL();
-       // "10% será adicionado ao total." 메시지 처리
+        document.addEventListener('DOMContentLoaded', function () {
+            // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
+            const tableNumberField = document.getElementById('table-number');
+            const tableNumber = getTableNumberFromURL();
+        // "10% será adicionado ao total." 메시지 처리
 
-       const serviceFeeMessage = document.getElementById('service-fee');
-        if (tableNumber === '0' && serviceFeeMessage) {
-            serviceFeeMessage.style.opacity = '0'; // 투명하게 설정
-        } else if (serviceFeeMessage) {
-            serviceFeeMessage.style.opacity = '1'; // 정상적으로 표시
-        }
+        const serviceFeeMessage = document.getElementById('service-fee');
+            if (tableNumber === '0' && serviceFeeMessage) {
+                serviceFeeMessage.style.opacity = '0'; // 투명하게 설정
+            } else if (serviceFeeMessage) {
+                serviceFeeMessage.style.opacity = '1'; // 정상적으로 표시
+            }
 
-        if (tableNumber && tableNumberField) {
-            tableNumberField.value = tableNumber;
-            tableNumberField.disabled = true;
-        }
-    });
+            if (tableNumber && tableNumberField) {
+                tableNumberField.value = tableNumber;
+                tableNumberField.disabled = true;
+            }
+        });
 
-</script>   
+    </script>   
 
-<script>
-// URL에서 table 파라미터 값을 가져오는 함수
-function getTableNumberFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table');
-}
+    <script>
+    // URL에서 table 파라미터 값을 가져오는 함수
+    function getTableNumberFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('table');
+    }
 
 // 주문 데이터를 Firebase에 전송하는 함수
-function sendOrderData() {
-    var orderDetails = [];
+    function sendOrderData() {
+        var orderDetails = [];
 
-    // URL에서 table 번호 가져오기
-    var tableNumber = getTableNumberFromURL(); // URL에서 table 번호 읽기
+        // URL에서 table 번호 가져오기
+        var tableNumber = getTableNumberFromURL();
 
-    // Table 번호가 없는 경우 경고 메시지 출력
-    if (!tableNumber || tableNumber.trim() === '') {
-        alert('URL에 Table 번호가 누락되었습니다. 관리자에게 문의하세요.');
-        return; // Table 번호가 없으면 실행 중단
-    }
-
-    // 주문 내역 수집
-    document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-        const name = item.querySelector('h2').textContent; // 메뉴 이름 가져오기
-        const quantity = item.querySelector('input[type=number]').value; // 수량 가져오기
-        if (parseInt(quantity) > 0) {
-            orderDetails.push({ name: name, quantity: quantity }); // 주문 항목 추가
+        // Table 번호가 없는 경우 경고 메시지 출력
+        if (!tableNumber || tableNumber.trim() === '') {
+            alert('URL에 Table 번호가 누락되었습니다. 관리자에게 문의하세요.');
+            return;
         }
-    });
 
-    // 모달에서 총 금액 가져오기
-    var totalAmount = document.getElementById('modal-total').textContent;
+        // 주문 내역 수집
+        document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+            const name = item.querySelector('h2').textContent; // 메뉴 이름 가져오기
+            const quantity = item.querySelector('input[type=number]').value; // 수량 가져오기
+            if (parseInt(quantity) > 0) {
+                orderDetails.push({ name: name, quantity: quantity }); // 주문 항목 추가
+            }
+        });
 
-    // Firebase에 주문 데이터 전송
-    firebase.database().ref('orders').push({
-        timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
-        tableNumber: tableNumber, // URL에서 가져온 Table 번호 저장
-        orderList: orderDetails, // 주문 항목 저장
-        totalAmount: totalAmount // 총 금액 저장
-    }).then(() => {
-        alert('Pedido concluído!.주문이 성공적으로 처리되었습니다.');
-        closeModal(); // 모달 닫기
-    }).catch(error => {
-        console.error("Error sending order data:", error);
-        alert('Ocorreu um erro ao processar o pedido!.주문 처리 중 오류가 발생했습니다: ' + error.message);
-    });
+        // 모달에서 총 금액 가져오기
+        var totalAmount = document.getElementById('modal-total').textContent;
+
+        // ===== 추가 입력 필드 값 가져오기 =====
+        const customerName = document.getElementById('customer-name')?.value || ''; // 이름 가져오기
+        const customerContact = document.getElementById('customer-contact')?.value || ''; // 연락처 가져오기
+        const customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
+        // ==================================
+
+        // Firebase에 주문 데이터 전송
+        firebase.database().ref('orders').push({
+            timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
+            tableNumber: tableNumber, // URL에서 가져온 Table 번호 저장
+            orderList: orderDetails, // 주문 항목 저장
+            totalAmount: totalAmount, // 총 금액 저장
+            customerName: customerName, // 고객 이름 저장
+            customerContact: customerContact, // 고객 연락처 저장
+            customerAddress: customerAddress // 고객 주소 저장
+        }).then(() => {
+            alert('Pedido concluído! 주문이 성공적으로 처리되었습니다.');
+            closeModal(); // 모달 닫기
+        }).catch(error => {
+            console.error("Error sending order data:", error);
+            alert('Ocorreu um erro ao processar o pedido! 주문 처리 중 오류가 발생했습니다: ' + error.message);
+        });
     }
-
     // 모달 창을 닫는 함수
     function closeModal() {
         document.getElementById('order-modal').style.display = 'none';
