@@ -646,6 +646,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 <input type="number" id="table-number" name="table-number" min="1" required>
             </div>
 
+            <!-- 추가 입력 필드 (이름, 연락처, 주소) -->
+            <div id="additional-fields" style="display:none; margin-bottom: 20px;"> <!-- 기본적으로 숨김 처리 -->
+                <div style="margin-bottom: 10px;">
+                    <label for="customer-name">Name:</label>
+                    <input type="text" id="customer-name" name="customer-name" placeholder="Your Name">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="customer-contact">Contact:</label>
+                    <input type="tel" id="customer-contact" name="customer-contact" placeholder="Your Phone">
+                </div>
+                <div>
+                    <label for="customer-address">Address:</label>
+                    <textarea id="customer-address" name="customer-address" placeholder="Your Address" rows="3"></textarea>
+                </div>
+            </div>
+
             <div id="service-fee" style="color: #757474; font-size: 10px; text-align: left;">
                 10% será adicionado ao total.
             </div>
@@ -660,8 +676,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             
             <button onclick="closeModal()">Close</button> <!-- 모달 창 닫기 버튼 -->
         </div>
-    
     </div>
+
 
 
     <!-- Firebase SDK 추가 (8.x 버전) -->
@@ -1250,37 +1266,46 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const orderButton = document.getElementById('order-button');
-            const cancelButton = document.getElementById('cancel-button');
-            const modal = document.getElementById('order-modal');
-            const orderList = document.getElementById('order-list');
-            const totalAmountDisplay = document.getElementById('total-amount');
+    document.addEventListener('DOMContentLoaded', function () {
+        const orderButton = document.getElementById('order-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const modal = document.getElementById('order-modal');
+        const orderList = document.getElementById('order-list');
+        const totalAmountDisplay = document.getElementById('total-amount');
 
-            // Define updateModalTotalAmount before it is called
-            function updateModalTotalAmount(totalAmountText) {
-                document.getElementById('modal-total').textContent = totalAmountText;
+        // ====== URL에서 table 번호 가져오기 ======
+        const tableNumber = getTableNumberFromURL();
+
+        // ====== table=99일 경우 추가 필드 표시 ======
+        if (tableNumber === '99') {
+            const additionalFields = document.getElementById('additional-fields');
+            if (additionalFields) {
+                additionalFields.style.display = 'block'; // 추가 필드 표시
             }
+        }
 
-            function updateTotalAmount() {
-                let totalAmount = 0;
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const quantity = parseInt(item.querySelector('input[type=number]').value);
-                    const pricePerItemElement = item.querySelector('.price-per-item');
-                    if (pricePerItemElement) {
-                        const pricePerItem = parseInt(pricePerItemElement.textContent);
-                        totalAmount += quantity * pricePerItem;
-                    } else {
-                        console.error("Failed to find element with class '.price-per-item'");
-                    }
-                });
+        // Define updateModalTotalAmount before it is called
+        function updateModalTotalAmount(totalAmountText) {
+            document.getElementById('modal-total').textContent = totalAmountText;
+        }
 
-            // URL에서 table 번호 가져오기
-            const tableNumber = getTableNumberFromURL();
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                const pricePerItemElement = item.querySelector('.price-per-item');
+                if (pricePerItemElement) {
+                    const pricePerItem = parseInt(pricePerItemElement.textContent);
+                    totalAmount += quantity * pricePerItem;
+                } else {
+                    console.error("Failed to find element with class '.price-per-item'");
+                }
+            });
 
             // table이 0인 경우 서비스 비용 추가 안 함
             let formattedTotalAmount;
-            if (tableNumber === '0') {
+            if (tableNumber === '0' || tableNumber === '99') {
+                // table=0 또는 table=99인 경우 서비스 비용 추가하지 않음
                 formattedTotalAmount = `Total: R$ ${totalAmount.toFixed(2)}`;
             } else {
                 const serviceFee = totalAmount * 0.1; // 서비스 비용 10%
@@ -1289,74 +1314,70 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // 총 금액 업데이트
-            const totalAmountDisplay = document.getElementById('total-amount');
             if (totalAmountDisplay) {
                 totalAmountDisplay.textContent = formattedTotalAmount;
             }
             updateModalTotalAmount(formattedTotalAmount);
-            }
+        }
 
-            // Reset Order (초기화 함수)
-            function resetOrder() {
-                // 모든 수량 입력 필드를 초기화
-                document.querySelectorAll('input[type=number]').forEach(input => {
-                    if (input.id !== 'table-number') { // Table 번호는 초기화하지 않음
-                        input.value = 0;
-                    }
-                });
-
-                // 모든 항목의 총 가격 초기화
-                document.querySelectorAll('.total-price').forEach(total => {
-                    total.textContent = '0R$';
-                });
-
-                // 전체 총 금액 초기화
-                const totalAmountDisplay = document.getElementById('total-amount');
-                if (totalAmountDisplay) {
-                    totalAmountDisplay.textContent = 'Total: 0R$';
+        // Reset Order (초기화 함수)
+        function resetOrder() {
+            // 모든 수량 입력 필드를 초기화
+            document.querySelectorAll('input[type=number]').forEach(input => {
+                if (input.id !== 'table-number') { // Table 번호는 초기화하지 않음
+                    input.value = 0;
                 }
-
-                // 모달 창 안의 주문 내역 초기화
-                if (orderList) {
-                    orderList.innerHTML = '';
-                }
-            }
-
-            // Cancel 버튼 클릭 시 초기화
-            cancelButton.addEventListener('click', function () {
-                resetOrder(); // 초기화 함수 호출
-                modal.style.display = 'none'; // 모달 닫기
             });
 
-            // Modal의 Close 버튼 클릭 시 초기화
-            const closeButton = document.getElementById('close-modal-button');
-            if (closeButton) {
-                closeButton.addEventListener('click', function () {
-                    resetOrder(); // 초기화 함수 호출
-                    modal.style.display = 'none'; // 모달 닫기
-                });
+            // 모든 항목의 총 가격 초기화
+            document.querySelectorAll('.total-price').forEach(total => {
+                total.textContent = '0R$';
+            });
+
+            // 전체 총 금액 초기화
+            if (totalAmountDisplay) {
+                totalAmountDisplay.textContent = 'Total: 0R$';
             }
 
-            orderButton.addEventListener('click', function () {
+            // 모달 창 안의 주문 내역 초기화
+            if (orderList) {
                 orderList.innerHTML = '';
-                let hasItems = false;
-                document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
-                    const quantity = parseInt(item.querySelector('input[type=number]').value);
-                    if (quantity > 0) {
-                        hasItems = true;
-                        const name = item.querySelector('h2').textContent;
-                        const price = item.querySelector('.price-per-item').textContent;
-                        const itemTotal = quantity * parseInt(price);
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`;
-                        orderList.appendChild(listItem);
-                    }
-                });
+            }
+        }
 
-                updateTotalAmount();
-            });
+        // Cancel 버튼 클릭 시 초기화
+        cancelButton.addEventListener('click', function () {
+            resetOrder(); // 초기화 함수 호출
+            modal.style.display = 'none'; // 모달 닫기
         });
-    </script>
+
+        orderButton.addEventListener('click', function () {
+            orderList.innerHTML = '';
+            let hasItems = false;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                if (quantity > 0) {
+                    hasItems = true;
+                    const name = item.querySelector('h2').textContent;
+                    const price = item.querySelector('.price-per-item').textContent;
+                    const itemTotal = quantity * parseInt(price);
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`;
+                    orderList.appendChild(listItem);
+                }
+            });
+
+            updateTotalAmount();
+        });
+    });
+
+    // URL에서 table 번호를 가져오는 함수
+    function getTableNumberFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('table');
+    }
+</script>
+
 
 
             cancelButton.addEventListener('click', function() { 
