@@ -605,6 +605,22 @@
         const customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
         // ==================================
 
+
+         // ===== 입력값 검증 =====
+        if (!customerName || customerName.includes(' ')) {
+            alert('이름에는 빈칸이 포함될 수 없습니다. 다시 입력해주세요.');
+            return;
+        }
+
+        if (!/^\d{11}$/.test(customerContact)) {
+            alert('연락처는 11자리 숫자로만 입력해야 합니다. 다시 확인해주세요.');
+            return;
+        }
+
+        if (!customerAddress) {
+            alert('주소를 입력해주세요.');
+            return;
+        }
         // Firebase에 주문 데이터 전송
         firebase.database().ref('orders').push({
             timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
