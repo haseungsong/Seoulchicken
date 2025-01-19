@@ -608,16 +608,19 @@
 
          // ===== 입력값 검증 =====
         if (!customerName || customerName.includes(' ')) {
+            alert('O nome não pode conter espaços em branco. Por favor, corrija.'); // 포르투갈어
             alert('이름에는 빈칸이 포함될 수 없습니다. 다시 입력해주세요.');
             return;
         }
 
         if (!/^\d{11}$/.test(customerContact)) {
+            alert('O número de contato deve ter exatamente 11 dígitos. Verifique novamente.'); // 포르투갈어
             alert('연락처는 11자리 숫자로만 입력해야 합니다. 다시 확인해주세요.');
             return;
         }
 
         if (!customerAddress) {
+            alert('Por favor, insira o endereço.'); // 포르투갈어
             alert('주소를 입력해주세요.');
             return;
         }
