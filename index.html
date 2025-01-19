@@ -563,18 +563,6 @@
             tableNumberField.value = tableNumber;
             tableNumberField.disabled = true;
         }
-
-        / 테이블 번호가 99인 경우
-        if (tableNumber === '99') {
-            // 테이블 번호 필드 숨기기
-            if (tableNumberField) {
-                tableNumberField.style.display = 'none'; // 테이블 번호 입력 필드 숨김
-            }
-
-            // 10% 서비스 텍스트 숨기기
-            if (serviceFeeMessage) {
-                serviceFeeMessage.style.display = 'none'; // 서비스 텍스트 숨김
-            }
     });
 
 </script>   
@@ -613,15 +601,10 @@ function sendOrderData() {
 
     // Firebase에 주문 데이터 전송
     firebase.database().ref('orders').push({
-        timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 시간
-        tableNumber: tableNumber, // 테이블 번호
-        customerName: customerName, // 이름
-        customerContact: customerContact, // 연락처
-        customerCEP: customerCEP, // CEP
-        customerAddress: customerAddress, // 주소
-        customerRemark: customerRemark, // 비고
-        orderList: orderDetails, // 주문 목록
-        totalAmount: document.getElementById('modal-total').textContent // 총 금액
+        timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
+        tableNumber: tableNumber, // URL에서 가져온 Table 번호 저장
+        orderList: orderDetails, // 주문 항목 저장
+        totalAmount: totalAmount // 총 금액 저장
     }).then(() => {
         alert('Pedido concluído!.주문이 성공적으로 처리되었습니다.');
         closeModal(); // 모달 닫기
