@@ -531,8 +531,33 @@
         const confirmButton = document.getElementById('confirm-button');
         if (confirmButton) {
             confirmButton.addEventListener('click', function () {
+                // 입력 필드 가져오기
+                const customerName = document.getElementById('customer-name').value.trim();
+                const customerContact = document.getElementById('customer-contact').value.trim();
+                const customerCEP = document.getElementById('customer-cep').value.trim();
+                const customerAddress = document.getElementById('customer-address').value.trim();
+
+                // 입력값 유효성 검사
+                if (!customerName) {
+                    alert('이름을 입력하세요. Nome é obrigatório!');
+                    return; // 유효하지 않은 경우 실행 중단
+                }
+                if (customerContact.length !== 11) {
+                    alert('전화번호는 정확히 11자리여야 합니다. Número de telefone deve ter 11 dígitos!');
+                    return; // 유효하지 않은 경우 실행 중단
+                }
+                if (customerCEP.length !== 8) {
+                    alert('CEP는 정확히 8자리여야 합니다. CEP deve ter 8 dígitos!');
+                    return; // 유효하지 않은 경우 실행 중단
+                }
+                if (!customerAddress) {
+                    alert('주소를 입력하세요. Endereço é obrigatório!');
+                    return; // 유효하지 않은 경우 실행 중단
+                }
+
+                // 모든 입력값이 유효한 경우에만 주문 진행
                 alert('Pedido concluído!. 주문이 완료되었습니다!');
-                closeModal();
+                closeModal(); // 모달 닫기
             });
         }
 
