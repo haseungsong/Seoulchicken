@@ -536,7 +536,8 @@
                 const customerContact = document.getElementById('customer-contact').value.trim();
                 const customerCEP = document.getElementById('customer-cep').value.trim();
                 const customerAddress = document.getElementById('customer-address').value.trim();
-
+                const customerRemark = document.getElementById('customer-remark')?.value.trim() || ''; // 여기에 추가
+                
                 // 입력값 유효성 검사
                 if (!customerName) {
                     alert('이름을 입력하세요. Nome é obrigatório!');
