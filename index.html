@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+            nav a.active {
+            color: rgba(255, 51, 0, 0.795); /* 활성화된 링크의 색상을 파란색으로 설정 */
+        }
+
             input[readonly] {
             background-color: #fff; /* 배경색 유지 */
             color: #333; /* 글자색 유지 */
@@ -754,6 +758,7 @@
             <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
 
         </select>
+
         <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
         <a href="#K-food" data-key="K-food">Bebida</a> <!-- 음료 링크 그대로 유지 -->
         <a href="#drinks" data-key="drinks">Bebida</a> <!-- 음료 링크 그대로 유지 -->
@@ -1241,53 +1246,41 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const wrapper = document.querySelector('.content-wrapper');
-            let isDown = false;
-            let startX;
-            let scrollLeft;
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('nav a'); // 네비게이션 링크들 가져오기
 
-            // 마우스 드래그 이벤트
-            wrapper.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - wrapper.offsetLeft;
-                scrollLeft = wrapper.scrollLeft;
+            function updateActiveNav(targetId) {
+                navLinks.forEach(link => {
+                    // 각 링크의 href 속성과 클릭된 섹션 ID 비교
+                    if (link.getAttribute('href') === targetId) {
+                        link.classList.add('active'); // 활성화된 링크에 "active" 클래스 추가
+                    } else {
+                        link.classList.remove('active'); // 다른 링크에서 "active" 클래스 제거
+                    }
+                });
+            }
+
+            // 페이지를 로드했을 때 초기 상태에서 활성화된 메뉴 설정
+            updateActiveNav('#menu');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault(); // 기본 동작 방지 (페이지 이동 방지)
+                    const targetId = this.getAttribute('href'); // 클릭된 링크의 href 값 가져오기
+                    updateActiveNav(targetId); // 활성화된 메뉴 업데이트
+                    showSection(targetId); // 섹션 보이기
+                });
             });
 
-            wrapper.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - wrapper.offsetLeft;
-                const walk = (x - startX) * 2; // 드래그 속도 설정
-                wrapper.scrollLeft = scrollLeft - walk;
-            });
-
-            // 터치 이벤트 (모바일)
-            wrapper.addEventListener('touchstart', (e) => {
-                isDown = true;
-                startX = e.touches[0].pageX - wrapper.offsetLeft;
-                scrollLeft = wrapper.scrollLeft;
-            });
-
-            wrapper.addEventListener('touchend', () => {
-                isDown = false;
-            });
-
-            wrapper.addEventListener('touchmove', (e) => {
-                if (!isDown) return;
-                const x = e.touches[0].pageX - wrapper.offsetLeft;
-                const walk = (x - startX) * 2;
-                wrapper.scrollLeft = scrollLeft - walk;
-            });
+            // 현재 활성화된 섹션 보이기
+            function showSection(id) {
+                const sections = document.querySelectorAll('.content');
+                sections.forEach(section => {
+                    section.style.display = section.id === id.substring(1) ? 'block' : 'none'; // ID 비교 후 섹션 표시/숨김
+                });
+            }
         });
+
     </script>
 
 
