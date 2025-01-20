@@ -595,33 +595,42 @@
                 orderDetails.push({ name: name, quantity: quantity }); // 주문 항목 추가
             }
         });
-
         // 모달에서 총 금액 가져오기
         var totalAmount = document.getElementById('modal-total').textContent;
 
         // ===== 추가 입력 필드 값 가져오기 =====
-        const customerName = document.getElementById('customer-name')?.value || ''; // 이름 가져오기
-        const customerContact = document.getElementById('customer-contact')?.value || ''; // 연락처 가져오기
-        const customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
-        // ==================================
+        let customerName = '';
+        let customerContact = '';
+        let customerAddress = '';
 
+        // table=99일 경우 추가 필드 검사
+        if (tableNumber === '99') {
+            customerName = document.getElementById('customer-name')?.value || ''; // 이름 가져오기
+            customerContact = document.getElementById('customer-contact')?.value || ''; // 연락처 가져오기
+            customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
 
-        if (tableNumber === '99') { // table=99인 경우에만 검증 실행
-        if (!customerName || customerName.includes(' ')) {
-            alert('O nome não pode conter espaços em branco. 이름에는 빈칸이 포함될 수 없습니다.');
-            return;
+            if (!customerName.trim()) {
+                alert('이름을 입력해주세요.');
+                return;
+            }
+            if (!/^\d{11}$/.test(customerContact)) {
+                alert('연락처는 11자리 숫자로만 입력해야 합니다.');
+                return;
+            }
+            if (!customerAddress.trim()) {
+                alert('주소를 입력해주세요.');
+                return;
+            }
         }
-        if (!/^\d{11}$/.test(customerContact)) {
-            alert('O número de contato deve ter exatamente 11 dígitos. 연락처는 11자리 숫자로만 입력해야 합니다');
-            return;
+
+        // table=99가 아닌 경우 기본값 설정
+        if (tableNumber !== '99') {
+            customerName = 'N/A';
+            customerContact = 'N/A';
+            customerAddress = 'N/A';
         }
-        if (!customerAddress) {
-            alert('Por favor, insira o endereço. 주소를 입력해주세요');
-            return;
-        }
-    }
-    }
-        // Firebase에 주문 데이터 전송
+
+        // Firebase에 데이터 전송
         firebase.database().ref('orders').push({
             timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
             tableNumber: tableNumber, // URL에서 가져온 Table 번호 저장
@@ -637,21 +646,23 @@
             console.error("Error sending order data:", error);
             alert('Ocorreu um erro ao processar o pedido! 주문 처리 중 오류가 발생했습니다: ' + error.message);
         });
-    }
-    // 모달 창을 닫는 함수
-    function closeModal() {
-        document.getElementById('order-modal').style.display = 'none';
-    }
+        }
 
-// 페이지 로드 시 table 번호를 입력 필드에 자동 설정
-document.addEventListener('DOMContentLoaded', function () {
-    const tableNumberField = document.getElementById('table-number');
-    const tableNumber = getTableNumberFromURL(); // URL에서 table 파라미터 가져오기
-    if (tableNumber && tableNumberField) {
-        tableNumberField.value = tableNumber; // 입력 필드에 table 번호 설정
-        tableNumberField.disabled = true; // 입력 필드를 비활성화하여 수정 불가
-    }
-});
+        // 모달 창을 닫는 함수
+        function closeModal() {
+        document.getElementById('order-modal').style.display = 'none';
+        }
+
+        // 페이지 로드 시 table 번호를 입력 필드에 자동 설정
+        document.addEventListener('DOMContentLoaded', function () {
+            const tableNumberField = document.getElementById('table-number');
+            const tableNumber = getTableNumberFromURL(); // URL에서 table 파라미터 가져오기
+            if (tableNumber && tableNumberField) {
+                tableNumberField.value = tableNumber; // 입력 필드에 table 번호 설정
+                tableNumberField.disabled = true; // 입력 필드를 비활성화하여 수정 불가
+            }
+        });
+        
 </script>
 
     
