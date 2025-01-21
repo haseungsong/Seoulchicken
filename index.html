@@ -126,9 +126,9 @@
         }
         nav a {
             color: white; /* 네비게이션 바 안의 링크 텍스트 색상을 흰색으로 설정 */
-            padding: 10px 20px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
+            padding: 10px 30px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
             text-decoration: none; /* 링크에 밑줄 제거 */
-            font-size: 25px; /* 링크 텍스트 크기를 18px로 설정 */
+            font-size: 30px; /* 링크 텍스트 크기를 18px로 설정 */
             font-weight: bold; /* 글씨를 굵게 설정 */
         }
         .content {
@@ -219,8 +219,8 @@
             padding: 5px; /* 모바일에서는 패딩을 줄여서 텍스트 박스 크기를 조정 */
         }
         nav a {
-            font-size: 18px; /* 네비게이션 텍스트 크기를 작게 조정 */
-            padding: 10px; /* 패딩을 줄여 모바일 화면에 맞추기 */
+            font-size: 23px; /* 네비게이션 텍스트 크기를 작게 조정 */
+            padding: 15px; /* 패딩을 줄여 모바일 화면에 맞추기 */
         }
         input[type="number"] {
             width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
@@ -822,10 +822,9 @@
         <button id="next-page" class="arrow-btn" style="right: 10px;">&#10095;</button>
     </div>
     <nav> <!-- 네비게이션 바 -->
-        <select id="language-select"> <!-- 언어 선택 드롭다운 -->
-            <option value="portuguese">Português</option> <!-- 포르투갈어 옵션 -->
-            <option value="korean">Coreano</option> <!-- 한국어 옵션 -->
-
+        <select id="language-select" style="width: 60px; height: 30px; font-size: 12px;"> <!-- 드롭다운 크기 조정 -->
+            <option value="portuguese">PT</option> <!-- 포르투갈어 옵션 -->
+            <option value="korean">KR</option> <!-- 한국어 옵션 -->
         </select>
 
         <a href="#menu" data-key="menu">Chicken</a> <!-- 메뉴 링크를 Chicken으로 변경 -->
