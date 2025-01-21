@@ -1368,39 +1368,54 @@
             document.getElementById('total-amount').textContent = 'Total: 0R$'; // 총 금액 초기화
         });
 
+        // 섹션 이동을 위한 ID 배열과 초기 인덱스 설정
             const sections = ['#menu', '#K-food', '#drinks']; // 섹션 ID 배열
             let currentIndex = 0; // 현재 섹션 인덱스
 
             // 페이지 이동 함수
             function navigateToSection(index) {
-                if (index >= 0 && index < sections.length) {
-                    const sectionId = sections[index];
-                    document.querySelectorAll('.content').forEach(section => {
-                        section.style.display = section.id === sectionId.substring(1) ? 'block' : 'none';
-                    });
-
-                    // 현재 활성화된 섹션에 따라 인덱스 업데이트
-                    currentIndex = index;
+                // 인덱스가 범위를 벗어난 경우 순환 처리
+                if (index < 0) {
+                    currentIndex = sections.length - 1; // 마지막 섹션으로 이동
+                } else if (index >= sections.length) {
+                    currentIndex = 0; // 첫 번째 섹션으로 이동
+                } else {
+                    currentIndex = index; // 정상 범위 내에서는 인덱스 업데이트
                 }
+
+                const sectionId = sections[currentIndex];
+                document.querySelectorAll('.content').forEach(section => {
+                    section.style.display = section.id === sectionId.substring(1) ? 'block' : 'none';
+                });
+
+                updateActiveNav(sectionId); // 네비게이션 업데이트
             }
 
-            // 이전 페이지 이동
+            // 네비게이션 메뉴의 활성 상태 업데이트 함수
+            function updateActiveNav(targetId) {
+                const navLinks = document.querySelectorAll('nav a');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === targetId) {
+                        link.classList.add('active'); // 활성화된 링크에 "active" 클래스 추가
+                    } else {
+                        link.classList.remove('active'); // 다른 링크에서 "active" 클래스 제거
+                    }
+                });
+            }
+
+            // 이전 페이지로 이동
             document.getElementById('prev-page').addEventListener('click', function () {
-                if (currentIndex > 0) {
-                    navigateToSection(currentIndex - 1);
-                }
+                navigateToSection(currentIndex - 1); // 이전 섹션으로 이동
             });
 
-            // 다음 페이지 이동
+            // 다음 페이지로 이동
             document.getElementById('next-page').addEventListener('click', function () {
-                if (currentIndex < sections.length - 1) {
-                    navigateToSection(currentIndex + 1);
-                }
+                navigateToSection(currentIndex + 1); // 다음 섹션으로 이동
             });
 
             // 초기 페이지 설정
-            navigateToSection(0);
-        });
+            navigateToSection(0); // 첫 번째 섹션 표시
+                    });
     </script>
 
     <script>
