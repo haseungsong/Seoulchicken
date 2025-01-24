@@ -674,24 +674,33 @@
         let customerName = '';
         let customerContact = '';
         let customerAddress = '';
+        // 참고사항과 결제 방식 변수 선언
+        let customerNotes = '';
+        let paymentMethod = '';
 
         // table=99일 경우 추가 필드 검사
         if (tableNumber === '99') {
             customerName = document.getElementById('customer-name')?.value || ''; // 이름 가져오기
             customerContact = document.getElementById('customer-contact')?.value || ''; // 연락처 가져오기
             customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
+            customerNotes = document.getElementById('customer-notes')?.value || ''; // 참고사항
+            paymentMethod = document.querySelector('button.selected')?.id || ''; // 선택된 결제 방식 (Pix 또는 Débito)
 
             if (!customerName.trim()) {
-                alert('이름을 입력해주세요.');
+                alert('Insira seu nome.이름을 입력해주세요.');
                 return;
             }
             if (!/^\d{11}$/.test(customerContact)) {
-                alert('연락처는 11자리 숫자로만 입력해야 합니다.');
+                alert('O número apenas 11 dígitos.11자리 숫자로만 입력해 주세요.');
                 return;
             }
             if (!customerAddress.trim()) {
-                alert('주소를 입력해주세요.');
+                alert('Insira seu endereço.주소를 입력해주세요.');
                 return;
+            }
+            if (!paymentMethod) {
+            alert('Escolha o método de pagamento.결제 방식을 선택해주세요.');
+            return;
             }
         }
 
@@ -711,6 +720,8 @@
             customerName: customerName, // 고객 이름 저장
             customerContact: customerContact, // 고객 연락처 저장
             customerAddress: customerAddress // 고객 주소 저장
+            customerNotes: customerNotes, // 참고사항 저장`
+            paymentMethod: paymentMethod // 결제 방식 저장
         }).then(() => {
             alert('Pedido concluído! 주문이 성공적으로 처리되었습니다.');
             closeModal(); // 모달 닫기
@@ -769,6 +780,18 @@
                     <label for="customer-address" style="font-weight: bold; margin-bottom: 5px;">🏠 Address:</label>
                     <textarea id="customer-address" name="customer-address" placeholder="Enter your address" rows="3"
                               style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"></textarea>
+                </div>
+                  <!-- 새로운 참고사항 입력 -->
+                <div style="margin-bottom: 10px; display: flex; flex-direction: column;">
+                    <label for="customer-notes" style="font-weight: bold; margin-bottom: 5px;">📋 참고사항:</label>
+                    <textarea id="customer-notes" name="customer-notes" placeholder="추가 메모를 입력하세요" rows="3"
+                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"></textarea>
+                </div>
+
+                <!-- 결제 방식 버튼 -->
+                <div style="margin-bottom: 10px; text-align: center;">
+                    <button id="pix-button" style="margin-right: 10px;">Pix</button>
+                    <button id="debit-button">Débito</button>
                 </div>
             </div>
 
@@ -1435,7 +1458,26 @@
                 additionalFields.style.display = 'block'; // 추가 필드 표시
             }
         }
+        // Pix 및 Débito 버튼 이벤트
+        const pixButton = document.getElementById('pix-button');
+            const debitButton = document.getElementById('debit-button');
 
+            // 결제 방식 버튼 클릭 이벤트
+            pixButton.addEventListener('click', function () {
+                selectPaymentMethod('Pix', pixButton, debitButton);
+            });
+
+            debitButton.addEventListener('click', function () {
+                selectPaymentMethod('Débito', debitButton, pixButton);
+            });
+
+            function selectPaymentMethod(method, selectedButton, otherButton) {
+                selectedButton.classList.add('selected'); // 선택된 버튼 강조
+                otherButton.classList.remove('selected'); // 다른 버튼 강조 해제
+                console.log(`결제 방식: ${method}`); // 선택된 결제 방식 출력 (테스트용)
+            }
+        });
+        
         // Define updateModalTotalAmount before it is called
         function updateModalTotalAmount(totalAmountText) {
             document.getElementById('modal-total').textContent = totalAmountText;
