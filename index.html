@@ -711,6 +711,7 @@
             customerName: customerName, // 고객 이름 저장
             customerContact: customerContact, // 고객 연락처 저장
             customerAddress: customerAddress // 고객 주소 저장
+            customerRequest: document.getElementById('customer-request')?.value || '' // 요청사항 저장
         }).then(() => {
             alert('Pedido concluído! 주문이 성공적으로 처리되었습니다.');
             closeModal(); // 모달 닫기
@@ -755,20 +756,26 @@
 
             <!-- 추가 입력 필드 (이름, 연락처, 주소) -->
             <div id="additional-fields" style="display:none; margin-bottom: 10px; background-color: #f8f8f8; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <div style="margin-bottom: 10px; display: flex; flex-direction: column;">
-                    <label for="customer-name" style="font-weight: bold; margin-bottom: 5px;">👤 Name:</label>
+                <div style="margin-bottom: 3px; display: flex; flex-direction: column;">
+                    <label for="customer-name" style="font-weight: bold; margin-bottom: 5px;">👤 Nome:</label>
                     <input type="text" id="customer-name" name="customer-name" placeholder="Insira seu nome completo." 
                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
                 </div>
-                <div style="margin-bottom: 10px; display: flex; flex-direction: column;">
-                    <label for="customer-contact" style="font-weight: bold; margin-bottom: 5px;">📞 Contact:</label>
+                <div style="margin-bottom: 3px; display: flex; flex-direction: column;">
+                    <label for="customer-contact" style="font-weight: bold; margin-bottom: 5px;">📞 Contato:</label>
                     <input type="tel" id="customer-contact" name="customer-contact" placeholder="Insira seu número de telefone. 11 digitos." 
                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
                 </div>
                 <div style="display: flex; flex-direction: column;">
-                    <label for="customer-address" style="font-weight: bold; margin-bottom: 5px;">🏠 Address:</label>
+                    <label for="customer-address" style="font-weight: bold; margin-bottom: 3px;">🏠 Endereço:</label>
                     <textarea id="customer-address" name="customer-address" placeholder="Insira seu endereço completo." rows="3"
                               style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"></textarea>
+                </div>
+                 <!-- 요청사항 필드 추가 -->
+                <div style="margin-bottom: 3px; display: flex; flex-direction: column;">
+                    <label for="customer-request" style="font-weight: bold; margin-bottom: 5px;">✍️ Comentario:</label>
+                    <textarea id="customer-request" name="customer-request" placeholder="Enter your request (optional)" rows="3"
+                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"></textarea>
                 </div>
             </div>
 
