@@ -682,15 +682,15 @@
             customerAddress = document.getElementById('customer-address')?.value || ''; // 주소 가져오기
 
             if (!customerName.trim()) {
-                alert('이름을 입력해주세요.');
+                alert('insira seu nome. 이름을 입력해주세요.');
                 return;
             }
             if (!/^\d{11}$/.test(customerContact)) {
-                alert('연락처는 11자리 숫자로만 입력해야 합니다.');
+                alert('Deve ter apenas 11 dígitos. 연락처는 11자리 숫자로만 입력해야 합니다.');
                 return;
             }
             if (!customerAddress.trim()) {
-                alert('주소를 입력해주세요.');
+                alert('Insira seu endereço.주소를 입력해주세요.');
                 return;
             }
         }
@@ -757,17 +757,17 @@
             <div id="additional-fields" style="display:none; margin-bottom: 10px; background-color: #f8f8f8; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 <div style="margin-bottom: 10px; display: flex; flex-direction: column;">
                     <label for="customer-name" style="font-weight: bold; margin-bottom: 5px;">👤 Name:</label>
-                    <input type="text" id="customer-name" name="customer-name" placeholder="Enter your full name" 
+                    <input type="text" id="customer-name" name="customer-name" placeholder="Insira seu nome completo." 
                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
                 </div>
                 <div style="margin-bottom: 10px; display: flex; flex-direction: column;">
                     <label for="customer-contact" style="font-weight: bold; margin-bottom: 5px;">📞 Contact:</label>
-                    <input type="tel" id="customer-contact" name="customer-contact" placeholder="Enter your phone number" 
+                    <input type="tel" id="customer-contact" name="customer-contact" placeholder="Insira seu número de telefone. 11 digitos." 
                            style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);">
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <label for="customer-address" style="font-weight: bold; margin-bottom: 5px;">🏠 Address:</label>
-                    <textarea id="customer-address" name="customer-address" placeholder="Enter your address" rows="3"
+                    <textarea id="customer-address" name="customer-address" placeholder="Insira seu endereço completo." rows="3"
                               style="padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 5px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"></textarea>
                 </div>
             </div>
