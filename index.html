@@ -604,39 +604,67 @@
         const confirmButton = document.getElementById('confirm-button');
         if (confirmButton) {
             confirmButton.addEventListener('click', function () {
-                alert('Pedido concluído!. 주문이 완료되었습니다!');
-                closeModal();
+                alert('Pedido concluído! 주문이 완료되었습니다!');
+                resetOrder(); // 주문 내역 초기화 함수 호출
+                closeModal(); // 모달 닫기
             });
         }
 
-        const closeButton = document.getElementById('close-modal-button');
-        if (closeButton) {
-            closeButton.addEventListener('click', closeModal);
-        }
+        // 주문 초기화 함수
+        function resetOrder() {
+            // 모든 수량 입력 필드를 초기화
+            document.querySelectorAll('input[type=number]').forEach(input => {
+                if (input.id !== 'table-number') { // table-number 필드는 초기화하지 않음
+                    input.value = 0; // 수량을 0으로 설정
+                }
+            });
 
-        function closeModal() {
-            document.getElementById('order-modal').style.display = 'none';
-        }
-    });
+            // 각 항목의 총 가격 초기화
+            document.querySelectorAll('.total-price').forEach(total => {
+                total.textContent = '0R$'; // 총 가격을 초기화
+            });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
-            const tableNumberField = document.getElementById('table-number');
-            const tableNumber = getTableNumberFromURL();
-        // "10% será adicionado ao total." 메시지 처리
-
-        const serviceFeeMessage = document.getElementById('service-fee');
-            if (tableNumber === '0' && serviceFeeMessage) {
-                serviceFeeMessage.style.opacity = '0'; // 투명하게 설정
-            } else if (serviceFeeMessage) {
-                serviceFeeMessage.style.opacity = '1'; // 정상적으로 표시
+            // 총 금액 초기화
+            const totalAmountDisplay = document.getElementById('total-amount');
+            if (totalAmountDisplay) {
+                totalAmountDisplay.textContent = 'Total: 0R$'; // 총 금액 초기화
             }
 
-            if (tableNumber && tableNumberField) {
-                tableNumberField.value = tableNumber;
-                tableNumberField.disabled = true;
+            // 모달 내 주문 리스트 초기화
+            const orderList = document.getElementById('order-list');
+            if (orderList) {
+                orderList.innerHTML = ''; // 주문 내역 초기화
+            }
+        }
+
+            const closeButton = document.getElementById('close-modal-button');
+            if (closeButton) {
+                closeButton.addEventListener('click', closeModal);
+            }
+
+            function closeModal() {
+                document.getElementById('order-modal').style.display = 'none';
             }
         });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // URL에서 table 파라미터 값을 가져와 입력 필드에 설정
+                const tableNumberField = document.getElementById('table-number');
+                const tableNumber = getTableNumberFromURL();
+            // "10% será adicionado ao total." 메시지 처리
+
+            const serviceFeeMessage = document.getElementById('service-fee');
+                if (tableNumber === '0' && serviceFeeMessage) {
+                    serviceFeeMessage.style.opacity = '0'; // 투명하게 설정
+                } else if (serviceFeeMessage) {
+                    serviceFeeMessage.style.opacity = '1'; // 정상적으로 표시
+                }
+
+                if (tableNumber && tableNumberField) {
+                    tableNumberField.value = tableNumber;
+                    tableNumberField.disabled = true;
+                }
+            });
 
     </script>   
 
