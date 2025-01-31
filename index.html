@@ -7,7 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
     <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
     <style> 
+    .menu-group {
+        margin-bottom: 30px;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
+    .group-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff6600;
+        text-align: left;
+        padding-left: 10px;
+        margin-bottom: 10px;
+    }
     .navigation-buttons {
             position: fixed; /* 페이지 스크롤에 따라 고정 */
             top: 50%; /* 페이지 중앙에 위치 */
@@ -881,6 +896,8 @@
                 A opção de escolher com osso sem custo adicional! No caso de meia porção, o valor será de 55 reais.
             </div>
 
+        <div class="menu-group">
+            <h2 class="group-title">Clássico</h2>
             <div class="menu"> <!-- 메뉴 리스트 -->
                 <div class="menu-item" id="menu1"> <!-- 메뉴 항목 1 -->
                     <h2>"CRISPY" chicken</h2> <!-- 메뉴 제목 설명 -->
@@ -936,7 +953,11 @@
                     <button type="button">+</button> <!-- 수량 증가 버튼 -->
                     R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
                 </div>
-                
+            </div>
+            
+            <div class="menu-group">
+                <h2 class="group-title">Meia/Meia</h2>    
+                <div class="menu">        
                 <div class="menu-item" id="menu6"> <!-- 메뉴 항목 6 -->
                     <h2>"Meia/Meia" Cri&Yang</h2> <!-- 메뉴 제목 설명 -->
                     <p>Original/Yangnum</p> <!-- 메뉴 설명 -->
@@ -1046,8 +1067,68 @@
                     <button type="button">+</button> <!-- 수량 증가 버튼 -->
                     R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
                 </div>
-                        
             </div> 
+        </div>
+
+        <div class="menu-group">
+            <h2 class="group-title">Meia Porção</h2>    
+            <div class="menu">        
+            <div class="menu-item" id="menu16"> <!-- 메뉴 항목 16 -->
+                <h2>"CRISPY" Meia Porção</h2> <!-- 메뉴 제목 설명 -->
+                <p>Crispy and crunchy</p> <!-- 메뉴 설명 -->
+                <img src="https://i.ibb.co/sJHx3K7/Bebida.jpg" alt="메뉴 16 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">52</span>
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity16" value="0" min="0" readonly>  <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+            </div>
+
+            <div class="menu-item" id="menu17"> <!-- 메뉴 항목 17 -->
+                <h2>"YANGNYON" Meia Porção</h2> <!-- 메뉴 제목 설명 -->
+                <p>Molho de tempero</p> <!-- 메뉴 설명 -->
+                <img src="https://i.ibb.co/sJHx3K7/Bebida.jpg" alt="메뉴 17 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">57</span>
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity17" value="0" min="0" readonly>  <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+            </div>
+
+            <div class="menu-item" id="menu18"> <!-- 메뉴 항목 18 -->
+                <h2>"GALBI" Meia Porção</h2> <!-- 메뉴 제목 설명 -->
+                <p>Molho de Shoyu</p> <!-- 메뉴 설명 -->
+                <img src="https://i.ibb.co/sJHx3K7/Bebida.jpg" alt="메뉴 18 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">57</span>
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity18" value="0" min="0" readonly>  <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+            </div>
+
+            <div class="menu-item" id="menu19"> <!-- 메뉴 항목 19 -->
+                <h2>"ONION" Meia Porção</h2> <!-- 메뉴 제목 설명 -->
+                <p>Molho de cebola</p> <!-- 메뉴 설명 -->
+                <img src="https://i.ibb.co/sJHx3K7/Bebida.jpg" alt="메뉴 19 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">57</span>
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity19" value="0" min="0" readonly>  <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+            </div>
+
+            <div class="menu-item" id="menu20"> <!-- 메뉴 항목 20 -->
+                <h2>"PURINGKLE" Meia Porção</h2> <!-- 메뉴 제목 설명 -->
+                <p>Tempero de queijo</p> <!-- 메뉴 설명 -->
+                <img src="https://i.ibb.co/sJHx3K7/Bebida.jpg" alt="메뉴 20 사진"> <!-- 메뉴 이미지 -->
+                <span class="price-per-item" style="color: rgba(255, 94, 0, 0.719); font-weight: bold; cursor: pointer;">78</span>
+                <button type="button">-</button> <!-- 수량 감소 버튼 -->
+                <input type="number" id="quantity20" value="0" min="0" readonly>  <!-- 수량 입력 필드 -->
+                <button type="button">+</button> <!-- 수량 증가 버튼 -->
+                R$<span class="total-price">0</span> <!-- 총 가격 표시 -->
+            </div>
+        </div> 
+    </div>
 
         </section>
 
