@@ -806,16 +806,16 @@
         }).then(() => {
             alert('Pedido concluído! 주문이 성공적으로 처리되었습니다.');
             closeModal(); // 모달 닫기
+
+              // === 주문 완료 후 화면 초기화 ===
+        resetOrder();  // 수량 및 총 금액 초기화
+
         }).catch(error => {
             console.error("Error sending order data:", error);
             alert('Ocorreu um erro ao processar o pedido! 주문 처리 중 오류가 발생했습니다: ' + error.message);
         });
         }
 
-        // 모달 창을 닫는 함수
-        function closeModal() {
-        document.getElementById('order-modal').style.display = 'none';
-        }
 
         // 페이지 로드 시 table 번호를 입력 필드에 자동 설정
         document.addEventListener('DOMContentLoaded', function () {
