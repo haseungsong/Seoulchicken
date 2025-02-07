@@ -617,13 +617,18 @@
         }
 
         const confirmButton = document.getElementById('confirm-button');
-        if (confirmButton) {
-            confirmButton.addEventListener('click', function () {
-                alert('Pedido concluído! 주문이 완료되었습니다!');
-                location.reload(); // 화면 새로고침
-                closeModal(); // 모달 닫기
-            });
-        }
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function () {
+                    alert('Pedido concluído! 주문이 완료되었습니다!');
+
+                    resetOrder(); // 주문 초기화 먼저 실행
+                    closeModal(); // 모달 닫기
+                
+                    setTimeout(() => {
+                        location.reload(); // 0.5초 후 새로고침 (초기화가 적용된 후)
+                    }, 500); // 500ms(0.5초) 딜레이 후 새로고침
+                });
+            }
 
         // 주문 초기화 함수
         function resetOrder() {
