@@ -1,272 +1,303 @@
+<!DOCTYPE html> <!-- HTML5 문서 형식을 선언 -->
+<html lang="pt"> <!-- 웹페이지의 기본 언어를 포르투갈어로 설정 -->
+<head> <!-- 웹 문서의 머리글(메타데이터, CSS, JS 포함) 시작 -->
+    <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 (한글, 포르투갈어 등 다국어 지원 가능) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- 반응형 웹을 위한 뷰포트 설정: 장치 화면 크기에 맞게 자동 조정됨 -->
 
-<!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
-<html lang="pt"> <!-- 문서의 언어를 한국어로 설정 -->
-<head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
-    <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+    <title>Seoulchicken</title> <!-- 웹페이지 제목 설정 (브라우저 탭에 표시됨) -->
+
+    <!-- Font Awesome 아이콘 라이브러리 (버전 6.0.0) 불러오기 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹을 위한 뷰포트 설정 -->
-    <title>Seoulchicken</title> <!-- 웹페이지의 제목 설정 -->
+
     <style> 
+    /* ========== 메뉴 그룹 스타일 ========== */
     .menu-group {
-        margin-bottom: 30px;
-        padding: 5px;
-        background-color: #fff;
+        margin-bottom: 30px; /* 아래쪽 여백 추가 */
+        padding: 5px; /* 내부 여백 추가 */
+        background-color: #fff; /* 배경색 흰색 */
+        border-radius: 10px; /* 모서리를 둥글게 설정 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    }
+
+    /* 메뉴 그룹의 제목 스타일 */
+    .group-title {
+        font-size: 24px; /* 글자 크기 */
+        font-weight: bold; /* 굵은 글씨 */
+        color: #ff6600; /* 오렌지 색상 */
+        text-align: left; /* 왼쪽 정렬 */
+        padding-left: 2px; /* 왼쪽 여백 추가 */
+        margin-bottom: 3px; /* 아래쪽 여백 */
+    }
+
+    /* ========== 페이지 이동 화살표 버튼 스타일 ========== */
+    .navigation-buttons {
+        position: fixed; /* 페이지 스크롤 시 고정 */
+        top: 50%; /* 페이지 중앙에 위치 */
+        width: 100%; /* 전체 너비 */
+        pointer-events: none; /* 버튼이 없는 영역은 클릭되지 않도록 설정 */
+        z-index: 2000; /* 다른 요소들보다 위에 배치 */
+    }
+
+    /* 화살표 버튼 스타일 */
+    .arrow-btn {
+        position: absolute; /* 부모 요소(.navigation-buttons)를 기준으로 배치 */
+        transform: translateY(-50%); /* 수직 중앙 정렬 */
+        background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정색 배경 */
+        color: white; /* 텍스트 색상 흰색 */
+        border: none; /* 테두리 없음 */
+        padding: 10px 20px; /* 내부 여백 */
+        font-size: 24px; /* 글자 크기 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        pointer-events: auto; /* 클릭 가능 */
+        border-radius: 50%; /* 버튼을 둥글게 */
+        transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+    }
+
+    /* 화살표 버튼 마우스 오버 시 색상 변경 */
+    .arrow-btn:hover {
+        background-color: rgba(0, 0, 0, 0.8); /* 어두운 색상 */
+    }
+
+    /* ========== 네비게이션 스타일 ========== */
+    nav a.active {
+        color: rgba(255, 51, 0, 0.795); /* 활성화된 링크 색상 */
+    }
+
+    /* 읽기 전용 입력 필드 스타일 (수정 불가) */
+    input[readonly] {
+        background-color: #fff; /* 배경색 흰색 유지 */
+        color: #333; /* 글자 색상 어두운 회색 */
+    }
+
+    /* ========== 주문 버튼 스타일 ========== */
+    #order-button {
+        background-color: rgba(255, 242, 0, 0.893); /* 노란색 배경 */
+        color: rgb(246, 255, 0); /* 텍스트 노란색 */
+        border: none; /* 테두리 없음 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        font-size: 18px; /* 글자 크기 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        padding: 12px 15px; /* 내부 여백 */
+        margin: 5px; /* 외부 여백 */
+        transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
+    }
+
+    /* ========== 취소 버튼 스타일 ========== */
+    #cancel-button {
+        background-color: #515050; /* 회색 배경 */
+        color: white; /* 텍스트 색상 흰색 */
+        border: none; /* 테두리 없음 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        font-size: 18px; /* 글자 크기 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        padding: 12px 15px; /* 내부 여백 */
+        margin: 5px; /* 외부 여백 */
+        transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
+    }
+
+    /* ========== 주문 안내 메시지 스타일 ========== */
+    .bone-menu-note {
+        text-align: center; /* 텍스트 가운데 정렬 */
+        font-size: 16px; /* 글자 크기 */
+        color: #007BFF; /* 파란색 */
+        margin: 1px; /* 위아래 여백 */
+        background-color: #f8f8f8; /* 배경색 연한 회색 */
+        padding: 10px; /* 내부 여백 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        font-weight: bold; /* 굵은 글씨 */
+    }
+
+    /* Google 폰트(Noto Sans KR) 불러오기 */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+    /* 메뉴 및 음료 리스트 스타일 */
+    .menu, .drink-menu {
+        padding: 20px;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        background-color: white;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2개의 열 */
+        gap: 10px;
+        box-sizing: border-box;
+        justify-items: start; /* 왼쪽 정렬 */
+        align-items: start; /* 상단 정렬 */
+        grid-auto-flow: row dense; 
     }
 
-    .group-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ff6600;
-        text-align: left;
-        padding-left: 2px;
-        margin-bottom: 3px;
+    /* 메뉴 및 음료 항목 스타일 */
+    .menu-item, .drink-item {
+        text-align: center;
+        width: 100%; /* 전체 너비 사용 */
+        grid-column: auto / span 1; /* 한 칸 차지 */
+        border-bottom: 1px solid #ccc; /* 하단 구분선 */
     }
-    .navigation-buttons {
-            position: fixed; /* 페이지 스크롤에 따라 고정 */
-            top: 50%; /* 페이지 중앙에 위치 */
-            width: 100%; /* 버튼을 좌우 끝에 배치 */
-            pointer-events: none; /* 전체 영역 클릭 방지 */
-            z-index: 2000; /* 다른 요소 위에 표시 */
-        }
+    /* ========== 전체 페이지 기본 스타일 ========== */
+    body {
+        font-family: 'Noto Sans KR', sans-serif; /* 웹페이지의 기본 글꼴을 'Noto Sans KR'로 설정 */
+        margin: 0; /* 기본 마진 제거 */
+        padding: 0; /* 기본 패딩 제거 */
+        background-color: #F7F7F7; /* 배경색 연한 회색 */
+        color: #333; /* 본문 기본 글자 색상 */
+    }
 
-    .arrow-btn {
-        position: absolute;
-        transform: translateY(-50%); /* 수직 중앙 정렬 */
-        background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-        color: white; /* 텍스트 색상 */
+    /* h2 제목과 p 문단 사이 간격 조정 */
+    h2 {
+        margin-bottom: 4px; /* 제목 아래쪽 마진을 4px로 설정 */
+    }
+
+    p {
+        margin-top: 2px; /* 문단 위쪽 마진을 2px로 설정 */
+    }
+
+    /* ========== 네비게이션 바 스타일 ========== */
+    nav {
+        background-color: #363434; /* 네비게이션 바 배경색 어두운 회색 */
+        color: white; /* 네비게이션 바 글자 색상 흰색 */
+        text-align: left; /* 텍스트 왼쪽 정렬 */
+        position: fixed; /* 스크롤 시에도 상단에 고정 */
+        width: 100%; /* 전체 너비 차지 */
+        top: 0; /* 페이지 최상단에 위치 */
+        z-index: 1000; /* 다른 요소 위에 배치 */
+        line-height: 40px; /* 줄 간격 40px */
+    }
+
+    /* 네비게이션 바 내부 링크 스타일 */
+    nav a {
+        color: white; /* 글자색 흰색 */
+        padding: 10px 30px; /* 상하 10px, 좌우 30px 패딩 */
+        text-decoration: none; /* 밑줄 제거 */
+        font-size: 30px; /* 글자 크기 */
+        font-weight: bold; /* 글씨를 굵게 설정 */
+    }
+
+    /* 본문 컨텐츠 스타일 */
+    .content {
+        padding-top: 80px; /* 네비게이션 바 높이만큼 여백 추가 */
+        background-color: #F7F7F7; /* 배경색 연한 회색 */
+    }
+
+    /* ========== 메뉴 이미지 스타일 ========== */
+    .menu-item img, .drink-item img, .k-food-item img {
+        width: 100%; /* 이미지가 부모 요소 너비의 100%를 차지하도록 설정 */
+        height: 240px; /* 고정된 높이 설정 */
+        object-fit: cover; /* 이미지가 비율을 유지하며 박스를 채우도록 설정 */
+        max-width: 100%; /* 최대 너비 100% */
+        border-radius: 10px; /* 이미지 모서리 둥글게 설정 */
+    }
+
+    /* 가격 표시 스타일 */
+    .menu-item span.price-per-item, .drink-item span.price-per-item {
+        margin-right: 10px; /* 오른쪽 여백 10px */
+        font-weight: bold; /* 글자 굵게 설정 */
+        color: #7474; /* 연한 회색 */
+    }
+
+    /* ========== 버튼 스타일 ========== */
+    button {
+        background-color: #515050; /* 버튼 배경색 어두운 회색 */
         border: none; /* 테두리 없음 */
-        padding: 10px 20px; /* 버튼 패딩 */
-        font-size: 24px; /* 화살표 크기 */
-        cursor: pointer; /* 마우스 커서 변경 */
-        pointer-events: auto; /* 클릭 가능 */
-        border-radius: 50%; /* 둥근 버튼 */
-        transition: background-color 0.3s ease; /* 배경색 변화 효과 */
+        color: white; /* 버튼 텍스트 흰색 */
+        padding: 20px 15px; /* 내부 여백 */
+        margin: 5px; /* 바깥 여백 */
+        border-radius: 5px; /* 모서리를 둥글게 */
+        font-size: 18px; /* 글자 크기 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        transition: background-color 0.3s; /* 색상 변화 애니메이션 */
     }
 
-    .arrow-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 더 어두운 색상 */
+    /* 버튼 마우스 오버 효과 */
+    button:hover {
+        background-color: #868585; /* 마우스를 올리면 더 어두운 색으로 변경 */
     }
-            nav a.active {
-            color: rgba(255, 51, 0, 0.795); /* 활성화된 링크의 색상을 파란색으로 설정 */
-        }
 
-            input[readonly] {
-            background-color: #fff; /* 배경색 유지 */
-            color: #333; /* 글자색 유지 */
-        }
-        #order-button {
-            background-color: rgba(255, 242, 0, 0.893); /* 노란색 */
-            color: rgb(246, 255, 0); /* 검정 텍스트 */
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 12px 15px;
-            margin: 5px;
-            transition: background-color 0.3s ease;
-        }
-        /* Cancel 버튼 스타일 (기본값: 회색) */
-        #cancel-button {
-            background-color: #515050; /* 회색 */
-            color: white; /* 흰색 텍스트 */
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 12px 15px;
-            margin: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .bone-menu-note {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            font-size: 16px; /* 글자 크기 설정 */
-            color: #007BFF; /* 글자색을 파란색으로 설정 */
-            margin: 1px; /* 위아래 여백 추가 */
-            background-color: #f8f8f8; /* 배경색 설정 */
-            padding: 10px; /* 내부 여백 추가 */
-            border-radius: 5px; /* 모서리를 둥글게 설정 */
-            font-weight: bold; /* 글자 굵게 표시 */
-        }
+    /* 수량 입력 필드 스타일 */
+    input[type=number] {
+        width: 50px; /* 입력창 너비 50px */
+        padding: 8px; /* 내부 여백 */
+        margin: 0 5px; /* 좌우 여백 5px */
+        border-radius: 4px; /* 모서리 둥글게 */
+        border: 1px solid #ccc; /* 테두리 색 회색 */
+        font-size: 16px; /* 글자 크기 */
+        text-align: center; /* 숫자를 가운데 정렬 */
+    }
 
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'); /* Google 폰트(Noto Sans KR) 불러오기 */
-        .menu, .drink-menu {
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 두 개의 열로 구성 */
-            gap: 10px;
-            box-sizing: border-box;
-            justify-items: start; /* 그리드 항목을 왼쪽 정렬 */
-            align-items: start; /* 그리드 항목을 상단 정렬 */
-            grid-auto-flow: row dense; 
-        }
-        .menu-item, .drink-item {
-            text-align: center;
-            width: 100%; /* 메뉴 및 음료 항목이 그리드 열 전체를 차지하도록 설정 */
-            grid-column: auto / span 1; /* 그리드 열을 한 칸만 차지 */
-            border-bottom: 1px solid #ccc; /* 구분선을 회색으로 추가 */
-        }
+    /* ========== 소개 섹션 스타일 (메인 배너) ========== */
+    .introduction {
+        text-align: center; /* 텍스트 가운데 정렬 */
+        padding: 20px; /* 패딩 추가 */
+        margin-top: 20px; /* 상단 여백 */
+        background-image: url('https://i.imgur.com/JLLD580.jpeg'); /* 배경 이미지 추가 */
+        background-size: cover; /* 배경 이미지를 화면에 맞게 조정 */
+        background-position: center; /* 배경 중앙 정렬 */
+        background-repeat: no-repeat; /* 배경 반복 없음 */
+        height: 100vh; /* 높이를 화면 높이와 동일하게 설정 */
+        display: flex;
+        flex-direction: column; /* 세로 방향 정렬 */
+        justify-content: flex-start; /* 상단 정렬 */
+        align-items: center; /* 가운데 정렬 */
+    }
 
-        body {
-            font-family: 'Noto Sans KR', sans-serif; /* 본문에 사용할 기본 글꼴 설정 */
-            margin: 0; /* 기본 여백 없앰 */
-            padding: 0; /* 기본 패딩 없앰 */
-            background-color: #F7F7F7; /* 배경색을 연한 회색으로 설정 */
-            color: #333; /* 본문 글자색을 어두운 회색으로 설정 */
-        }
-        /* h2와 p 사이의 간격 줄이기 */
-        h2 {
-            margin-bottom: 4px; /* h2 태그 아래쪽 간격을 5px로 설정 */
-        }
+    /* 소개 섹션 제목 스타일 */
+    .introduction h1 {
+        font-size: 48px; /* 글자 크기 */
+        font-weight: bold; /* 굵은 글씨 */
+        font-family: 'Arial', sans-serif; /* 글씨체 설정 */
+        color: #FFD700; /* 노란색 */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 효과 */
+        margin-top: 0; /* 상단 여백 제거 */
+        padding-top: 20px; /* 패딩 추가 */
+        text-align: center; /* 텍스트 가운데 정렬 */
+    }
 
-        p {
-            margin-top: 2px; /* p 태그 위쪽 간격을 5px로 설정 */
-        }
+    /* 소개 섹션 내부 텍스트 스타일 */
+    .introduction-content {
+        position: absolute; /* 위치 절대값 설정 */
+        color: white; /* 텍스트 색상 흰색 */
+        background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+        padding: 10px; /* 내부 여백 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        max-width: 90%; /* 최대 너비 설정 */
+        text-align: center; /* 가운데 정렬 */
+    }
 
-        nav {
-            background-color: #363434; /* 네비게이션 바 배경색을 연한 빨강으로 설정 */
-            color: white; /* 네비게이션 바 안의 글자색을 흰색으로 설정 */
-            text-align: left; /* 텍스트를 가운데 정렬 */
-            position: fixed; /* 네비게이션 바를 페이지 상단에 고정 */
-            width: 100%; /* 네비게이션 바의 너비를 전체 화면 크기로 설정 */
-            top: 0; /* 네비게이션 바를 화면의 가장 위로 위치시킴 */
-            z-index: 1000; /* 다른 요소들보다 네비게이션 바가 위에 위치하도록 설정 */
-            line-height: 40px; /* 줄 간격을 40px로 설정 */
-        }
-        nav a {
-            color: white; /* 네비게이션 바 안의 링크 텍스트 색상을 흰색으로 설정 */
-            padding: 10px 30px; /* 링크 주변에 10px 위아래, 20px 좌우 패딩 추가 */
-            text-decoration: none; /* 링크에 밑줄 제거 */
-            font-size: 30px; /* 링크 텍스트 크기를 18px로 설정 */
-            font-weight: bold; /* 글씨를 굵게 설정 */
-        }
-        .content {
-            padding-top: 80px;
-            background-color: #F7F7F7;
-        }
-
-        .menu-item img, .drink-item img, .k-food-item img {
-            width: 100%; /* 이미지가 그리드 열의 100%를 차지하도록 설정 */
-            height: 240px; /* 이미지의 높이를 자동으로 설정하여 비율을 유지 * 필요시 조정/
-            object-fit: cover; /* 이미지가 그리드 영역을 꽉 채우면서 비율을 유지 */
-            max-width: 100%; /* 최대 너비를 100%로 설정 */
-            border-radius: 10px; /* 이미지를 둥글게 설정 (선택 사항) */
-        }
-        .menu-item span.price-per-item, .drink-item span.price-per-item {
-            margin-right: 10px; /* 요소 오른쪽에 10px 여백 추가 */
-            font-weight: bold; /* 텍스트를 굵게 표시 */
-            color: #7474; /* 가격 텍스트 색상을 연한 빨강으로 설정 */
-        }
-        button {
-            background-color: #515050; /* 버튼의 배경색을 연한 빨강으로 설정 */
-            border: none; /* 버튼에 테두리 없음 */
-            color: white; /* 버튼 텍스트를 흰색으로 설정 */
-            padding: 20px 15px; /* 버튼에 12px 위아래, 15px 좌우 패딩 추가 */
-            margin: 5px; /* 버튼 주위에 5px 여백 추가 */
-            border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
-            font-size: 18px; /* 버튼 텍스트 크기를 18px로 설정 */
-            cursor: pointer; /* 버튼에 마우스 커서 포인터 모양 적용 */
-            transition: background-color 0.3s; /* 배경색이 부드럽게 변하도록 애니메이션 추가 */
-        }
-        button:hover {
-            background-color: #868585; /* 마우스를 올렸을 때 버튼 배경색을 약간 더 어두운 빨강으로 변경 */
-        }
-        input[type=number] {
-            width: 50px; /* 입력창 너비를 50px로 설정 */
-            padding: 8px; /* 입력창 내부 패딩을 8px로 설정 */
-            margin: 0 5px; /* 좌우에 5px 여백 추가 */
-            border-radius: 4px; /* 입력창 모서리를 4px 둥글게 설정 */
-            border: 1px solid #ccc; /* 회색 테두리 추가 */
-            font-size: 16px; /* 입력창 글자 크기를 16px로 설정 */
-            text-align: center; /* 입력된 숫자를 가운데 정렬 */
-        }
-        .introduction {
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            padding: 20px; /* 패딩을 추가 */
-            margin-top: 20px; /* 상단에 여백 추가 */
-            background-image: url('https://i.imgur.com/JLLD580.jpeg'); /* 배경 이미지 설정 */
-            background-size: cover; /* 배경 이미지를 화면에 맞게 확장, 비율 유지 */
-            background-position: center; /* 배경 이미지 중앙 정렬 */
-            background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
-            height: 100vh; /* 화면의 높이를 100%로 설정 */
-            display: flex;
-            flex-direction: column; /* 텍스트를 세로 방향으로 정렬 */
-            justify-content: flex-start; /* 텍스트를 수직으로 가운데 정렬 */
-            align-items: center; /* 텍스트를 가로로 가운데 정렬 */
-        }
-
-        .introduction h1 {
-            font-size: 48px; /* 글자 크기를 크게 설정 */
-            font-weight: bold; /* 볼드체 설정 */
-            font-family: 'Arial', sans-serif; /* 다른 글씨체로 설정 (여기서는 Arial 사용) */
-            color: #FFD700; /* 텍스트 색상을 연한 빨강으로 설정 */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트에 그림자 추가 */
-            margin-top: 0; /* 상단 마진 제거 */
-            padding-top: 20px; /* 상단 패딩을 조금 추가하여 텍스트 위치 조정 */
-            text-align: center; /* 텍스트 가운데 정렬 */
-            top: 15%
-        }
-
-        .introduction-content {
-            position: absolute; /* 텍스트를 절대 위치로 설정 */
-            color: white; /* 텍스트 색상을 흰색으로 설정 */
-            background-color: rgba(0, 0, 0, 0.5); /* 텍스트 배경을 반투명 검정색으로 설정하여 가독성 향상 */
-            padding: 10px; /* 텍스트와 배경 사이에 여백 추가 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스가 너무 넓어지지 않도록 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-        }
-
-
+    /* ========== 반응형 디자인 (모바일 최적화) ========== */
     @media (max-width: 600px) {
         .introduction {
-            height: 300px; /* 모바일에서는 섹션 높이를 더 줄여서 텍스트와 이미지가 한 화면에 보이도록 설정 */
-            background-size: contain; /* 모바일에서는 배경 이미지가 잘리지 않도록 조정 */
+            height: 300px; /* 모바일에서는 높이를 줄임 */
+            background-size: contain; /* 배경 이미지 잘리지 않게 설정 */
         }
+
         .introduction-content {
-            font-size: 14px; /* 모바일에서 글씨 크기를 조금 더 작게 조정 */
-            padding: 5px; /* 모바일에서는 패딩을 줄여서 텍스트 박스 크기를 조정 */
+            font-size: 14px; /* 모바일에서 글자 크기 조정 */
+            padding: 5px; /* 내부 패딩 조정 */
         }
+
         nav a {
-            font-size: 22px; /* 네비게이션 텍스트 크기를 작게 조정 */
-            padding: 10px; /* 패딩을 줄여 모바일 화면에 맞추기 */
+            font-size: 22px; /* 네비게이션 글자 크기 줄임 */
+            padding: 10px; /* 내부 패딩 조정 */
         }
+
         input[type="number"] {
-            width: 30px; /* 숫자 입력 필드 크기를 줄여 모바일 화면에 맞게 조정 */
+            width: 30px; /* 숫자 입력 필드 크기 축소 */
             padding: 4px;
         }
+
         button {
-            padding: 6px; /* 버튼의 크기 줄이기 */
-            font-size: 12px; /* 버튼의 폰트 크기를 줄임 */
+            padding: 6px; /* 버튼 크기 축소 */
+            font-size: 12px; /* 버튼 글자 크기 축소 */
         }
-        .introduction {
-            background-size: cover; /* 모바일에서도 배경 이미지를 화면 크기에 맞춤 */
-            height: 100vh; /* 화면의 높이를 100%로 설정 */
-        }
+
         .introduction h1 {
             background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-            color: #eeee05; /* 텍스트 색상을 흰색으로 설정 */
-            padding: 10px; /* 텍스트 주변 여백 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
-        }
-        .introduction p {
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-            color: #f8f8f8; /* 텍스트 색상을 흰색으로 설정 */
-            padding: 10px; /* 텍스트 주변 여백 */
-            border-radius: 5px; /* 모서리를 둥글게 처리 */
-            max-width: 90%; /* 텍스트 박스의 최대 너비를 90%로 제한 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 추가 */
+            color: #eeee05; /* 노란색 */
+            padding: 10px; /* 내부 여백 */
+            border-radius: 5px; /* 둥근 모서리 */
+            text-align: center; /* 텍스트 가운데 정렬 */
         }
         #order-button, #cancel-button {
             float: right; /* 버튼을 오른쪽으로 배치 */
@@ -617,13 +648,30 @@
         }
 
         const confirmButton = document.getElementById('confirm-button');
-        if (confirmButton) {
-            confirmButton.addEventListener('click', function () {
-                alert('Pedido concluído! 주문이 완료되었습니다!');
-                location.reload(); // 화면 새로고침
-                closeModal(); // 모달 닫기
-            });
-        }
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function () {
+                    alert('Pedido concluído! 주문이 완료되었습니다!');
+
+                    // 주문 완료 후 데이터 초기화
+                    resetOrder();  
+
+                    // Firebase에 주문 데이터 저장 후 새로고침
+                    firebase.database().ref('orders').push({
+                        timestamp: new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }), // 현재 시간 저장
+                        tableNumber: getTableNumberFromURL(), // Table 번호 가져오기
+                        orderList: [],  // 주문 내역 (지금은 빈 값으로 저장, 필요하면 업데이트 가능)
+                        totalAmount: '0R$',  // 총 금액 초기화
+                        customerName: 'N/A',
+                        customerContact: 'N/A',
+                        customerAddress: 'N/A'
+                    }).then(() => {
+                        location.reload();  // Firebase 저장 후 새로고침
+                    }).catch(error => {
+                        console.error("Error sending order data:", error);
+                        alert('Erro ao processar o pedido! 주문 처리 중 오류 발생: ' + error.message);
+                    });
+                });
+            }
 
         // 주문 초기화 함수
         function resetOrder() {
