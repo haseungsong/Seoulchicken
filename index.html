@@ -615,46 +615,89 @@
             });
         }
 
-        const confirmButton = document.getElementById('confirm-button');
-            if (confirmButton) {
-                confirmButton.addEventListener('click', function () {
-                    alert('Pedido concluído! 주문이 완료되었습니다!');
+        document.addEventListener('DOMContentLoaded', function () {
+    const confirmButton = document.getElementById('confirm-button');
+    console.log(confirmButton); // 버튼이 제대로 선택되는지 확인
 
-                    resetOrder(); // 주문 초기화 먼저 실행
-                    closeModal(); // 모달 닫기
-                
-                    setTimeout(() => {
-                        location.reload(); // 0.5초 후 새로고침 (초기화가 적용된 후)
-                    }, 500); // 500ms(0.5초) 딜레이 후 새로고침
-                });
+    if (confirmButton) {
+        confirmButton.addEventListener('click', function () {
+            alert('Pedido concluído! 주문이 완료되었습니다!');
+
+            resetOrder(); // 주문 초기화
+            updateTotalAmount(); // 🔹 총 금액 업데이트 추가
+            closeModal(); // 모달 닫기
+
+            setTimeout(() => {
+                console.log("🔄 1초 후 새로고침 실행됨");
+                location.reload();
+            }, 1000);
+        });
+    } else {
+        console.error("⚠️ Error: 'confirm-button' 버튼을 찾을 수 없습니다.");
+    }
+
+    // 수량 증가 및 감소 버튼 이벤트 추가
+    document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
+        button.addEventListener('click', function () {
+            const container = this.closest('.menu-item, .drink-item');
+            if (container) {
+                const inputField = container.querySelector('input[type=number]');
+                const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                const totalPriceElement = container.querySelector('.total-price');
+
+                let quantity = parseInt(inputField.value);
+                quantity = this.textContent === '+' ? quantity + 1 : Math.max(0, quantity - 1);
+                inputField.value = quantity;
+
+                if (totalPriceElement) {
+                    totalPriceElement.textContent = `${quantity * pricePerItem} R$`;
+                }
+
+                updateTotalAmount(); // 🔹 총 금액 업데이트 추가
             }
+        });
+    });
+});
+
 
         // 주문 초기화 함수
         function resetOrder() {
-            // 모든 수량 입력 필드를 초기화
-            document.querySelectorAll('input[type=number]').forEach(input => {
-                if (input.id !== 'table-number') { // table-number 필드는 초기화하지 않음
-                    input.value = 0; // 수량을 0으로 설정
-                }
-            });
+    console.log("🔄 주문 초기화 실행됨");
 
-            // 각 항목의 총 가격 초기화
-            document.querySelectorAll('.total-price').forEach(total => {
-                total.textContent = '0R$'; // 총 가격을 초기화
-            });
-
-            // 총 금액 초기화
-            const totalAmountDisplay = document.getElementById('total-amount');
-            if (totalAmountDisplay) {
-                totalAmountDisplay.textContent = 'Total: 0R$'; // 총 금액 초기화
-            }
-
-            // 모달 내 주문 리스트 초기화
-            const orderList = document.getElementById('order-list');
-            if (orderList) {
-                orderList.innerHTML = ''; // 주문 내역 초기화
-            }
+    // 모든 수량 입력 필드를 0으로 설정 (테이블 번호 제외)
+    document.querySelectorAll('input[type=number]').forEach(input => {
+        if (input.id !== 'table-number') {
+            input.value = 0;
         }
+    });
+
+    // 모든 총 가격을 0으로 설정
+    document.querySelectorAll('.total-price').forEach(total => {
+        total.textContent = '0R$';
+    });
+
+    // 전체 총 금액 초기화
+    const totalAmountDisplay = document.getElementById('total-amount');
+    if (totalAmountDisplay) {
+        totalAmountDisplay.textContent = 'Total: 0R$';
+    }
+
+    // 모달 창 내 총 금액도 초기화
+    const modalTotal = document.getElementById('modal-total');
+    if (modalTotal) {
+        modalTotal.textContent = 'Total: 0R$';
+    }
+
+    // 주문 내역 리스트 초기화
+    const orderList = document.getElementById('order-list');
+    if (orderList) {
+        orderList.innerHTML = ''; // 주문 내역 비우기
+    }
+
+    // 수량 업데이트 후 총 금액 다시 계산
+    updateTotalAmount();
+}
+
 
             const closeButton = document.getElementById('close-modal-button');
             if (closeButton) {
@@ -662,8 +705,15 @@
             }
 
             function closeModal() {
-                document.getElementById('order-modal').style.display = 'none';
-            }
+    const modal = document.getElementById('order-modal');
+
+    if (modal) {
+        console.log("✅ 모달 닫기 실행됨");
+        modal.style.display = 'none';
+    } else {
+        console.error("⚠️ Error: 'order-modal'을 찾을 수 없습니다.");
+    }
+}
         });
 
             document.addEventListener('DOMContentLoaded', function () {
