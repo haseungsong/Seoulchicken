@@ -1683,33 +1683,31 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-    const orderButton = document.getElementById('order-button');
-    const cancelButton = document.getElementById('cancel-button');
-    const modal = document.getElementById('order-modal');
-    const orderList = document.getElementById('order-list');
-    const totalAmountDisplay = document.getElementById('total-amount');
-
-    // 🔹 주문 초기화 함수 추가
-    function resetOrder() {
-        document.querySelectorAll('input[type=number]').forEach(input => {
-            if (input.id !== 'table-number') {
-                input.value = 0;
-            }
+        // Cancel 버튼 클릭 시 초기화
+        cancelButton.addEventListener('click', function () {
+            resetOrder(); // 초기화 함수 호출
+            modal.style.display = 'none'; // 모달 닫기
         });
 
-        document.querySelectorAll('.total-price').forEach(total => {
-            total.textContent = '0R$';
-        });
-
-        if (totalAmountDisplay) {
-            totalAmountDisplay.textContent = 'Total: 0R$';
-        }
-
-        if (orderList) {
+        orderButton.addEventListener('click', function () {
             orderList.innerHTML = '';
-        }
-    }
+            let hasItems = false;
+            document.querySelectorAll('.menu-item, .drink-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type=number]').value);
+                if (quantity > 0) {
+                    hasItems = true;
+                    const name = item.querySelector('h2').textContent;
+                    const price = item.querySelector('.price-per-item').textContent;
+                    const itemTotal = quantity * parseInt(price);
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `${name}: ${quantity} x ${price} = ${itemTotal}R$`;
+                    orderList.appendChild(listItem);
+                }
+            });
+
+            updateTotalAmount();
+        });
+    });
 
     // URL에서 table 번호를 가져오는 함수
     function getTableNumberFromURL() {
