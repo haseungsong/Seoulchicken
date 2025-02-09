@@ -623,18 +623,22 @@
         confirmButton.addEventListener('click', function () {
             alert('Pedido concluído! 주문이 완료되었습니다!');
 
-            resetOrder(); // 주문 초기화
-            updateTotalAmount(); // 🔹 총 금액 업데이트 추가
-            closeModal(); // 모달 닫기
+            closeModal(); // ✅ 먼저 모달을 닫음
+
+            setTimeout(() => {
+                resetOrder(); // ✅ 모달이 닫힌 후 500ms 후에 초기화 실행
+                updateTotalAmount(); // 총 금액 업데이트
+            }, 500); // 🔹 0.5초 후 초기화 실행
 
             setTimeout(() => {
                 console.log("🔄 1초 후 새로고침 실행됨");
-                location.reload();
-            }, 1000);
+                location.reload(); // 🔄 1초 후 페이지 새로고침
+            }, 1000); // 🔹 1초 후 새로고침 실행
         });
     } else {
         console.error("⚠️ Error: 'confirm-button' 버튼을 찾을 수 없습니다.");
     }
+});
 
     // 수량 증가 및 감소 버튼 이벤트 추가
     document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
