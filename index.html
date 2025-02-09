@@ -1,4 +1,3 @@
-
 <!DOCTYPE html> <!-- HTML 문서의 문서 형식을 선언 -->
 <html lang="pt"> <!-- 문서의 언어를 한국어로 설정 -->
 <head> <!-- 문서의 메타데이터와 스타일 시트, 스크립트 등을 포함하는 섹션 시작 -->
@@ -1595,12 +1594,11 @@
             // table이 0인 경우 서비스 비용 추가 안 함
             let formattedTotalAmount;
             if (tableNumber === '0' || tableNumber === '99') {
-                // table=0 또는 table=99인 경우 서비스 비용 추가하지 않음
-                formattedTotalAmount = `Total: R$ ${totalAmount.toFixed(2)}`;
+                formattedTotalAmount = `Total: R$ ${Math.floor(totalAmount)}`;
             } else {
-                const serviceFee = totalAmount * 0.1; // 서비스 비용 10%
-                const totalWithServiceFee = totalAmount + serviceFee; // 총 금액에 서비스 비용 추가
-                formattedTotalAmount = `Total: R$ ${totalWithServiceFee.toFixed(2)}`;
+                const serviceFee = totalAmount * 0.1;
+                const totalWithServiceFee = totalAmount + serviceFee;
+                formattedTotalAmount = `Total: R$ ${Math.floor(totalWithServiceFee)}`;
             }
 
             // 총 금액 업데이트
