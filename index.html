@@ -638,31 +638,37 @@
     } else {
         console.error("⚠️ Error: 'confirm-button' 버튼을 찾을 수 없습니다.");
     }
-});
 
-    // 수량 증가 및 감소 버튼 이벤트 추가
+    // 🔹 수량 증가 및 감소 버튼 이벤트 리스너 추가
     document.querySelectorAll('.menu-item button, .drink-item button').forEach(button => {
         button.addEventListener('click', function () {
             const container = this.closest('.menu-item, .drink-item');
             if (container) {
                 const inputField = container.querySelector('input[type=number]');
-                const pricePerItem = parseInt(container.querySelector('.price-per-item').textContent);
+                const pricePerItemElement = container.querySelector('.price-per-item');
                 const totalPriceElement = container.querySelector('.total-price');
 
                 let quantity = parseInt(inputField.value);
-                quantity = this.textContent === '+' ? quantity + 1 : Math.max(0, quantity - 1);
-                inputField.value = quantity;
+                const pricePerItem = parseInt(pricePerItemElement.textContent);
 
-                if (totalPriceElement) {
-                    totalPriceElement.textContent = `${quantity * pricePerItem} R$`;
+                // 🔹 버튼 텍스트가 "+"면 수량 증가, "-"면 감소
+                if (this.textContent.trim() === "+") {
+                    quantity++;
+                } else {
+                    quantity = Math.max(0, quantity - 1); // 최소 0 이하로 내려가지 않도록 제한
                 }
 
-                updateTotalAmount(); // 🔹 총 금액 업데이트 추가
+                inputField.value = quantity; // 입력 필드 값 업데이트
+
+                if (totalPriceElement) {
+                    totalPriceElement.textContent = `${quantity * pricePerItem} R$`; // 총 가격 업데이트
+                }
+
+                updateTotalAmount(); // 전체 총 금액 업데이트
             }
         });
     });
 });
-
 
         // 주문 초기화 함수
         function resetOrder() {
