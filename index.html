@@ -923,6 +923,33 @@
     const database = firebase.database();
     </script>
 
+
+    <!-- ✅ 여기에 이 스크립트를 붙여넣으세요 -->
+    <script>
+        document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        });
+        document.addEventListener('keydown', function (e) {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+            (e.ctrlKey && e.key.toLowerCase() === 'u')
+        ) {
+            e.preventDefault();
+        }
+        });
+        document.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+        });
+        document.addEventListener('dragstart', function (e) {
+        e.preventDefault();
+        });
+    </script>
+    <!-- ✅ 여기까지 붙여넣기 -->
+
+
+
+
 </head>
     <body> <!-- 본문 시작 -->
     <!-- 좌우 화살표 버튼 -->
